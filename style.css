@@ -139,6 +139,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
   font-size: 10px;
   text-align: center;
   font-weight: 900;
+  font-family: "helvetica", sans-serif !important;
   color: white;
   pointer-events: none;
 }
