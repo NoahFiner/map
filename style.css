@@ -100,24 +100,38 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
   right: 2vw;
 }
 
+@media only screen and (max-width: 999px) {
+  .floor {
+    width: 80vw;
+    height: 56.25vw;
+    margin-top: -28vw;
+  }
+}
+
 #f4 {
   background-image: url('400.png');
 }
 
 .room {
+  z-index: 0;
   cursor: pointer;
   height: 30px;
   width: 30px;
   border-radius: 20px;
-  opacity: 0.75;
+  opacity: 1;
   transform: scale(1);
   -webkit-transform: scale(1);
   transform-origin: 50% 50%;
   -webkit-transform-origin: 50% 50%;
-  background-color: rgba(255, 0, 0, 1);
+  background-color: rgba(200, 0, 0, 1);
+  /*border: 1px solid black;*/
+  box-shadow: 1px 1px 5px #000;
   position: absolute;
-  transition: all 0.25s;
-  -webkit-transition: all 0.25s;
+  -webkit-transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 1); /* older webkit */
+  -webkit-transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+     -moz-transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+       -o-transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+          transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 1.275); /* easeOutBack */
 }
 
 .room > p {
@@ -130,7 +144,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 }
 
 .room:hover {
+  z-index: 1;
   opacity: 1;
+  box-shadow: 4px 4px 10px #000;
+  background-color: rgba(255, 50, 50, 1);
   transform: scale(1.25);
   -webkit-transform: scale(1.25);
 }
