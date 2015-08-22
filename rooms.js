@@ -16,7 +16,7 @@ var Room = function(x, y, num, info) {
   }
   this.floor = this.num[0];
   this.init = function() {
-    $("#f"+this.floor+"-content").append("<div class='"+this.type+" "+this.num+"' id='"+this.num+"'><p>"+this.num+"</p></div>")
+    $("#f"+this.floor+"-content").append("<div class='"+this.type+" "+this.num+"' id='"+this.num+"'><p>"+this.num.substr(0, 3)+"</p></div>")
     $("#"+this.num).css("left", this.x+"%");
     $("#"+this.num).css("top", this.y+"%");
   }

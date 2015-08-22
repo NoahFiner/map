@@ -16,6 +16,8 @@ html, body {
 }
 
 #fixed-outer {
+  z-index:439582729378598273498573;
+  pointer-events: none;
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -23,24 +25,49 @@ html, body {
 
 #header-left {
   height: 100vh;
-  width: 25vw;
+  width: 15vw;
   border-right: 1px solid #B20202;
 }
 
-#header-top {
+.header-sub {
   width: 100%;
   height: 10vh;
+  pointer-events: auto;
+  cursor: pointer;
   line-height: 10vh;
-  background-color: #B20202;
+  background-color: transparent;
+  border-top: 1px solid #B20202;
+  border-bottom: 1px solid #B20202;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
 }
 
-#header-top h1 {
+.header-sub:hover {
+  background-color: rgba(50, 50, 50, 0.15);
+}
+
+.header-sub.selected {
+  background-color: #B20202 !important;
+}
+
+.header-sub h1 {
   font-size: 4vw;
   vertical-align: middle;
-  color: white;
-  text-align: center;
+  color: #B20202;
+  margin-left: 2vw;
+  text-align: left;
   font-family: "helvetica", sans-serif;
   font-weight: 500;
+}
+
+.header-sub.selected h1 {
+  color: white;
+}
+
+.header-sub.selected h1:after {
+  content: "\25BA";
+  margin-left: 2vw;
+  font-size: 3vw;
 }
 
 .floor-outer {
@@ -99,6 +126,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
   text-align: center;
   font-weight: 900;
   color: white;
+  pointer-events: none;
 }
 
 .room:hover {
