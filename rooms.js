@@ -29,8 +29,6 @@ var searchForFloor, infoTime;
 
 var activateInfo = function() {
   $(".info-outer").css("opacity", "1");
-  clearTimeout(infoTime);
-  infoTime = setTimeout(function() {$(".info-outer").css("opacity", "0")}, 5000);
 }
 
 $(document).ready(function() {
@@ -63,6 +61,7 @@ $(document).ready(function() {
     $("#f"+id[0]+"-h1").html(roomio.num);
     $("#f"+id[0]+"-p").html(roomio.info);
   }, function() {
-
+    clearTimeout(infoTime);
+    infoTime = setTimeout(function() {$(".info-outer").css("opacity", "0")}, 1000);
   })
 });
