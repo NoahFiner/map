@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"/> -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
   <title>Map</title>
   <link type="text/css" rel="stylesheet" href="style.css"/>
   <script language="javascript" type="text/javascript" src="jquery/jquery.js"></script>
@@ -40,12 +40,19 @@
         <div class="header-sub">
           <h1>800</h1>
         </div>
+        <div id="rotate">
+          <div id="rotate-inner" class="rotate">
+            <div id="rotate-inner-text" class="no-rotate">
+              <p>rotate</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div id="400-outer" class="floor-outer">
-      <div id="f4" class="floor">
+      <div id="f4" class="floor rotate">
         <div class="relative-full" id="f4-content">
-          <div id="f4-info" class="info-outer">
+          <div id="f4-info" class="info-outer no-rotate">
             <div class="info-top">
               <h1 id="f4-h1">400</h1>
             </div>
