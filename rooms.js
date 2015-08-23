@@ -51,6 +51,20 @@ $(document).ready(function() {
   floors[4][16] = new Room (64, 90, '407', 'some creepy closet crap');
   floors[4][17] = new Room (62, 86, '408-1', 'another cool classroom thingy');
   floors[4][18] = new Room (48, 87, '408-2', 'another entrance to 408');
+  floors[4][19] = new Room (37, 83, '410', 'closet crap');
+  floors[4][20] = new Room (31, 84, '411-1', 'Biology room entrance');
+  floors[4][21] = new Room (22, 84, '411-2', 'Biology room alternate entrance');
+  floors[4][22] = new Room (21, 74, '413', 'Greenhouse entrance');
+  floors[4][23] = new Room (25, 73, '414-1', 'Another biology room entrance');
+  floors[4][24] = new Room (28, 73, '415-1', 'no idea what this is');
+  floors[4][25] = new Room (45, 70, '415-2', 'another entrance to 415');
+  floors[4][26] = new Room (42, 35, '422-1', 'some chem lab thing');
+  floors[4][27] = new Room (32, 46, '415-3', 'ANOTHER WAY INTO 415???');
+  floors[4][28] = new Room (27, 44, '414-2', 'really more bio entrances why is this necessary');
+  floors[4][29] = new Room (33, 29, '422-2', 'that stupid chem lab again');
+  floors[4][30] = new Room (29, 26, '421-1', 'and another chem lab how many are there');
+  floors[4][31] = new Room (19, 17, '421-2', 'wow enough with all these chem labs seriously');
+  floors[4][32] = new Room (16, 23, '422-3', 'how many bio entrances can you have');
   searchForRoom = function(wat) {
     var currFloor = wat[0];
     for(i = 0; i < floors[currFloor].length; i++) {
@@ -75,4 +89,23 @@ $(document).ready(function() {
     clearTimeout(infoTime);
     infoTime = setTimeout(function() {$(".info-outer").css("opacity", "0")}, 1000);
   })
+
+
+
+
+});
+
+$(function() {
+$("#f4-content").click(function(e) {
+
+  var offset = $(this).offset();
+  var height = $(this).height();
+  var width = $(this).width();
+  var relativeX = ((e.pageX - offset.left));
+  var relativeY = ((e.pageY - offset.top));
+  relativeX = relativeX*100/width;
+  relativeY = relativeY*100/height;
+  alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
+
+});
 });
