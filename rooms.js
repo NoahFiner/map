@@ -1,3 +1,6 @@
+var deg;
+var currScroll;
+
 var Room = function(floor, x, y, num, info) {
   this.x = x;
   this.y = y;
@@ -34,7 +37,7 @@ var floors = [[], [], [], [], [], [], [], [], [], [], []];
 var searchForFloor, infoTime;
 
 var activateInfo = function() {
-  $(".info-outer").css("opacity", "1");
+  $("#f"+currScroll+"-info").css("opacity", "1");
 }
 
 $(document).ready(function() {
@@ -96,6 +99,17 @@ $(document).ready(function() {
     }
     return [-1, -1];
   }
+
+  $(".other").click(function() {
+    var id = $(this).attr("id").toString();
+    if(parseInt(id[1])) {
+      scrollio(id[1]);
+    }
+    if(id.substr(0, 4) === "MAIN") {
+      scrollio(0);
+    }
+  })
+
   $(".room, .other").hover(function() {
     clearTimeout(infoTime);
     var a;
@@ -124,7 +138,7 @@ $(document).ready(function() {
     else {
       $("#f"+floorio+"-info").css("top", ((roomio.y)-20)+"%");
       $("#f"+floorio+"-info").css("left", ((roomio.x)-15)+"%");
-      if(roomio.y <= 25) {
+      if(roomio.y <= 30) {
         $("#f"+floorio+"-info").css("top", ((roomio.y)+10)+"%");
       }
       if(roomio.x <= 20) {

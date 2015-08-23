@@ -164,9 +164,29 @@ html, body {
     margin-top: -28vw;
   }
 }
-
+#f1 {
+  background-image: url('main.png');
+}
+#f2 {
+  background-image: url('200.png');
+}
+#f3 {
+  background-image: url('300.png');
+}
 #f4 {
   background-image: url('400.png');
+}
+#f5 {
+  background-image: url('500.png');
+}
+#f6 {
+  background-image: url('600.png');
+}
+#f7 {
+  background-image: url('700.png');
+}
+#f8 {
+  background-image: url('800.png');
 }
 
 .room, .other {
