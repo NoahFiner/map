@@ -80,6 +80,10 @@ $(document).ready(function() {
   floors[4][36] = new Room (4, 80, 75, 'MAIN-1', 'Back to the main hallway.')
   floors[4][37] = new Room (4, 57, 5, 'F200-1', 'A staircase to floor 200.')
   floors[4][38] = new Room (4, 91, 45, 'MAIN-2', 'Back to the main hallway.')
+  floors[6][0] = new Room (6, 44, 15, 'F400-1', 'Main staircase to floor 400.')
+  floors[6][1] = new Room (6, 34.5, 2, '631', 'Spanish and French room.')
+  floors[6][2] = new Room (6, 36, 4, '632', 'I have no idea.')
+  floors[6][3] = new Room (6, 32, 5, '630', 'Yup, never been in there.')
   searchForRoom = function(wat) {
     var currFloor = wat[0];
     for(i = 0; i < floors[currFloor].length; i++) {
@@ -162,7 +166,7 @@ $(document).ready(function() {
 });
 
 $(function() {
-$("#f4-content").click(function(e) {
+$("#f6-content").click(function(e) {
 
   var offset = $(this).offset();
   var height = $(this).height();
@@ -171,7 +175,7 @@ $("#f4-content").click(function(e) {
   var relativeY = ((e.pageY - offset.top));
   relativeX = relativeX*100/width;
   relativeY = relativeY*100/height;
-  // alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
+  alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
   //turn that alert on for testing only
 });
 });

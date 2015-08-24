@@ -62,7 +62,7 @@ $(document).ready(function() {
     rotateAll();
   })
   $(window).resize(function() {
-    getHeight();
+    getHeights();
   })
   $(window).scroll(function() {
     var a = $(window).scrollTop() - 250;
