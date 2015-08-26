@@ -65,12 +65,42 @@ $(document).ready(function() {
   floors[2][21] = new Room (2, 45, 19, '232', 'wtf fairview name these rooms in order.');
   floors[2][22] = new Room (2, 39, 26, '222', 'these numbers make no sense at all wow.');
   floors[2][23] = new Room (2, 32, 27, '219-2', 'ANOTHER CLASSROOM CALLED 219 WHY FAIRVIEW WHY ARE YOU DOING THIS YOU MESSED UP MY ALGORITHM');
-  floors[2][24] = new Room (2, 24, 45, '220', 'yay my elementary functions class');
+  floors[2][24] = new Room (2, 24, 45, '220', 'This room probably contains some krap but I don\'t care what it is.');
   floors[2][25] = new Room (2, 23, 51, '219', 'The FIRST stupid room called 219.');
   floors[2][26] = new Room (2, 21, 89, 'F400-2', 'The main staircase to the 400 floor.');
   floors[2][27] = new Room (2, 79, 81, 'MAIN-200', 'Access to the main level.');
   floors[2][28] = new Room (2, 88, 80, 'F300-1', 'Tiny corridor to the 300 floor.');
   floors[2][28] = new Room (2, 84, 66, 'F100', 'Access to the 100 floor (cafeteria)');
+
+
+  floors[3][0] = new Room (3, 22, 14, '302', 'Break room.');
+  floors[3][1] = new Room (3, 31, 31, '308', 'Teacher office.');
+  floors[3][2] = new Room (3, 35, 29, '309-1', 'Tech/Drafting Lab.');
+  floors[3][3] = new Room (3, 36, 46, '310', 'Video editing.');
+  floors[3][4] = new Room (3, 37, 49, '312-1', 'Electrical.');
+  floors[3][5] = new Room (3, 44, 46, '311-1', 'Storage/Lost and Found.');
+  floors[3][6] = new Room (3, 47, 39, '312-2', 'idk other storage');
+  floors[3][7] = new Room (3, 49, 34, '312-3', 'ANOTHER 312 GET YOUR CARP TOGETHER FAIRVIEW');
+  floors[3][8] = new Room (3, 42, 24, '309-2', 'Tech/Drafting Lab.');
+  floors[3][9] = new Room (3, 53, 26, '309-3', 'Tech/Drafting Lab.');
+  floors[3][10] = new Room (3, 69, 38, '339-1', 'Film/Photography room and JLab.');
+  floors[3][11] = new Room (3, 75, 58, '339-2', 'Film/Photography room and JLab.');
+  floors[3][12] = new Room (3, 75, 62, '333', 'Computer lab');
+  floors[3][13] = new Room (3, 69, 73, '330', 'Custodian room.');
+  floors[3][14] = new Room (3, 70, 82, '329', 'Storage room.');
+  floors[3][15] = new Room (3, 59, 83, '325', 'Strange boy\'s bathroom.');
+  floors[3][16] = new Room (3, 55, 83, '324', 'Strange girl\'s bathroom.');
+  floors[3][17] = new Room (3, 55, 88, '326', 'Dressing room.');
+  floors[3][18] = new Room (3, 59, 90, '327', 'Another dressing room.');
+  floors[3][19] = new Room (3, 59, 94, '328', 'ANOTHER dressing room.');
+  floors[3][20] = new Room (3, 59, 29, '318', 'Pantry.');
+  floors[3][21] = new Room (3, 63, 39, '317-1', 'Food lab.');
+  floors[3][22] = new Room (3, 51, 41, '316', 'Work room.');
+  floors[3][23] = new Room (3, 69, 62, '317-2', 'Food lab.');
+  floors[3][24] = new Room (3, 68, 68, '334', 'Storage.');
+  floors[3][25] = new Room (3, 65, 71, '323', 'Workroom.');
+  floors[3][26] = new Room (3, 57, 74, '315-1', 'Multi-use classroom.');
+  floors[3][27] = new Room (3, 46, 52, '315-2', 'Multi-use classroom.');
 
 
   floors[4][0] = new Room (4, 77, 49, '402-1', 'Science');
@@ -113,6 +143,8 @@ $(document).ready(function() {
   floors[4][37] = new Room (4, 57, 5, 'F200-1', 'Staircase to floor 200.');
   floors[4][38] = new Room (4, 91, 45, 'MAIN-400-2', 'Back to the main hallway.');
   floors[4][39] = new Room (4, 29, 32, '420-1', 'Biology');
+
+
   floors[6][0] = new Room (6, 44, 15, 'F400-1', 'Main staircase to floor 400.');
   floors[6][1] = new Room (6, 34.5, 2, '631', 'Spanish and French room.');
   floors[6][2] = new Room (6, 36, 4, '632', 'I have no idea.');
@@ -285,7 +317,7 @@ $(".relative-full").click(function(e) {
   var relativeY = ((e.pageY - offset.top));
   relativeX = relativeX*100/width;
   relativeY = relativeY*100/height;
-  // alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
+  alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
   //turn that alert on for testing only
 });
 });
