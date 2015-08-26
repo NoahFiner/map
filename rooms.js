@@ -101,6 +101,9 @@ $(document).ready(function() {
   floors[3][25] = new Room (3, 65, 71, '323', 'Workroom.');
   floors[3][26] = new Room (3, 57, 74, '315-1', 'Multi-use classroom.');
   floors[3][27] = new Room (3, 46, 52, '315-2', 'Multi-use classroom.');
+  floors[3][28] = new Room (3, 11, 1, 'MAIN-300', 'Back to the main hallway.');
+  floors[3][29] = new Room (3, 42, 32, 'F500-1', 'Staircase to the 500 hallway.');
+  floors[3][30] = new Room (3, 72, 79, 'F500-2', 'Another staircase to the 500 hallway.');
 
 
   floors[4][0] = new Room (4, 77, 49, '402-1', 'Science');
