@@ -62,17 +62,67 @@ var headerActive = false;
 var toggleHeader = function(state) {
   if(state === false) {
     headerActive = true;
+    $("#header-top-more").html("hide options");
     $("#header-top").addClass('more');
   }
   else {
     headerActive = false;
+    $("#header-top-more").html("options");
     $("#header-top").removeClass('more');
+  }
+}
+
+var exitsActive = true, floorsActive = true, roomsActive = true;
+
+var setState = function(wat, boo) {
+  if(boo) {
+    $("."+wat).addClass("active");
+    switch(wat) {
+      case 'exits':
+        $('.exit').removeClass("nope");
+        exitsActive = true;
+        break;
+      case 'floors':
+        $('.other:not(.exit)').removeClass("nope");
+        floorsActive = true;
+        break;
+      case 'rooms':
+        $('.room').removeClass("nope");
+        roomsActive = true;
+        break;
+    }
+  }
+  else {
+    $("."+wat).removeClass("active");
+    switch(wat) {
+      case 'exits':
+        $('.exit').addClass("nope");
+        exitsActive = false;
+        break;
+      case 'floors':
+        $('.other:not(.exit)').addClass("nope");
+        floorsActive = false;
+        break;
+      case 'rooms':
+        $('.room').addClass("nope");
+        roomsActive = false;
+        break;
+    }
   }
 }
 
 $(document).ready(function() {
   $("#header-top-more").click(function() {
     toggleHeader(headerActive);
+  })
+  $(".exits").click(function() {
+    setState('exits', !exitsActive);
+  })
+  $(".floors").click(function() {
+    setState('floors', !floorsActive);
+  })
+  $(".rooms").click(function() {
+    setState('rooms', !roomsActive);
   })
   $(".header-sub").click(function() {
     $(".header-sub").removeClass("selected");

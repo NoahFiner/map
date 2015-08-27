@@ -73,13 +73,52 @@ html, body {
 #header-top-more {
   cursor: pointer;
   color: white;
+  background-color: transparent;
   font-size: 3vh;
+  margin-top: 3px;
   line-height: 4vh;
   text-align: center;
   vertical-align: middle;
   font-family: 'helvetica', sans-serif;
   font-weight: 200;
   display: block;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+}
+
+#header-top-more:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+#header-top-more:before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 2px;
+  top: 14vh;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #FFF;
+  /*visibility: hidden;*/
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 1); /* older webkit */
+  -webkit-transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 2);
+     -moz-transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 2);
+       -o-transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 2);
+          transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 2); /* easeOutBack */
+}
+
+#header-top-more:hover:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+#header-top-more:active:before {
+  -webkit-transform: scaleX(1.2);
+  transform: scaleX(1.2);
 }
 
 #options-outer {
@@ -92,13 +131,37 @@ html, body {
   display: inline-block;
   line-height: 75px;
   vertical-align: middle;
+  cursor: pointer;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+}
+
+#options-outer > p {
+  font-family: 'helvetica', sans-serif;
+  font-weight: 400;
+  height: 75px;
+  background-color: transparent;
+  width: 60%;
+  text-align: right;
+  padding-right: 10px;
+}
+
+#options-outer > div:not(.hr):hover {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+#options-outer > p:hover {
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 #options-outer > .hr {
   display: block !important;
 }
 
-.option {
+div.exits, div.floors, div.rooms {
   background-color: transparent;
   height: 25px;
   width: 25px;
@@ -106,6 +169,24 @@ html, body {
   border-radius: 50px;
   margin-left: 10px;
   margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+div.exits.active {
+  background-color: rgba(0, 200, 200, 1);
+  border: 1px solid rgba(0, 200, 200, 1);
+}
+
+div.floors.active {
+  background-color: rgba(0, 200, 0, 1);
+  border: 1px solid rgba(0, 200, 0, 1);
+}
+
+div.rooms.active {
+  background-color: rgba(200, 0, 0, 1);
+  border: 1px solid rgba(200, 0, 0, 1);
 }
 
 #header-left {
@@ -283,6 +364,7 @@ html, body {
   width: 30px;
   border-radius: 60px;
   opacity: 1;
+  pointer-events: auto;
   transform: scale(1) rotate(0deg);
   -webkit-transform: scale(1) rotate(0deg);
   transform-origin: 50% 50%;
@@ -296,6 +378,11 @@ html, body {
      -moz-transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 2);
        -o-transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 2);
           transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 2); /* easeOutBack */
+}
+
+.room.nope, .other.nope {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .other {
