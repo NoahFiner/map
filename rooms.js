@@ -399,7 +399,7 @@ $(".relative-full").click(function(e) {
   var relativeY = ((e.pageY - offset.top));
   relativeX = relativeX*100/width;
   relativeY = relativeY*100/height;
-  alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
+  // alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
   //turn that alert on for testing only
 });
 });
