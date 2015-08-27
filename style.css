@@ -29,24 +29,83 @@ html, body {
   height: 15vh;
   width: 15vw;
   right: 0;
+  pointer-events: auto;
   display: inline-block;
   background-color: #B20202;
   clear: none;
+  overflow: hidden;
   box-shadow: 0 0 5px #000;
   border-left: 2px solid black;
   border-bottom: 2px solid black;
   border-bottom-left-radius: 20px;
+  -webkit-transition: all 500ms cubic-bezier(1.000, 0.030, 0.250, 1); /* older webkit */
+  -webkit-transition: all 500ms cubic-bezier(1.000, 0.030, 0.250, 1.270);
+     -moz-transition: all 500ms cubic-bezier(1.000, 0.030, 0.250, 1.270);
+       -o-transition: all 500ms cubic-bezier(1.000, 0.030, 0.250, 1.270);
+          transition: all 500ms cubic-bezier(1.000, 0.030, 0.250, 1.270); /* custom */
+}
+
+#header-top.more {
+  height: 60vh;
 }
 
 #header-top-h1 {
   color: white;
   font-size: 10vh;
-  line-height: 15vh;
+  line-height: 10vh;
   text-align: center;
   vertical-align: middle;
   font-family: 'helvetica', sans-serif;
   font-weight: 200;
   display: block;
+}
+
+.hr {
+  background-color: white;
+  height: 1px;
+  width: 60%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#header-top-more {
+  cursor: pointer;
+  color: white;
+  font-size: 3vh;
+  line-height: 4vh;
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'helvetica', sans-serif;
+  font-weight: 200;
+  display: block;
+}
+
+#options-outer {
+  margin-top: 20px;
+  border-top: 1px solid white;
+}
+
+#options-outer > div, #options-outer p {
+  color: white;
+  display: inline-block;
+  line-height: 75px;
+  vertical-align: middle;
+}
+
+#options-outer > .hr {
+  display: block !important;
+}
+
+.option {
+  background-color: transparent;
+  height: 25px;
+  width: 25px;
+  border: 1px solid white;
+  border-radius: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 #header-left {

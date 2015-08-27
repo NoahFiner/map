@@ -253,6 +253,25 @@ $(document).ready(function() {
   floors[6][49] = new Room (6, 17, 92, 'EXIT-600', 'Exit to the parking lot (LOCKED)');
 
 
+  floors[7][0] = new Room (7, 31, 27, '703', 'Health Room');
+  floors[7][1] = new Room (7, 33, 32, '704', 'Men\'s Locker Room');
+  floors[7][2] = new Room (7, 35, 53, '722', 'Office');
+  floors[7][3] = new Room (7, 31, 57, '726-1', 'Varsity Locker Room');
+  floors[7][4] = new Room (7, 27, 61, '729', 'Office');
+  floors[7][5] = new Room (7, 33, 79, '731', 'Health Room');
+  floors[7][6] = new Room (7, 35, 84, '732-ACCESS', 'Hallway to Girl\'s Locker Room');
+  floors[7][7] = new Room (7, 53, 86, '738', 'Girl\'s Locker Room');
+  floors[7][8] = new Room (7, 62, 68, '744', 'Access to Girl\'s Locker Room');
+  floors[7][9] = new Room (7, 64, 61, '726-2', 'Varsity Locker Room');
+  floors[7][10] = new Room (7, 38, 76, '735', 'Trainer');
+  floors[7][11] = new Room (7, 75, 58, '760', 'Weight Room');
+  floors[7][12] = new Room (7, 66, 66, 'F900-2', 'Access to the mat room and main gym.');
+  floors[7][13] = new Room (7, 82, 71, 'F900-3', 'Access to the main gym and south gym.');
+  floors[7][14] = new Room (7, 19, 57, 'F900-4', 'Access to The Bricks and main level.');
+  floors[7][15] = new Room (7, 17, 7, 'F500-3', 'Access to 500 level.');
+  floors[7][16] = new Room (7, 86, 67, 'EXIT-700', 'Exit to the side of the school.');
+
+
   floors[8][0] = new Room (8, 96, 26, '801', 'The office');
   floors[8][1] = new Room (8, 81, 45, '802', 'Another room in the office place.');
   floors[8][2] = new Room (8, 71, 50, '809', 'Entrance to the attendance office.');

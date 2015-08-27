@@ -57,7 +57,23 @@ var select = function(wat) {
   $("#"+wat+"00h").addClass("selected");
 }
 
+var headerActive = false;
+
+var toggleHeader = function(state) {
+  if(state === false) {
+    headerActive = true;
+    $("#header-top").addClass('more');
+  }
+  else {
+    headerActive = false;
+    $("#header-top").removeClass('more');
+  }
+}
+
 $(document).ready(function() {
+  $("#header-top-more").click(function() {
+    toggleHeader(headerActive);
+  })
   $(".header-sub").click(function() {
     $(".header-sub").removeClass("selected");
     $(this).addClass("selected");
