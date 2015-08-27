@@ -1,5 +1,5 @@
 var deg;
-var currScroll;
+var currScroll = 1;
 
 var Room = function(floor, x, y, num, info) {
   this.x = x;
@@ -7,7 +7,7 @@ var Room = function(floor, x, y, num, info) {
   this.num = num;
   this.info = info;
   this.floor = floor;
-  if(!isNaN(this.num) || this.num.search('-') != -1 && this.num.search('F') === -1 && this.num.search('M') === -1) {
+  if(!isNaN(this.num) || this.num.search('-') != -1 && this.num.search('F') === -1 && this.num.search('M') === -1 && this.num.search('EXIT') === -1) {
     this.type = 'room';
   }
   else {
@@ -18,10 +18,16 @@ var Room = function(floor, x, y, num, info) {
   }
   else {
     this.color = "#02B202";
+    if(this.num.search("EXIT") != -1) {
+      this.color = "#02B2B2";
+    }
   }
   this.init = function() {
     if((this.type === 'other') && (this.num != "LIRBARY")) {
       $("#f"+this.floor+"-content").append("<div class='"+this.type+" "+this.num+"' id='"+this.num+"'><p class='no-rotate'>"+this.num.substr(0, 4)+"</p></div>")
+      if(this.num.search("EXIT") != -1) {
+        $("#"+this.num).addClass("exit");
+      }
     }
     else {
       $("#f"+this.floor+"-content").append("<div class='"+this.type+" "+this.num+"' id='"+this.num+"'><p class='no-rotate'>"+this.num.substr(0, 3)+"</p></div>")
@@ -32,7 +38,7 @@ var Room = function(floor, x, y, num, info) {
   this.init();
 }
 
-var floors = [[], [], [], [], [], [], [], [], [], [], [], []];
+var floors = [[], [], [], [], [], [], [], [], [], [], [], [], []];
 
 var searchForFloor, infoTime;
 
@@ -41,6 +47,21 @@ var activateInfo = function() {
 }
 
 $(document).ready(function() {
+
+  floors[1][0] = new Room (1, 25, 39, 'F400-MAIN-1', "The science hallway.");
+  floors[1][1] = new Room (1, 33, 26, 'F400-MAIN-2', "The science hallway.");
+  floors[1][2] = new Room (1, 34, 65, 'F600-MAIN', "The social studies and world languages hallway.");
+  floors[1][3] = new Room (1, 43, 90, 'F800-MAIN', "The English hallway.");
+  floors[1][4] = new Room (1, 56, 87, 'F900', "The Bricks and gyms. Access to 700 hallway.");
+  floors[1][5] = new Room (1, 64, 27, 'F500-MAIN-1', "The band/theatre hallway.");
+  floors[1][6] = new Room (1, 74, 40, 'F500-MAIN-2', "The band/theatre hallway.");
+  floors[1][7] = new Room (1, 38, 2, 'F200-MAIN', "The math hallway.");
+  floors[1][8] = new Room (1, 53, 4, 'F300-MAIN', "The electives hallway.");
+  floors[1][9] = new Room (1, 47, 2, 'F100-MAIN', "The cafeteria.");
+  floors[1][10] = new Room (1, 50, 91, 'EXIT-FRONT', "Front entrance/exit.");
+  floors[1][11] = new Room (1, 52, 1, 'EXIT-BACK', "Back entrance/exit (LOCKED AFTER 9:00).");
+
+
   floors[2][0] = new Room (2, 61, 79, '201', 'Some big math classroom.');
   floors[2][1] = new Room (2, 58, 79, '203', 'A teacher\s office.');
   floors[2][2] = new Room (2, 53, 59, '213', 'PIB Algebra II class (i think)');
@@ -70,7 +91,10 @@ $(document).ready(function() {
   floors[2][26] = new Room (2, 21, 89, 'F400-2', 'The main staircase to the 400 floor.');
   floors[2][27] = new Room (2, 79, 81, 'MAIN-200', 'Access to the main level.');
   floors[2][28] = new Room (2, 88, 80, 'F300-1', 'Tiny corridor to the 300 floor.');
-  floors[2][28] = new Room (2, 84, 66, 'F100', 'Access to the 100 floor (cafeteria)');
+  floors[2][29] = new Room (2, 84, 66, 'F100', 'Access to the 100 floor (cafeteria)');
+  floors[2][30] = new Room (2, 52, 13, 'EXIT-200-1', 'Exit (LOCKED)');
+  floors[2][31] = new Room (2, 6, 68, 'EXIT-200-2', 'Exit (LOCKED)');
+  floors[2][32] = new Room (2, 71, 53, 'EXIT-BACK-1', 'Back entrance/exit (LOCKED AFTER 9:00).');
 
 
   floors[3][0] = new Room (3, 22, 14, '302', 'Break room.');
@@ -104,6 +128,7 @@ $(document).ready(function() {
   floors[3][28] = new Room (3, 11, 1, 'MAIN-300', 'Back to the main hallway.');
   floors[3][29] = new Room (3, 42, 32, 'F500-1', 'Staircase to the 500 hallway.');
   floors[3][30] = new Room (3, 72, 79, 'F500-2', 'Another staircase to the 500 hallway.');
+  floors[3][31] = new Room (3, 63, 26, 'EXIT-300', 'Exit to the back parking lot (LOCKED)');
 
 
   floors[4][0] = new Room (4, 77, 49, '402-1', 'Science');
@@ -146,6 +171,34 @@ $(document).ready(function() {
   floors[4][37] = new Room (4, 57, 5, 'F200-1', 'Staircase to floor 200.');
   floors[4][38] = new Room (4, 91, 45, 'MAIN-400-2', 'Back to the main hallway.');
   floors[4][39] = new Room (4, 29, 32, '420-1', 'Biology');
+  floors[4][40] = new Room (4, 15, 17, 'EXIT-400', 'Exit to the lake (LOCKED)');
+
+
+  floors[5][0] = new Room (5, 38, 83, "541", "Office");
+  floors[5][1] = new Room (5, 40, 89, "542", "Office");
+  floors[5][2] = new Room (5, 34, 94, "545", "Platform");
+  floors[5][3] = new Room (5, 38, 94, "544", "Office");
+  floors[5][4] = new Room (5, 38, 62, "501", "Special Education");
+  floors[5][5] = new Room (5, 34, 44, "501-2", "Special Education");
+  floors[5][6] = new Room (5, 29, 38, "510", "Custodian Room");
+  floors[5][7] = new Room (5, 26, 33, "514-ACCESS-1", "Provides access to the 514 art room.");
+  floors[5][8] = new Room (5, 21, 20, "507", "Unknown.");
+  floors[5][9] = new Room (5, 21, 7, "512", "Fine arts room.");
+  floors[5][10] = new Room (5, 46, 15, "513", "Fine arts room.");
+  floors[5][11] = new Room (5, 44, 18, "514-ACCESS-2", "Provides access to the 514 art room.");
+  floors[5][12] = new Room (5, 38, 41, "502", "Special Education.");
+  floors[5][13] = new Room (5, 44, 59, "521", "Music Library.");
+  floors[5][12] = new Room (5, 49, 55, "522", "Library??.");
+  floors[5][13] = new Room (5, 53, 52, "524", "Choir Room.");
+  floors[5][14] = new Room (5, 54, 57, "523", "Office.");
+  floors[5][15] = new Room (5, 56, 67, "531", "Fine Arts/Band/Choir Room.");
+  floors[5][16] = new Room (5, 66, 69, "555", "Office.");
+  floors[5][17] = new Room (5, 77, 71, "EXIT-500", "Exit to the back parking lot (LOCKED).");
+  floors[5][18] = new Room (5, 58, 79, "F300-3", "Access to the 300 floor.");
+  floors[5][19] = new Room (5, 30.5, 21, "F300-2", "Access to the 300 floor.");
+  floors[5][20] = new Room (5, 25, 71, "MAIN-600-1", "Access to the main level.");
+  floors[5][21] = new Room (5, 73, 81, "F700-1", "Access to the 700 floor.");
+  floors[5][22] = new Room (5, 42, 22, "518", "Storage.");
 
 
   floors[6][0] = new Room (6, 44, 15, 'F400-1', 'Main staircase to floor 400.');
@@ -197,6 +250,7 @@ $(document).ready(function() {
   floors[6][46] = new Room (6, 88, 25, 'MAIN-600', 'Back to the main level.');
   floors[6][47] = new Room (6, 57, 62, 'F800', 'Main staircase to the 800 floor.');
   floors[6][48] = new Room (6, 84, 43, 'F800-HIDDEN', 'Hidden staircase to the 800 floor.');
+  floors[6][49] = new Room (6, 17, 92, 'EXIT-600', 'Exit to the parking lot (LOCKED)');
 
 
   floors[8][0] = new Room (8, 96, 26, '801', 'The office');
@@ -228,6 +282,28 @@ $(document).ready(function() {
   floors[8][26] = new Room (8, 10.5, 33, 'F600-MAIN-1', 'Main staircase to the 600 floor.');
   floors[8][27] = new Room (8, 56, 2, 'F600-HIDDEN-1', 'A hidden staircase to the 600 floor.');
   floors[8][28] = new Room (8, 87, 19, 'MAIN-800', 'Back to the main level.');
+
+
+  floors[9][0] = new Room (9, 6, 36, "918", "the text on the fire escape map is wayyyy too small to read ;_;");
+  floors[9][1] = new Room (9, 12, 36, "917", "absolutely no idea but this room is really really small");
+  floors[9][2] = new Room (9, 33, 35, "915", "this is where some bloke sells t-shirts");
+  floors[9][3] = new Room (9, 42, 35, "914", "IB Store.");
+  floors[9][4] = new Room (9, 50, 24, "913", "Football Storage.");
+  floors[9][5] = new Room (9, 56, 29, "901", "Mat Room/Aerobics.");
+  floors[9][6] = new Room (9, 52, 37, "900-1", "Main Gym.");
+  floors[9][7] = new Room (9, 83, 68, "900-2", "Main Gym.");
+  floors[9][8] = new Room (9, 81, 73, "900-3", "Main Gym.");
+  floors[9][9] = new Room (9, 84, 80, "902-1", "South Gym.");
+  floors[9][10] = new Room (9, 85, 76, "906", "idk some weird bathroom for the opposite gender of the other one.");
+  floors[9][11] = new Room (9, 90, 62, "905", "idk some weird bathroom for the opposite gender of the other one.");
+  floors[9][12] = new Room (9, 91, 58, "902-2", "South Gym.");
+  floors[9][13] = new Room (9, 69, 27, "F700-2", "Access to the 700 floor's other corridors (plus the other gyms).");
+  floors[9][14] = new Room (9, 44, 25, "F700-3", "Access to the 700 floor main corridor.");
+  floors[9][15] = new Room (9, 3, 39, "MAIN-900", "Access to the main hall.");
+  floors[9][16] = new Room (9, 8, 44, "EXIT-900-1", "Exit to front parking lot.");
+  floors[9][17] = new Room (9, 44, 44, "EXIT-900-2", "Exit to front parking lot.");
+  floors[9][18] = new Room (9, 91, 50, "EXIT-900-3", "Exit to the back parking lot.");
+  floors[9][19] = new Room (9, 81, 81, "EXIT-900-4", "Exit to the front parking lot.");
 
   searchForRoom = function(wat) {
     var currFloor = wat[0];
@@ -283,6 +359,9 @@ $(document).ready(function() {
       if(roomio.x >= 85) {
         $("#f"+floorio+"-info").css("left", ((roomio.x)-20)+"%");
       }
+      if(roomio.x <= 10) {
+        $("#f"+floorio+"-info").css("left", ((roomio.x)+5)+"%");
+      }
     }
     else {
       $("#f"+floorio+"-info").css("top", ((roomio.y)-20)+"%");
@@ -320,7 +399,7 @@ $(".relative-full").click(function(e) {
   var relativeY = ((e.pageY - offset.top));
   relativeX = relativeX*100/width;
   relativeY = relativeY*100/height;
-  // alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
+  alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
   //turn that alert on for testing only
 });
 });

@@ -2,8 +2,8 @@ var deg = 0;
 
 var currScroll;
 
-var height1, height2, height3, height4, height5, height6, height7, height8;
-var heights = [height1, height2, height3, height4, height5, height6, height7, height8];
+var height1, height2, height3, height4, height5, height6, height7, height8, height9;
+var heights = [height1, height2, height3, height4, height5, height6, height7, height8, height9];
 
 var getHeights = function() {
   var height = window.innerHeight
@@ -37,7 +37,7 @@ var rotateAll = function() {
 
 var scrollio = function(wat) {
   var yo = heights[wat];
-  if(parseInt(wat) === 8) {
+  if(parseInt(wat) === 9) {
     yo = $("body").height();
   }
   $('html, body').animate({
@@ -47,6 +47,12 @@ var scrollio = function(wat) {
 
 var select = function(wat) {
   currScroll = wat;
+  if(wat === 1) {
+    $("#header-top-h1").html("main");
+  }
+  else {
+    $("#header-top-h1").html(wat+"00");
+  }
   $(".header-sub").removeClass("selected");
   $("#"+wat+"00h").addClass("selected");
 }
@@ -74,6 +80,7 @@ $(document).ready(function() {
     if(a <= heights[5]) {select(5)} else
     if(a <= heights[6]) {select(6)} else
     if(a <= heights[7]) {select(7)} else
-    {select(8)}
+    if(a <= heights[8]) {select(8)} else
+    {select(9)}
   })
 })
