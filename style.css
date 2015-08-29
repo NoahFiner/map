@@ -200,10 +200,11 @@ div.rooms.active {
   position: relative;
   background-color: rgba(147, 147, 147, 1);
   border-right: 2px solid #000;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
-#header-left::webkit-scrollbar {
-  display: none;
+::-webkit-scrollbar {
+    display: none;
 }
 
 #rotate {
@@ -242,7 +243,7 @@ div.rooms.active {
   vertical-align: middle;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
   font-family: 'helvetica', sans-serif !important;
-  color: #b20202;
+  color: #FFF;
   font-weight: 900;
 }
 
@@ -255,6 +256,81 @@ div.rooms.active {
   -webkit-transition: all 0.25s;
 }
 
+#back-outer {
+  width: 100%;
+  height: 100px;
+  margin-top: 0;
+  pointer-events: auto;
+  cursor: pointer;
+  background-image: url('fairview/weather_sunny.jpeg');
+  background-position: 50% 50%;
+  background-size: cover;
+  border-bottom: 1px solid #000;
+  overflow: hidden
+}
+
+#back {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-image: url('fairview/logo.png');
+  background-position: 50% 20px;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  transition: background-position 0.5s;
+  -webkit-transition: background-position 0.5s;
+}
+
+#tipsy {
+  width: 90%;
+  white-space: nowrap;
+  height: 25px;
+  position: absolute;
+  top: 10px;
+  background-color: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  left: 0;
+  right: 0;
+  overflow: visible;
+  margin-left: auto;
+  margin-right: auto;
+  transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+  transition-delay: 0.1s;
+  -webkit-transition-delay: 0.1s;
+}
+
+#tipsy > p {
+  font-size: 12px;
+  line-height: 25px;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  font-family: "helvetica", sans-serif;
+  font-weight: 400;
+}
+
+#tipsy > img {
+  width: 15px;
+  height: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  clear: both;
+  display: block;
+}
+
+#back:hover {
+  background-position: 50% 40px;
+}
+
+#back:hover #tipsy {
+  opacity: 1;
+}
+
+#back:active {
+  background-position: 50% 60px;
+}
+
 .header-sub {
   width: 100%;
   height: 30px;
@@ -262,31 +338,37 @@ div.rooms.active {
   cursor: pointer;
   line-height: 30px;
   background-color: rgba(147, 147, 147, 1);
-  border-top: 1px solid #000;
-  border-bottom: 1px solid rgba(181, 181, 181, 1);
+  /*border-top: 1px solid #000;*/
+  /*border-bottom: 1px solid rgba(181, 181, 181, 1);*/
   box-shadow: inset 0 0 0px 0px #000;
   transition: all 0.25s;
+  background-image: url('fairview/nav-norm.png');
+  background-size: auto 100%;
+  background-position: 100% 50%;
   z-index: -1;
   -webkit-transition: all 0.25s;
 }
 
 .header-sub:first-child {
-  margin-top: 25px;
+  top: 25px;
+  border-top: 1px solid #000;
 }
 
-.header-sub.yo {
-  border-bottom: 1px solid #000 !important;
+.header-sub!00 {
+  /*border-bottom: 1px solid #000 !important;*/
 }
 
 .header-sub:hover {
   background-color: rgba(164, 164, 164, 1);
   /*box-shadow: inset 0 0 5px 2.5px #000;*/
+  background-image: url('fairview/nav-hover.png');
 }
 
 .header-sub.selected {
   background-color: rgba(137, 137, 137, 1) !important;
-  box-shadow: 0 0 5px 2.5px #000 !important;
+  /*box-shadow: 0 0 5px 2.5px #000 !important;*/
   z-index:100;
+  background-image: url('fairview/nav-active.png');
 }
 
 .header-sub h1 {
@@ -335,7 +417,7 @@ div.rooms.active {
   margin-top: -42vh;
   display: block;
   line-height: 100vh;
-  right: 2vw;
+  right: 4vw;
 }
 
 @media only screen and (max-width: 999px) {
@@ -343,6 +425,7 @@ div.rooms.active {
     width: 80vw;
     height: 56.25vw;
     margin-top: -28vw;
+    right: 2vw;
   }
 }
 #f1 {
@@ -419,10 +502,11 @@ div.rooms.active {
 
 .room > p, .other > p {
   line-height: 30px;
-  font-size: 10px;
+  font-size: 12px;
   text-align: center;
   font-weight: 900;
   font-family: "helvetica", sans-serif !important;
+  /*font-family: Palatino, "Palatino Linotype", "Hoefler Text", Times, "Times New Roman", "Droid Sans", serif !important;*/
   color: white;
   pointer-events: none;
 }
@@ -456,11 +540,11 @@ div.rooms.active {
 }
 
 .info-outer {
-  height: 75px;
+  height: 80px;
   width: 200px;
   box-shadow: -5px 5px 10px #000;
   pointer-events: none;
-  background-color: white;
+  background-color: #d7d7d7;
   border: 1px solid #B20202;
   background-image: url('whitey.png');
   position: absolute;
@@ -473,8 +557,8 @@ div.rooms.active {
 }
 
 .info-top {
-  height: 25px;
-  line-height: 25px;
+  height: 30px;
+  line-height: 30px;
   width: 100%;
   background-color: #B20202;
   transition: all 0.25s;
@@ -482,9 +566,11 @@ div.rooms.active {
 }
 
 .info-top > h1 {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 900;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
   font-family: "helvetica", sans-serif !important;
+  /*font-family: Palatino, "Palatino Linotype", "Hoefler Text", Times, "Times New Roman", "Droid Sans", serif !important;*/
   text-align: left;
   margin-left: 10px;
   vertical-align: middle;
