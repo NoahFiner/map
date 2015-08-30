@@ -569,6 +569,13 @@ div.rooms.active {
     margin-top: -28vw;
     right: 2vw;
   }
+  #header-top-h1 {
+    font-size: 7vw;
+    font-weight: 900;
+  }
+  #header-top-more {
+    font-size: 2vh;
+  }
 }
 #f1 {
   background-image: url('main.png');
