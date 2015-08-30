@@ -72,6 +72,37 @@ var toggleHeader = function(state) {
   }
 }
 
+var headerHidden = false;
+
+var setHidden = function(state) {
+  if(state === false) {
+    headerHidden = true;
+    $("#header-left, #rotate, #hamburger-outer, .floor").addClass("hidden");
+    $(".ham1, .ham2, .ham3, .hamhidden, .circle").removeClass("active");
+  }
+  else {
+    headerHidden = false;
+    $("#header-left, #rotate, #hamburger-outer, .floor").removeClass("hidden");
+    $(".ham1, .ham2, .ham3, .hamhidden, .circle").addClass("active");
+  }
+}
+
+function detectmobile() { // thanks, stackoverflow!
+ if( navigator.userAgent.match(/Android/i)
+ || navigator.userAgent.match(/webOS/i)
+ || navigator.userAgent.match(/iPhone/i)
+ || navigator.userAgent.match(/iPad/i)
+ || navigator.userAgent.match(/iPod/i)
+ || navigator.userAgent.match(/BlackBerry/i)
+ || navigator.userAgent.match(/Windows Phone/i)
+ ){
+    return true;
+  }
+ else {
+    return false;
+  }
+}
+
 var exitsActive = true, floorsActive = true, roomsActive = true;
 
 var setState = function(wat, boo) {
@@ -124,6 +155,9 @@ $(document).ready(function() {
   $(".rooms").click(function() {
     setState('rooms', !roomsActive);
   })
+  $("#hamburger-relative").click(function() {
+    setHidden(headerHidden);
+  })
   $(".header-sub").click(function() {
     $(".header-sub").removeClass("selected");
     $(this).addClass("selected");
@@ -149,4 +183,10 @@ $(document).ready(function() {
     if(a <= heights[8]) {select(8)} else
     {select(9)}
   })
+  if(detectmobile()) {
+    setHidden(false);
+  }
+  else {
+    setHidden(true);
+  }
 })

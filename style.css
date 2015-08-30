@@ -28,6 +28,7 @@ html, body {
   position: absolute;
   height: 15vh;
   width: 15vw;
+  min-width: 200px !important;
   right: 0;
   pointer-events: auto;
   display: inline-block;
@@ -192,15 +193,147 @@ div.rooms.active {
   border: 1px solid rgba(200, 0, 0, 1);
 }
 
+#hamburger-outer {
+  background-image: url('black-linen-2.png');
+  background-color: #b20202;
+  border: 1px solid black;
+  display: inline-block;
+  position: absolute;
+  pointer-events: auto;
+  left: 10vw;
+  height: 7.5vw;
+  width: 7.5vw;
+  min-height: 100px;
+  min-width: 100px;
+  clear: none;
+  cursor: pointer;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+#hamburger-outer.hidden {
+  left: 0vw;
+}
+
+#hamburger-relative {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+#hamburger-relative > div {
+  position: absolute;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 1);
+  transition: all 0.5;
+  -webkit-transition: all 0.5s;
+}
+
+#hamburger-relative:hover > div, #hamburger-relative > div.active {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+#hamburger-relative:hover > .ham1 {
+  top: 20%;
+}
+
+#hamburger-relative:hover > .ham3 {
+  top: 70%;
+}
+
+.ham1, .ham2, .ham3, .hamhidden {
+  height: 10%;
+  width: 70%;
+  opacity: 1;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.circle {
+  background-color: transparent !important;
+  height: 80%;
+  width: 80%;
+  border-radius: 500px;
+  border: 0.1vw solid white;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 10%;
+  transform: scale(0);
+  -webkit-transform: scale(0);
+  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+}
+
+.ham1 {
+  top: 25%;
+}
+
+.ham2, .hamhidden {
+  top: 45%;
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+}
+
+.hamhidden {
+  opacity: 0;
+  transition: opacity 0.01s. transform 0.5s, -webkit-transform 0.5s;
+  -webkit-transition: opacity 0.01s, transform 0.5s, -webkit-transform 0.5s;
+}
+
+.ham3 {
+  top: 65%;
+}
+
+.ham1.active, .ham3.active {
+  opacity: 0;
+  top: 45%;
+}
+
+.ham2.active {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.hamhidden.active {
+  opacity: 1;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.circle.active {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+}
+
+
 #header-left {
   height: 100vh;
   width: 10vw;
+  left: 0;
   pointer-events: auto;
   overflow: scroll;
   position: relative;
+  display: inline-block;
   background-color: rgba(147, 147, 147, 1);
   border-right: 2px solid #000;
   box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+#header-left.hidden {
+  left: -10vw;
+}
+
+#rotate.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 ::-webkit-scrollbar {
@@ -216,6 +349,8 @@ div.rooms.active {
   background-image: url('black-linen-2.png');
   box-shadow: inset 0px 10px 18px 0px rgba(0,0,0,0.75);
   border-top: 1px solid #000;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
 }
 
 #rotate-inner {
@@ -418,6 +553,13 @@ div.rooms.active {
   display: block;
   line-height: 100vh;
   right: 4vw;
+}
+
+.floor.hidden /*not really hidden lol, just centered. just lazy with class names...*/{
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media only screen and (max-width: 999px) {
