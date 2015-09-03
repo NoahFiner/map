@@ -25,13 +25,15 @@ var rotateAll = function() {
   // $(".room, .other").css("-webkit-transform", "scale(1) rotate(-"+deg+"deg)");
   $(".no-rotate").css("transform", "rotate(-"+deg+"deg)");
   $(".no-rotate").css("-webkit-transform", "rotate(-"+deg+"deg)");
-  if(deg % 180) {
+  if(deg % 180 && detectMobile === false) {
     $(".floor").css("height", "77.34375vh");
     $(".floor").css("width", "110vh");
   }
   else {
-    $(".floor").css("height", "84.375vh");
-    $(".floor").css("width", "120vh");
+    if(detectMobile() === false) {
+      $(".floor").css("height", "84.375vh");
+      $(".floor").css("width", "120vh");
+    }
   }
 }
 
@@ -77,12 +79,12 @@ var headerHidden = false;
 var setHidden = function(state) {
   if(state === false) {
     headerHidden = true;
-    $("#header-left, #rotate, #hamburger-outer, .floor").addClass("hidden");
+    $("#header-left, #rotate, #hamburger-outer, .floor, .floor-outer").addClass("hidden");
     $(".ham1, .ham2, .ham3, .hamhidden, .circle").removeClass("active");
   }
   else {
     headerHidden = false;
-    $("#header-left, #rotate, #hamburger-outer, .floor").removeClass("hidden");
+    $("#header-left, #rotate, #hamburger-outer, .floor, .floor-outer").removeClass("hidden");
     $(".ham1, .ham2, .ham3, .hamhidden, .circle").addClass("active");
   }
 }
