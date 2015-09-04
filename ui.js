@@ -144,6 +144,8 @@ var setState = function(wat, boo) {
   }
 }
 
+var zoom = document.documentElement.clientWidth / window.innerWidth;
+
 $(document).ready(function() {
   $("#header-top-more").click(function() {
     toggleHeader(headerActive);
@@ -171,6 +173,13 @@ $(document).ready(function() {
   })
   $(window).resize(function() {
     getHeights();
+    var zoomNew = document.documentElement.clientWidth / window.innerWidth;
+    if (zoom != zoomNew) {
+        // zoom has changed
+        // adjust your fixed element
+        zoom = zoomNew
+        
+    }
   })
   $(window).scroll(function() {
     var a = $(window).scrollTop() - 250;
