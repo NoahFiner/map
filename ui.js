@@ -180,6 +180,7 @@ $(document).ready(function() {
         zoom = zoomNew;
         $(".room").css({
           height: (50/zoom)+"px"
+          width: (50/zoom)+"px"
         })
         $(".room > p").css({
           fontSize: (20/zoom)+"px",
@@ -187,6 +188,7 @@ $(document).ready(function() {
         })
         $(".other").css({
           height: (75/zoom)+"px"
+          width: (75/zoom)+"px"
         })
         $(".other > p").css({
           fontSize: (25/zoom)+"px",
@@ -194,6 +196,7 @@ $(document).ready(function() {
         })
         $(".exit").css({
           height: (60/zoom)+"px"
+          width: (60/zoom)+"px"
         })
         $(".exit > p").css({
           fontSize: (25/zoom)+"px",
