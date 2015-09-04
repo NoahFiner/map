@@ -178,7 +178,7 @@ $(document).ready(function() {
         // zoom has changed
         // adjust your fixed element
         zoom = zoomNew
-        
+        alert(zoomNew);
     }
   })
   $(window).scroll(function() {
