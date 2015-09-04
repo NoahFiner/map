@@ -1,7 +1,7 @@
 * {
   margin: 0;
   font-family: "HelveticaNeue-UltraLight", "Helvetica Neue Ultra Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  color: #B20202;
+  color: rgba(228, 52, 52, 1);
   font-weight: 100;
 }
 
@@ -33,7 +33,7 @@ html, body {
   right: 0;
   pointer-events: auto;
   display: inline-block;
-  background-color: #b20202;
+  background-color: rgba(228, 52, 52, 1);
   background-image: url('black-linen-2.png');
   clear: none;
   overflow: hidden;
@@ -196,7 +196,7 @@ div.rooms.active {
 
 #hamburger-outer {
   background-image: url('black-linen-2.png');
-  background-color: #b20202;
+  background-color: rgba(228, 52, 52, 1);
   border: 1px solid black;
   display: inline-block;
   position: absolute;
@@ -532,6 +532,8 @@ div.rooms.active {
   height: 100vh;
   position: relative;
   line-height: 100vh;
+  overflow: scroll;
+  border: 2px solid #000;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&amp;0.21+0,0+100 */
   background-color: #d7d7d7;
   transition: all 0.5s;
@@ -557,41 +559,9 @@ div.rooms.active {
 }
 
 .floor-outer.hidden /*not really hidden lol, just centered. just lazy with class names...*/{
-  width: 90vw;
+  width: 100vw;
 }
 
-@media only screen and (max-width: 999px) {
-  .floor {
-    width: 100vw;
-    height: 84.25vw;
-    margin-top: -35vw;
-  }
-  #header-top-h1 {
-    font-size: 7vw;
-    font-weight: 900;
-  }
-  #header-top-more {
-    font-size: 3vw;
-  }
-  #header-left, #rotate-inner, #rotate {
-    width: 20vw;
-  }
-  #header-left.hidden {
-    left: -20vw;
-  }
-  #hamburger-outer {
-    left: 20vw;
-    width: 12.5vw;
-    height: 12.5vw;
-  }
-  .header-sub {
-    height: 75px;
-    line-height: 75px;
-  }
-  .header-sub h1 {
-    font-size: 50px;
-  }
-}
 #f1 {
   background-image: url('main.png');
 }
@@ -709,7 +679,7 @@ div.rooms.active {
   box-shadow: -5px 5px 10px #000;
   pointer-events: none;
   background-color: #d7d7d7;
-  border: 1px solid #B20202;
+  border: 1px solid rgba(228, 52, 52, 1);
   background-image: url('whitey.png');
   position: absolute;
   top: 0;
@@ -724,7 +694,7 @@ div.rooms.active {
   height: 30px;
   line-height: 30px;
   width: 100%;
-  background-color: #B20202;
+  background-color: rgba(228, 52, 52, 1);
   transition: all 0.25s;
   -webkit-transition: all 0.25s;
 }
@@ -749,4 +719,67 @@ div.rooms.active {
   margin: 2.5px;
   line-height: 15px;
   vertical-align: baseline;
+}
+
+@media only screen and (max-width: 999px) {
+  .floor {
+    width: 100vw;
+    height: 84.25vw;
+    margin-top: -35vw;
+  }
+  #header-top-h1 {
+    font-size: 7vw;
+    font-weight: 900;
+  }
+  #header-top-more {
+    font-size: 3vw;
+  }
+  #header-left, #rotate-inner, #rotate {
+    width: 20vw;
+  }
+  #rotate-inner, #rotate {
+    height: 20vw;
+  }
+  #header-left.hidden {
+    left: -20vw;
+  }
+  #hamburger-outer {
+    left: 20vw;
+    width: 12.5vw;
+    height: 12.5vw;
+  }
+  .header-sub {
+    height: 75px;
+    line-height: 75px;
+  }
+  .header-sub h1 {
+    font-size: 50px;
+  }
+  .room {
+    height: 50px !important;
+    width: 50px !important;
+    line-height: 50px !important;
+  }
+  .other {
+    height: 75px !important;
+    width: 75px !important;
+    line-height: 75px !important;
+  }
+  .exit {
+    height: 60px !important;
+    width: 60px !important;
+    line-height: 60px !important;
+  }
+  .room > p {
+    line-height: 50px !important;
+    font-size: 20px !important;
+  }
+  .other > p {
+    font-size: 25px !important;
+    line-height: 75px !important;
+  }
+  .exit > p {
+    line-height: 60px !important;
+    font-size: 25px !important;
+  }
 }

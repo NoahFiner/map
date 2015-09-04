@@ -44,7 +44,7 @@ var scrollio = function(wat) {
   }
   $('html, body').animate({
     scrollTop: yo
-  })
+  }, 1)
 }
 
 var select = function(wat) {
