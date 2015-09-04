@@ -179,7 +179,7 @@ $(document).ready(function() {
         // adjust your fixed element
         zoom = zoomNew;
         $(".room").css({
-          height: (50/zoom)+"px"
+          height: (50/zoom)+"px",
           width: (50/zoom)+"px"
         })
         $(".room > p").css({
@@ -187,7 +187,7 @@ $(document).ready(function() {
           lineHeight: (50/zoom)+"px"
         })
         $(".other").css({
-          height: (75/zoom)+"px"
+          height: (75/zoom)+"px",
           width: (75/zoom)+"px"
         })
         $(".other > p").css({
@@ -195,7 +195,7 @@ $(document).ready(function() {
           lineHeight: (75/zoom)+"px"
         })
         $(".exit").css({
-          height: (60/zoom)+"px"
+          height: (60/zoom)+"px",
           width: (60/zoom)+"px"
         })
         $(".exit > p").css({
