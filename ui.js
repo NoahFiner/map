@@ -177,8 +177,28 @@ $(document).ready(function() {
     if (zoom != zoomNew) {
         // zoom has changed
         // adjust your fixed element
-        zoom = zoomNew
-        alert(zoomNew);
+        zoom = zoomNew;
+        $(".room").css({
+          height: (50/zoom)+"px"
+        })
+        $(".room > p").css({
+          fontSize: (20/zoom)+"px",
+          lineHeight: (50/zoom)+"px"
+        })
+        $(".other").css({
+          height: (75/zoom)+"px"
+        })
+        $(".other > p").css({
+          fontSize: (25/zoom)+"px",
+          lineHeight: (75/zoom)+"px"
+        })
+        $(".exit").css({
+          height: (60/zoom)+"px"
+        })
+        $(".exit > p").css({
+          fontSize: (25/zoom)+"px",
+          lineHeight: (60/zoom)+"px"
+        })
     }
   })
   $(window).scroll(function() {
