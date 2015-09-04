@@ -185,6 +185,17 @@ $(document).ready(function() {
     if(a <= heights[8]) {select(8)} else
     {select(9)}
   })
+  var a = $(window).scrollTop() - 250;
+  if(a <= heights[0]) {select(0)} else
+  if(a <= heights[1]) {select(1)} else
+  if(a <= heights[2]) {select(2)} else
+  if(a <= heights[3]) {select(3)} else
+  if(a <= heights[4]) {select(4)} else
+  if(a <= heights[5]) {select(5)} else
+  if(a <= heights[6]) {select(6)} else
+  if(a <= heights[7]) {select(7)} else
+  if(a <= heights[8]) {select(8)} else
+  {select(9)}
   if(detectmobile()) {
     setHidden(false);
   }
