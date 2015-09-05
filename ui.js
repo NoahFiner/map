@@ -231,6 +231,7 @@ $(document).ready(function() {
   if(a <= heights[7]) {select(7)} else
   if(a <= heights[8]) {select(8)} else
   {select(9)}
+  setTimeout(function() {$("#floor-text").html("Scroll the page to see the other hallways.");}, 10);
   if(detectmobile()) {
     setHidden(false);
   }
