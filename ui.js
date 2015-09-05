@@ -47,6 +47,8 @@ var scrollio = function(wat) {
   })
 }
 
+var floorDescs = ['asdf', 'The main level', 'The math hallway', 'The electives hallway', 'The science hallway', 'The band/theatre/arts hallway', 'The social studies/world languages hallway', 'The althetic/health hallway', 'The language arts hallway', 'The Bricks and the 700 hallway\'s gyms.'];
+
 var select = function(wat) {
   currScroll = wat;
   if(wat === 1) {
@@ -57,6 +59,7 @@ var select = function(wat) {
   }
   $(".header-sub").removeClass("selected");
   $("#"+wat+"00h").addClass("selected");
+  $("#floor-text").html(floorDescs[wat]);
 }
 
 var headerActive = false;
@@ -79,12 +82,12 @@ var headerHidden = false;
 var setHidden = function(state) {
   if(state === false) {
     headerHidden = true;
-    $("#header-left, #rotate, #hamburger-outer, .floor, .floor-outer").addClass("hidden");
+    $("#header-left, #rotate, #hamburger-outer, .floor, .floor-outer, #floor-text").addClass("hidden");
     $(".ham1, .ham2, .ham3, .hamhidden, .circle").removeClass("active");
   }
   else {
     headerHidden = false;
-    $("#header-left, #rotate, #hamburger-outer, .floor, .floor-outer").removeClass("hidden");
+    $("#header-left, #rotate, #hamburger-outer, .floor, .floor-outer, #floor-text").removeClass("hidden");
     $(".ham1, .ham2, .ham3, .hamhidden, .circle").addClass("active");
   }
 }

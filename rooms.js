@@ -62,16 +62,16 @@ $(document).ready(function() {
   floors[1][11] = new Room (1, 52, 1, 'EXIT-BACK', "Back entrance/exit (LOCKED AFTER 9:00).");
 
 
-  floors[2][0] = new Room (2, 61, 79, '201', 'Some big math classroom.');
-  floors[2][1] = new Room (2, 58, 79, '203', 'A teacher\s office.');
-  floors[2][2] = new Room (2, 53, 59, '213', 'PIB Algebra II class (i think)');
-  floors[2][3] = new Room (2, 53, 68, '214', 'other weird math class');
-  floors[2][4] = new Room (2, 56, 68, '212', 'another weird math class');
+  floors[2][0] = new Room (2, 61, 79, '201', 'Math classroom.');
+  floors[2][1] = new Room (2, 58, 79, '203', 'Office.');
+  floors[2][2] = new Room (2, 53, 59, '213', 'Math classroom.');
+  floors[2][3] = new Room (2, 53, 68, '214', 'Math classroom.');
+  floors[2][4] = new Room (2, 56, 68, '212', 'Math classroom.');
   floors[2][5] = new Room (2, 46, 80, '204', 'some other office');
-  floors[2][6] = new Room (2, 42, 80, '205', 'coolio classroom');
+  floors[2][6] = new Room (2, 42, 80, '205', 'Math classroom.');
   floors[2][7] = new Room (2, 30, 79, '206', 'teensy weensy office');
-  floors[2][8] = new Room (2, 16, 79, '208', 'I think this is a really weird bathroom');
-  floors[2][9] = new Room (2, 9, 79, '211', 'other weird bathroom');
+  floors[2][8] = new Room (2, 16, 79, '208', 'Locked, old bathroom');
+  floors[2][9] = new Room (2, 9, 79, '211', 'Locked, old bathroom');
   floors[2][10] = new Room (2, 23, 64, '216', 'Boys\'s bathroom. Don\'t go here, it\'s the weirdest thing ever.');
   floors[2][11] = new Room (2, 22, 61, '217', 'Girl\'s bathroom. Idk what is in there which is good.');
   floors[2][12] = new Room (2, 18, 54, '218', 'Cute little teacher office.');
