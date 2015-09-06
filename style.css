@@ -752,11 +752,11 @@ div.rooms.active {
 }
 
 @media only screen and (max-width: 999px) {
-  .floor {
+  /*.floor {
     width: 100vw;
     height: 84.25vw;
     margin-top: -35vw;
-  }
+  }*/
   #header-top-h1 {
     font-size: 7vw;
     font-weight: 900;
@@ -794,59 +794,22 @@ div.rooms.active {
   .header-sub h1 {
     font-size: 50px;
   }
-  .room {
-    height: 50px !important;
-    width: 50px !important;
-    line-height: 50px !important;
+  .room, .other, .exit {
+    transform: scale(1.5);
+    -webkit-transform: scale(1.5);
   }
-  .other {
-    height: 75px !important;
-    width: 75px !important;
-    line-height: 75px !important;
-  }
-  .exit {
-    height: 60px !important;
-    width: 60px !important;
-    line-height: 60px !important;
-  }
-  .room > p {
-    line-height: 50px !important;
-    font-size: 20px !important;
-  }
-  .other > p {
-    font-size: 25px !important;
-    line-height: 75px !important;
-  }
-  .exit > p {
-    line-height: 60px !important;
-    font-size: 25px !important;
+  .room:hover, .other:hover, .exit:hover {
+    transform: scale(1.75);
+    -webkit-transform: scale(1.75);
   }
 }
 
-.room.zoomed {
-  height: 20px !important;
-  width: 20px !important;
-  line-height: 20px !important;
+
+.room.zoomed, .other.zoomed, .exit.zoomed {
+  transform: scale(0.5);
+  -webkit-transform: scale(0.5);
 }
-.other.zoomed {
-  height: 40px !important;
-  width: 40px !important;
-  line-height: 40px !important;
-}
-.exit.zoomed {
-  height: 35px !important;
-  width: 35px !important;
-  line-height: 35px !important;
-}
-.room.zoomed > p.zoomed {
-  line-height: 20px !important;
-  font-size: 10px !important;
-}
-.other.zoomed > p.zoomed {
-  font-size: 15px !important;
-  line-height: 40px !important;
-}
-.exit.zoomed > p.zoomed {
-  line-height: 35px !important;
-  font-size: 10px !important;
+.room.zoomed:hover, .other.zoomed:hover, .exit.zoomed:hover {
+  transform: scale(1);
+  -webkit-transform: scale(1);
 }
