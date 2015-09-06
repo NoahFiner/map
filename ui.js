@@ -238,4 +238,11 @@ $(document).ready(function() {
   else {
     setHidden(true);
   }
+  $(document).addEventListener('gestureend', function(e) {
+    if (e.scale < 1.0) {
+      alert("zoomed");
+    } else if (e.scale > 1.0) {
+      alert("unzoomed");
+    }
+  }, false);
 })
