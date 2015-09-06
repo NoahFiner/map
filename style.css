@@ -294,6 +294,10 @@ div.rooms.active {
   background-color: rgba(255, 255, 255, 1);
 }
 
+#hamburger-outer:hover {
+  background-color: rgba(178, 2, 2, 1);
+}
+
 #hamburger-relative:hover > .ham1 {
   top: 20%;
 }
