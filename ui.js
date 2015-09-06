@@ -240,9 +240,12 @@ $(document).ready(function() {
   }
   window.addEventListener('gestureend', function(e) {
     if (e.scale < 1.0) {
-      alert("zoomed");
-    } else if (e.scale > 1.0) {
-      alert("unzoomed");
+      //zoomed out
+      $(".room, .exit, .other, p").removeClass("zoomed");
+    }
+    else if (e.scale > 1.0) {
+      //zoomed in
+      $(".room, .exit, .other, p").addClass("zoomed");
     }
   }, false);
 })
