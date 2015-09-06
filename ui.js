@@ -47,15 +47,15 @@ var scrollio = function(wat) {
   })
 }
 
-var floorDescs = ['asdf', 'The main level', 'The math hallway', 'The electives hallway', 'The science hallway', 'The band/theatre/arts hallway', 'The social studies/world languages hallway', 'The althetic/health hallway', 'The language arts hallway', 'The Bricks and the 700 hallway\'s gyms.'];
+var floorDescs = ['asdf', 'The main level', 'The math hallway', 'The electives hallway', 'The science hallway', 'The band/theatre/arts hallway', 'The social studies/languages hallway', 'The althetic/health hallway', 'The language arts hallway', 'The Bricks and the 700 hallway\'s gyms'];
 
 var select = function(wat) {
   currScroll = wat;
   if(wat === 1) {
-    $("#header-top-h1").html("main");
+    $("#header-top-h1, #floor-floor").html("main");
   }
   else {
-    $("#header-top-h1").html(wat+"00");
+    $("#header-top-h1, #floor-floor").html(wat+"00");
   }
   $(".header-sub").removeClass("selected");
   $("#"+wat+"00h").addClass("selected");
@@ -239,11 +239,11 @@ $(document).ready(function() {
     setHidden(true);
   }
   window.addEventListener('gestureend', function(e) {
-    if (e.scale < 1.0) {
+    if (e.scale < 1.0 && detectMobile()) {
       //zoomed out
       $(".room, .exit, .other, p").removeClass("zoomed");
     }
-    else if (e.scale > 1.0) {
+    else if (e.scale > 1.0 && detectMobile()) {
       //zoomed in
       $(".room, .exit, .other, p").addClass("zoomed");
     }

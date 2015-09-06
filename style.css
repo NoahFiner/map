@@ -35,7 +35,7 @@ html, body {
 }
 
 #header-middle {
-  height: 10vh;
+  height: 12.5vh;
   right: 0;
   left: 0;
   bottom: 0;
@@ -43,16 +43,46 @@ html, body {
   margin-left: auto;
   margin-right: auto;
   display: inline-block;
+  white-space: nowrap;
 }
 
 #floor-text {
-  font-size: 6vh;
+  font-size: 4vh;
   text-align: center;
-  line-height: 10vh;
-  vertical-align: middle;
   color: white;
+  line-height: 12.5vh;
+  vertical-align: middle;
   font-family: 'helvetica', sans-serif;
   font-weight: 800;
+  display: inline-block;
+  text-align: right;
+  float: right;
+}
+
+.vert-hr {
+  margin-top: 3.75vh;
+  margin-bottom: 3.75vh;
+  height: 5vh;
+  width: 2px;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  background-color: white;
+  display: inline-block;
+  float: right;
+}
+
+#floor-floor {
+  font-size: 8vh;
+  text-align: center;
+  color: #b20202;
+  margin-right: 2vw;
+  line-height: 12.5vh;
+  vertical-align: middle;
+  font-family: 'helvetica', sans-serif;
+  font-weight: 800;
+  display: inline-block;
+  text-align: right;
+  float: right;
 }
 
 #header-top {
@@ -785,7 +815,7 @@ div.rooms.active {
   }
   #floor-text.hidden {
     text-align: center;
-    font-size: 4vw;
+    font-size: 3.5vw;
   }
   .header-sub {
     height: 75px;
