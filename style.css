@@ -805,11 +805,11 @@ div.rooms.active {
 }
 
 
-.room.zoomed, .other.zoomed, .exit.zoomed {
+/*.room.zoomed, .other.zoomed, .exit.zoomed {
   transform: scale(0.5);
   -webkit-transform: scale(0.5);
 }
 .room.zoomed:hover, .other.zoomed:hover, .exit.zoomed:hover {
   transform: scale(1);
   -webkit-transform: scale(1);
-}
+}*/
