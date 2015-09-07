@@ -34,6 +34,40 @@ html, body {
 
 }
 
+#loading-outer {
+  z-index:3489257923874592837459823749587;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  background-color: gray;
+  pointer-events: auto;
+  opacity: 1;
+  background-image: url('whitey.png');
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+}
+
+#loading-outer.gone {
+  pointer-events: none;
+  opacity: 0;
+}
+
+#loading-outer > h1 {
+  font-size: 6vh;
+  text-align: center;
+  font-family: 'helvetica', sans-serif;
+  font-weight: 900;
+  color: white;
+}
+
+#loading-outer > h1:first-child {
+  margin-top: 45vh;
+}
+
+#loading-outer > h1:not(:first-child) {
+  margin-top: 0vh;
+}
+
 #header-middle {
   height: 12.5vh;
   right: 0;
@@ -267,6 +301,8 @@ div.rooms.active {
   min-height: 100px;
   min-width: 100px;
   clear: none;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;

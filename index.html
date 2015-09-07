@@ -12,6 +12,22 @@
 <body>
   <div id="everything">
     <div id="fixed-outer">
+      <div id="loading-outer">
+        <h1>loading</h1>
+        <h1 id='loading-dots'>...</h1>
+        <script>
+          var cycles = ['.', '..', '...', '....', '.....'];
+          var cycnum = 0;
+          var change = function() {
+            cycnum += 1;
+            if(cycnum >= 5) {
+              cycnum = 0;
+            }
+            $("#loading-dots").html(cycles[cycnum]);
+          }
+          var cycinterval = setInterval(function() {change()}, 500);
+        </script>
+      </div>
       <div id="header-top">
         <p id="header-top-h1">main</p>
         <div class="hr"></div>

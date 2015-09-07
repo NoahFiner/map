@@ -182,13 +182,13 @@ $(document).ready(function() {
   floors[5][5] = new Room (5, 34, 44, "501-2", "Special Education");
   floors[5][6] = new Room (5, 29, 38, "510", "Custodian Room");
   floors[5][7] = new Room (5, 26, 33, "514-ACCESS-1", "Provides access to the 514 art room");
-  floors[5][8] = new Room (5, 21, 20, "507", "Unknown");
+  floors[5][8] = new Room (5, 21, 20, "507", "");
   floors[5][9] = new Room (5, 21, 7, "512", "Fine arts room");
   floors[5][10] = new Room (5, 46, 15, "513", "Fine arts room");
   floors[5][11] = new Room (5, 44, 18, "514-ACCESS-2", "Provides access to the 514 art room");
   floors[5][12] = new Room (5, 38, 41, "502", "Special Education");
   floors[5][13] = new Room (5, 44, 59, "521", "Music Library");
-  floors[5][12] = new Room (5, 49, 55, "522", "Library??");
+  floors[5][12] = new Room (5, 49, 55, "522", "Library"); //TODO: no idea
   floors[5][13] = new Room (5, 53, 52, "524", "Choir Room");
   floors[5][14] = new Room (5, 54, 57, "523", "Office");
   floors[5][15] = new Room (5, 56, 67, "531", "Fine Arts/Band/Choir Room");
@@ -305,7 +305,7 @@ $(document).ready(function() {
 
   floors[9][0] = new Room (9, 6, 36, "918", "");
   floors[9][1] = new Room (9, 12, 36, "917", "");
-  floors[9][2] = new Room (9, 33, 35, "915", "Some store thing");
+  floors[9][2] = new Room (9, 33, 35, "915", "");
   floors[9][3] = new Room (9, 42, 35, "914", "IB Store");
   floors[9][4] = new Room (9, 50, 24, "913", "Football Storage");
   floors[9][5] = new Room (9, 56, 29, "901", "Mat Room/Aerobics");

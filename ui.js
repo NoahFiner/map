@@ -12,6 +12,18 @@ var getHeights = function() {
   }
 }
 
+var doneLoading = function() {
+  $("#loading-outer").addClass("gone");
+  setTimeout(function() {
+    $("#loading-outer").remove();
+    clearInterval(cycinterval);
+  }, 500)
+}
+
+setTimeout(function() {
+  doneLoading();
+}, 3000)
+
 getHeights();
 
 var rotateAll = function() {
