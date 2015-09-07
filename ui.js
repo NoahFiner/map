@@ -20,9 +20,9 @@ var doneLoading = function() {
   }, 500)
 }
 
-setTimeout(function() {
+$(window).ready(function() {
   doneLoading();
-}, 3000)
+})
 
 getHeights();
 
