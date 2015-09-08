@@ -250,6 +250,13 @@ $(document).ready(function() {
   else {
     setHidden(true);
   }
+  window.addEventListener("load",function() {
+	// Set a timeout...
+	setTimeout(function(){
+		// Hide the address bar!
+		window.scrollTo(0, 1);
+	}, 0);
+});
   window.addEventListener('gestureend', function(e) {
     if (e.scale < 1.0 && detectMobile()) {
       //zoomed out
