@@ -868,6 +868,10 @@ div.rooms.active {
     transform: scale(1.5);
     -webkit-transform: scale(1.5);
   }
+  .info-outer {
+    transform: scale(2);
+    -webkit-transform: scale(2);
+  }
   .room:hover, .other:hover, .exit:hover {
     transform: scale(1.75);
     -webkit-transform: scale(1.75);
