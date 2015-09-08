@@ -188,17 +188,17 @@ $(document).ready(function() {
   floors[5][11] = new Room (5, 44, 18, "514-ACCESS-2", "Provides access to the 514 art room");
   floors[5][12] = new Room (5, 38, 41, "502", "Special Education");
   floors[5][13] = new Room (5, 44, 59, "521", "Music Library");
-  floors[5][12] = new Room (5, 49, 55, "522", "Library"); //TODO: no idea
-  floors[5][13] = new Room (5, 53, 52, "524", "Choir Room");
-  floors[5][14] = new Room (5, 54, 57, "523", "Office");
-  floors[5][15] = new Room (5, 56, 67, "531", "Fine Arts/Band/Choir Room");
-  floors[5][16] = new Room (5, 66, 69, "555", "Office");
-  floors[5][17] = new Room (5, 77, 71, "EXIT-500", "Exit to the back parking lot (LOCKED)");
-  floors[5][18] = new Room (5, 58, 79, "F300-3", "Access to the 300 floor");
-  floors[5][19] = new Room (5, 30.5, 21, "F300-2", "Access to the 300 floor");
-  floors[5][20] = new Room (5, 25, 71, "MAIN-600-1", "Access to the main level");
-  floors[5][21] = new Room (5, 73, 81, "F700-1", "Access to the 700 floor");
-  floors[5][22] = new Room (5, 42, 22, "518", "Storage");
+  floors[5][14] = new Room (5, 49, 55, "522", "Library"); //TODO: no idea
+  floors[5][15] = new Room (5, 53, 52, "524", "Choir Room");
+  floors[5][16] = new Room (5, 54, 57, "523", "Office");
+  floors[5][17] = new Room (5, 56, 67, "531", "Fine Arts/Band/Choir Room");
+  floors[5][18] = new Room (5, 66, 69, "555", "Office");
+  floors[5][19] = new Room (5, 77, 71, "EXIT-500", "Exit to the back parking lot (LOCKED)");
+  floors[5][20] = new Room (5, 58, 79, "F300-3", "Access to the 300 floor");
+  floors[5][21] = new Room (5, 30.5, 21, "F300-2", "Access to the 300 floor");
+  floors[5][22] = new Room (5, 25, 71, "MAIN-600-1", "Access to the main level");
+  floors[5][23] = new Room (5, 73, 81, "F700-1", "Access to the 700 floor");
+  floors[5][24] = new Room (5, 42, 22, "518", "Storage");
 
 
   floors[6][0] = new Room (6, 44, 15, 'F400-1', 'Main staircase to floor 400');
