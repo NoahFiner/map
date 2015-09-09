@@ -865,16 +865,16 @@ div.rooms.active {
     font-size: 50px;
   }
   .room, .other, .exit {
-    transform: scale(1.5);
-    -webkit-transform: scale(1.5);
+    transform: scale(1.2) !important;
+    -webkit-transform: scale(1.2) !important;
   }
   .info-outer {
     transform: scale(2);
     -webkit-transform: scale(2);
   }
   .room:hover, .other:hover, .exit:hover {
-    transform: scale(1.75);
-    -webkit-transform: scale(1.75);
+    transform: scale(2) !important;
+    -webkit-transform: scale(2) !important;
   }
 }
 
