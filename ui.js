@@ -37,12 +37,16 @@ var rotateAll = function() {
   // $(".room, .other").css("-webkit-transform", "scale(1) rotate(-"+deg+"deg)");
   $(".no-rotate").css("transform", "rotate(-"+deg+"deg)");
   $(".no-rotate").css("-webkit-transform", "rotate(-"+deg+"deg)");
-  if(deg % 180 && detectMobile === false) {
+  if(detectmobile() || $(window).width() <= 999) {
+    $(".info-outer").css("transform", "rotate(-"+deg+"deg) scale(2)");
+    $(".info-outer").css("-webkit-transform", "rotate(-"+deg+"deg) scale(2)");
+  }
+  if(deg % 180 && detectmobile() === false) {
     $(".floor").css("height", "77.34375vh");
     $(".floor").css("width", "110vh");
   }
   else {
-    if(detectMobile() === false) {
+    if(detectmobile() === false) {
       $(".floor").css("height", "84.375vh");
       $(".floor").css("width", "120vh");
     }
@@ -259,11 +263,11 @@ $(document).ready(function() {
 	}, 0);
 });
   window.addEventListener('gestureend', function(e) {
-    if (e.scale < 1.0 && detectMobile()) {
+    if (e.scale < 1.0 && detectmobile()) {
       //zoomed out
       $(".room, .exit, .other, p").removeClass("zoomed");
     }
-    else if (e.scale > 1.0 && detectMobile()) {
+    else if (e.scale > 1.0 && detectmobile()) {
       //zoomed in
       $(".room, .exit, .other, p").addClass("zoomed");
     }
