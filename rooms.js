@@ -42,8 +42,8 @@ var floors = [[], [], [], [], [], [], [], [], [], [], [], [], []];
 
 var searchForFloor, infoTime;
 
-var activateInfo = function() {
-  $("#f"+currScroll+"-info").css("opacity", "1");
+var activateInfo = function(where) {
+  $("#f"+where+"-info").css("opacity", "1");
 }
 
 $(document).ready(function() {
@@ -368,7 +368,7 @@ $(document).ready(function() {
       a = searchForRoom(id);
     }
     var roomio = floors[floorio][a];
-    activateInfo();
+    activateInfo(floorio);
     if((deg % 180) === 0 || deg === 0) {
       $("#f"+floorio+"-info").css("top", ((roomio.y)-15)+"%");
       $("#f"+floorio+"-info").css("left", ((roomio.x)-10)+"%");
@@ -398,12 +398,9 @@ $(document).ready(function() {
     $("#f"+floorio+"-p").html(roomio.info);
     $(".info-top").css("background-color", roomio.color);
     $(".info-outer").css("border", "1px solid "+roomio.color);
-    if(detectMobile()) {
-      scrollio(floorio);
-    }
   }, function() {
     clearTimeout(infoTime);
-    infoTime = setTimeout(function() {$(".info-outer").css("opacity", "0")}, 1000);
+    infoTime = setTimeout(function() {$("#f"+floorio+"-info").css("opacity", "0")}, 1000);
   })
 
 
