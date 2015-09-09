@@ -246,6 +246,7 @@ $(document).ready(function() {
   setTimeout(function() {$("#floor-text").html("Scroll the page to see the other hallways.");}, 10);
   if(detectmobile()) {
     setHidden(false);
+    $(".room, .other, .exit").addClass("zoomed");
   }
   else {
     setHidden(true);
