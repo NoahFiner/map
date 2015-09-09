@@ -398,6 +398,9 @@ $(document).ready(function() {
     $("#f"+floorio+"-p").html(roomio.info);
     $(".info-top").css("background-color", roomio.color);
     $(".info-outer").css("border", "1px solid "+roomio.color);
+    if(detectMobile()) {
+      scrollio(floorio);
+    }
   }, function() {
     clearTimeout(infoTime);
     infoTime = setTimeout(function() {$(".info-outer").css("opacity", "0")}, 1000);
