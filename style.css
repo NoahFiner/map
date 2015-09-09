@@ -865,8 +865,8 @@ div.rooms.active {
     font-size: 50px;
   }
   .room, .other, .exit {
-    transform: scale(1.2) !important;
-    -webkit-transform: scale(1.2) !important;
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
   }
   .info-outer {
     transform: scale(2);
@@ -879,11 +879,11 @@ div.rooms.active {
 }
 
 
-/*.room.zoomed, .other.zoomed, .exit.zoomed {
-  transform: scale(0.5);
-  -webkit-transform: scale(0.5);
+.room.zoomed, .other.zoomed, .exit.zoomed {
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
 }
 .room.zoomed:hover, .other.zoomed:hover, .exit.zoomed:hover {
-  transform: scale(1);
-  -webkit-transform: scale(1);
-}*/
+  transform: scale(2) !important;
+  -webkit-transform: scale(2) !important;
+}
