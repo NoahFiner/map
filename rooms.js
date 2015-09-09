@@ -1,6 +1,8 @@
 var deg;
 var currScroll = 1;
 
+var floorio = 1;
+
 var Room = function(floor, x, y, num, info) {
   this.x = x;
   this.y = y;
@@ -358,7 +360,7 @@ $(document).ready(function() {
     clearTimeout(infoTime);
     var a;
     var id = $(this).attr("id").toString();
-    var floorio = id[0];
+    floorio = id[0];
     if(floorio === 'F' || 'L' || 'M') {
       floorio = searchForFloor(id.toString());
       a = floorio[1];
