@@ -3,6 +3,7 @@
 <head>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="initial-scale=1.0">
   <link rel="icon" href="favicon.ico" type="image/x-icon"/>
   <title>Map</title>
   <link type="text/css" rel="stylesheet" href="style.css"/>
@@ -59,9 +60,22 @@
         <div class="vert-hr"></div>
         <h1 id="floor-text">the math hall</h1>
       </div>
+      <div id="darkened-full">
+      </div>
+      <div id="header-search">
+        <div id="search-upper">
+          <div id="searchio">
+          </div>
+          <div id="search-outer">
+            <input type="text" name="search" id="search" placeholder="search room" max="3" />
+          </div>
+        </div>
+        <div id="search-lower">
+        </div>
+      </div>
       <div id="header-left">
         <div id="back-outer">
-          <a href="http://fairviewhs.org">
+          <a href="/">
             <div id="back">
               <div id="tipsy">
                 <p>Go to homepage</p>
@@ -70,9 +84,6 @@
             </div>
           </a>
         </div>
-        <!-- <div onclick="location.href = 'http://fairviewhs.org'" class="header-sub">
-          <h1>&#x25C4;back</h1>
-        </div> -->
         <div class="header-sub selected" id="100h">
           <h1>main</h1>
         </div>

@@ -1,7 +1,14 @@
+// Place all the behaviors and hooks related to the matching controller here.
+// All this logic will automatically be available in application.js.
+//= require jquery2
+//= require jquery-ui/effect.all
+
 var deg;
 var currScroll = 1;
 
 var floorio = 1;
+
+var maxSearchCars = 2;
 
 var Room = function(floor, x, y, num, info) {
   this.x = x;
@@ -47,6 +54,8 @@ var searchForFloor, infoTime;
 var activateInfo = function(where) {
   $("#f"+where+"-info").css("opacity", "1");
 }
+
+var found = ['this is to avoid an infinite loop lol'];
 
 $(document).ready(function() {
 
@@ -225,8 +234,8 @@ $(document).ready(function() {
   floors[6][19] = new Room (6, 52, 61, '616', 'Boy\'s bathroom');
   floors[6][20] = new Room (6, 56, 54, '615', 'Social studies classroom');
   floors[6][21] = new Room (6, 52, 47, '614', 'Closet');
-  floors[6][22] = new Room (6, 41, 56, '619', 'Office');
-  floors[6][23] = new Room (6, 50, 57, '620', 'Office');
+  floors[6][22] = new Room (6, 41, 56, '619', 'Staff bathroom');
+  floors[6][23] = new Room (6, 50, 57, '620', 'Staff bathroom');
   floors[6][24] = new Room (6, 49, 50, '621', 'Office');
   floors[6][25] = new Room (6, 46, 41, '622', 'Girl\'s bathroom');
   floors[6][26] = new Room (6, 43, 36, '612', 'Kitchen');
@@ -346,6 +355,35 @@ $(document).ready(function() {
     return [-1, -1];
   }
 
+  searchForFound = function(wat) {
+    for(i = 0; i < found.length; i++) {
+      if(wat === found[i]) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  searchForRoomSoft = function(wat) {
+    var currFloor = wat[0];
+    if(!isNaN(currFloor)) {
+      if(currFloor >= 0 && currFloor <= 9) {
+        for(j = 0; j < floors[currFloor].length; j++) {
+          var room = floors[currFloor][j].num;
+          if((room.search(wat) === 0) && (searchForFound(room.substr(0, 3)) === -1)) {
+            found.push(room.substr(0, 3));
+            return j;
+          }
+        }
+        return -1;
+      } else {
+        return -1;
+      }
+    } else {
+      return -1;
+    }
+  }
+
   $(".other").click(function() {
     var id = $(this).attr("id").toString();
     if(parseInt(id[1])) {
@@ -356,10 +394,25 @@ $(document).ready(function() {
     }
   })
 
-  $(".room, .other").hover(function() {
+  $(document).keyup(function() {
+    setTimeout(function() {
+      var hello = $("input[name=search]").val();
+      search(hello);
+    }, 100)
+  })
+
+  // $("#search").focusout(function() {
+  //   search("");
+  //   $("#search-lower").height(0);
+  // });
+
+  hoverRoom = function(id, activate) {
+    $(".room, .other").removeClass("hovered");
+    if(activate != false) {
+      $("#"+id.toString()).addClass("hovered");
+    }
     clearTimeout(infoTime);
     var a;
-    var id = $(this).attr("id").toString();
     floorio = id[0];
     if(floorio === 'F' || 'L' || 'M') {
       floorio = searchForFloor(id.toString());
@@ -400,15 +453,105 @@ $(document).ready(function() {
     $("#f"+floorio+"-p").html(roomio.info);
     $(".info-top").css("background-color", roomio.color);
     $(".info-outer").css("border", "1px solid "+roomio.color);
+  }
+
+  $(".room, .other").hover(function() {
+    hoverRoom($(this).attr("id").toString(), false)
   }, function() {
     clearTimeout(infoTime);
+    $("#"+$(this).attr("id").toString()).removeClass("hovered");
     infoTime = setTimeout(function() {$("#f"+floorio+"-info").css("opacity", "0")}, 1000);
   })
 
+  foundRooms = [];
 
+  search = function(wat) {
+    if(!isNaN(wat) && parseInt(wat[0]) >= 2) {
+      found = ['this is to avoid infinite loops lol'];
+      foundRooms = [];
+      var currFloor = wat[0];
+      for(f = 0; f < floors[currFloor].length; f++) {
+        var hi = searchForRoomSoft(wat);
+        if(f === 0 && hi === -1) {
+          foundRooms = [];
+          appendFound(wat);
+          break;
+        }
+        if(hi != -1) {
+          foundRooms.push(hi);
+        }
+        if(hi === -1) {
+          appendFound(wat);
+          break;
+        }
+      }
+      appendFound(wat);
+    }
+  }
 
+  appendFound = function(wat) {
+    var currFloor = wat[0];
+    if(foundRooms.length === 0) {
+      $("#search-lower").css("height", "5vw");
+      $("#search-lower").empty();
+      $("#search-lower").append("<p style='font-size: 3vw; line-height; 5vw; vertical-align: middle; font-weight: 900; color: black; text-align: center'>No rooms found.</p>")
+    }
+    else {
+      var multVal;
+      if(detectmobile()) {
+        multVal = 10;
+      }
+      else {
+        multVal = 5;
+      }
+      if(foundRooms.length <= 4) {
+        $("#search-lower").css("height", multVal*foundRooms.length+"vw");
+      }
+      else {
+        $("#search-lower").css("height", multVal*4.5+"vw");
+      }
+      $("#search-lower").empty();
+      if(foundRooms.length > 1) {
+        for(i = 0; i < foundRooms.length; i++) {
+          var e = foundRooms[i];
+          var roomNumFull = floors[currFloor][e].num;
+          var roomNum = floors[currFloor][e].num.substr(0, 3);
+          var roomDesc = floors[currFloor][e].info;
+          if(roomDesc >= maxSearchCars) {
+            roomsDesc = roomsDesc.substr(0, maxSearchCars);
+          }
+          $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
+        }
+      }
+      else if(foundRooms.length === 1) {
+        var e = foundRooms[0]
+        var roomNumFull = floors[currFloor][e].num;
+        var roomNum = floors[currFloor][e].num.substr(0, 3);
+        var roomDesc = floors[currFloor][e].info;
+        $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
+      }
+    }
+    $(".result-outer").click(function() {
+      var id = $(this).attr("id").toString()
+      var id = id.substr(1, id.length);
+      goTo(id);
+      setExpanded(false);
+    })
+  }
+
+  goTo = function(where) {
+    $(".room, .other").css("pointer-events", "none");
+    scrollio(parseInt(where[0]));
+    var offset = $("#"+where).offset();
+    $("#"+where[0]+"00-outer").scrollLeft(offset.left);
+    hoverRoom(where, true);
+    setTimeout(function() {
+      $(".room, .other").css("pointer-events", "auto");
+    }, 3000);
+  }
 
 });
+
 
 $(function() {
 $(".relative-full").click(function(e) {

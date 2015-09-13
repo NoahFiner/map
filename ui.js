@@ -98,13 +98,30 @@ var headerHidden = false;
 var setHidden = function(state) {
   if(state === false) {
     headerHidden = true;
-    $("#header-left, #rotate, #hamburger-outer, .floor, .floor-outer, #floor-text").addClass("hidden");
+    $("#header-left, #rotate, #hamburger-outer, .floor, .floor-outer, #floor-text, #header-search").addClass("hidden");
     $(".ham1, .ham2, .ham3, .hamhidden, .circle").removeClass("active");
   }
   else {
     headerHidden = false;
-    $("#header-left, #rotate, #hamburger-outer, .floor, .floor-outer, #floor-text").removeClass("hidden");
+    $("#header-left, #rotate, #hamburger-outer, .floor, .floor-outer, #floor-text, #header-search").removeClass("hidden");
     $(".ham1, .ham2, .ham3, .hamhidden, .circle").addClass("active");
+  }
+}
+
+var expanded = false;
+
+var setExpanded = function(state) {
+  if(state === false) {
+    expanded = false;
+    $("#header-search, #darkened-full").removeClass("expanded");
+    $("#search-lower").height(0);
+    $("input[name=search]").val("");
+  }
+  else {
+    expanded = true;
+    $("#header-search, #darkened-full").addClass("expanded");
+    $("#search-lower").height(0);
+    $("input[name=search]").val('');
   }
 }
 
@@ -166,8 +183,14 @@ var setState = function(wat, boo) {
 var zoom = document.documentElement.clientWidth / window.innerWidth;
 
 $(document).ready(function() {
+  $("#darkened-full").click(function() {
+    setExpanded(false);
+  })
   $("#header-top-more").click(function() {
     toggleHeader(headerActive);
+  })
+  $("#searchio").click(function() {
+    setExpanded(!expanded);
   })
   $(".exits").click(function() {
     setState('exits', !exitsActive);
@@ -190,6 +213,7 @@ $(document).ready(function() {
   $("#rotate-inner").click(function() {
     rotateAll();
   })
+  $(".floor-outer").scrollLeft($(".floor-outer").width()/2);
   $(window).resize(function() {
     getHeights();
     var zoomNew = document.documentElement.clientWidth / window.innerWidth;
@@ -259,7 +283,7 @@ $(document).ready(function() {
 	// Set a timeout...
 	setTimeout(function(){
 		// Hide the address bar!
-		window.scrollTo(0, 1);
+		window.scrollTo($(".floor").width/2, 1);
 	}, 0);
 });
   window.addEventListener('gestureend', function(e) {
