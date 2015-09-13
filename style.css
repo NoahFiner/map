@@ -394,7 +394,6 @@ html, body {
   position: absolute;
   height: 15vh;
   width: 15vw;
-  min-width: 200px !important;
   right: 0;
   pointer-events: auto;
   display: inline-block;
@@ -569,8 +568,6 @@ div.rooms.active {
   left: 10vw;
   height: 7.5vw;
   width: 7.5vw;
-  min-height: 100px;
-  min-width: 100px;
   clear: none;
   border-bottom-right-radius: 20px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
@@ -769,7 +766,7 @@ div.rooms.active {
 
 #back-outer {
   width: 100%;
-  height: 100px;
+  height: 65px;
   margin-top: 0;
   pointer-events: auto;
   cursor: pointer;
@@ -1108,12 +1105,36 @@ div.rooms.active {
     height: 84.25vw;
     margin-top: -35vw;
   }*/
+  #header-top {
+    width: 27vw;
+    height: 10vh;
+  }
+  #options-outer {
+    margin-top: 10px;
+  }
   #header-top-h1 {
     font-size: 7vw;
     font-weight: 900;
+    line-height: 5vh;
   }
   #header-top-more {
     font-size: 3vw;
+  }
+  #header-top-more:before {
+    top: 9vh;
+  }
+  #options-outer > p {
+    font-size: 10px;
+    padding-right: 2.5px;
+    padding-left: 2.5px;
+    height: 25px;
+  }
+  div.exits, div.floors, div.rooms {
+    height: 12.5px;
+    width: 12.5px;
+  }
+  #options-outer > div, #options-outer p {
+    line-height: 25px;
   }
   #header-left, #rotate-inner, #rotate {
     width: 20vw;
@@ -1187,14 +1208,14 @@ div.rooms.active {
     text-align: center;
     font-size: 3.5vw;
   }
-  .header-sub {
+  /*.header-sub {
     height: 75px;
     line-height: 75px;
   }
   .header-sub h1 {
     font-size: 50px;
-  }
-  .room, .other, .exit {
+  }*/
+  /*.room, .other, .exit {
     transform: scale(2);
     -webkit-transform: scale(2);
   }
@@ -1205,7 +1226,7 @@ div.rooms.active {
   .room:hover, .room.hovered, .other:hover, .other.hovered, .exit:hover, .exit.hovered {
     transform: scale(2.5) !important;
     -webkit-transform: scale(2.5) !important;
-  }
+  }*/
 }
 
 .room.zoomed, .other.zoomed, .exit.zoomed {
