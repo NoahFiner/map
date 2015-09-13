@@ -1234,14 +1234,14 @@ div.rooms.active {
   }*/
 }
 
-.room.zoomed, .other.zoomed, .exit.zoomed {
+/*.room.zoomed, .other.zoomed, .exit.zoomed {
   transform: scale(2);
   -webkit-transform: scale(2);
 }
 .room.zoomed:hover, .room.hovered.hover, .other.zoomed:hover, .other.zoomed.hovered, .exit.zoomed:hover, .exit.zoomed.hovered {
   transform: scale(2.5) !important;
   -webkit-transform: scale(2.5) !important;
-}
+}*/
 
 @media screen and (orientation:landscape) and (max-device-width: 700px) {
   .room, .other, .exit {
