@@ -122,6 +122,7 @@ var setExpanded = function(state) {
     $("#header-search, #darkened-full").addClass("expanded");
     $("#search-lower").height(0);
     $("input[name=search]").val('');
+    $("#search").focus();
   }
 }
 
@@ -183,6 +184,24 @@ var setState = function(wat, boo) {
 var zoom = document.documentElement.clientWidth / window.innerWidth;
 
 $(document).ready(function() {
+  $("#search").keypress(function(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13') {
+      event.preventDefault();
+      if($("input[name=search]").val() != "" && results) {
+        var currFloor = $("input[name=search]").val().toString()[0];
+        var firstRoom = foundRooms[0];
+        goTo(floors[currFloor][firstRoom].num);
+      }
+    }
+  });
+  $("body").keydown(function(event) {
+    var keycode = event.keyCode;
+    if(keycode == '70' && !expanded) {
+      setExpanded(true);
+      event.preventDefault();
+    }
+  });
   $("#darkened-full").click(function() {
     setExpanded(false);
   })

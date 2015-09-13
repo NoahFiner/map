@@ -10,6 +10,8 @@ var floorio = 1;
 
 var maxSearchCars = 2;
 
+var results = false;
+
 var Room = function(floor, x, y, num, info) {
   this.x = x;
   this.y = y;
@@ -438,12 +440,12 @@ $(document).ready(function() {
       }
     }
     else {
-      $("#f"+floorio+"-info").css("top", ((roomio.y)-20)+"%");
-      $("#f"+floorio+"-info").css("left", ((roomio.x)-15)+"%");
+      $("#f"+floorio+"-info").css("top", ((roomio.y)-30)+"%");
+      $("#f"+floorio+"-info").css("left", ((roomio.x)-25)+"%");
       if(roomio.y <= 30) {
         $("#f"+floorio+"-info").css("top", ((roomio.y)+10)+"%");
       }
-      if(roomio.x <= 20) {
+      if(roomio.x <= 35) {
         $("#f"+floorio+"-info").css("left", ((roomio.x)+5)+"%");
       }
     }
@@ -495,8 +497,10 @@ $(document).ready(function() {
       $("#search-lower").css("height", "5vw");
       $("#search-lower").empty();
       $("#search-lower").append("<p style='font-size: 3vw; line-height; 5vw; vertical-align: middle; font-weight: 900; color: black; text-align: center'>No rooms found.</p>")
+      results = false;
     }
     else {
+      results = true;
       var multVal;
       if(detectmobile()) {
         multVal = 10;
@@ -535,16 +539,17 @@ $(document).ready(function() {
       var id = $(this).attr("id").toString()
       var id = id.substr(1, id.length);
       goTo(id);
-      setExpanded(false);
     })
   }
 
   goTo = function(where) {
+    setExpanded(false);
     $(".room, .other").css("pointer-events", "none");
     scrollio(parseInt(where[0]));
     var offset = $("#"+where).offset();
     $("#"+where[0]+"00-outer").scrollLeft(offset.left);
     hoverRoom(where, true);
+    $("#search").blur();
     setTimeout(function() {
       $(".room, .other").css("pointer-events", "auto");
     }, 3000);
