@@ -554,6 +554,8 @@ $(document).ready(function() {
       $(".room, .other").css("pointer-events", "auto");
     }, 3000);
   }
+  var category = (location.hash).replace('#','');
+  goTo(category.toString());
 
 });
 
