@@ -272,9 +272,9 @@ $(document).ready(function() {
   floors[7][3] = new Room (7, 31, 57, '726-1', 'Varsity Locker Room');
   floors[7][4] = new Room (7, 27, 61, '729', 'Office');
   floors[7][5] = new Room (7, 33, 79, '731', 'Health Room');
-  floors[7][6] = new Room (7, 35, 84, '732-ACCESS', 'Hallway to Girl\'s Locker Room');
-  floors[7][7] = new Room (7, 53, 86, '738', 'Girl\'s Locker Room');
-  floors[7][8] = new Room (7, 62, 68, '744', 'Access to Girl\'s Locker Room');
+  floors[7][6] = new Room (7, 35, 84, '732-ACCESS', 'Hallway to Women\'s Locker Room');
+  floors[7][7] = new Room (7, 53, 86, '738', 'Women\'s Locker Room');
+  floors[7][8] = new Room (7, 62, 68, '744', 'Access to Women\'s Locker Room');
   floors[7][9] = new Room (7, 64, 61, '726-2', 'Varsity Locker Room');
   floors[7][10] = new Room (7, 38, 76, '735', 'Trainer');
   floors[7][11] = new Room (7, 75, 58, '760', 'Weight Room');
@@ -308,7 +308,7 @@ $(document).ready(function() {
   floors[8][20] = new Room (8, 31, 92, '846', 'Language arts classroom');
   floors[8][21] = new Room (8, 37, 71, '841', 'Teacher office');
   floors[8][22] = new Room (8, 39, 52, '831', 'Teacher office');
-  floors[8][23] = new Room (8, 42, 61, '822', 'Language arts classroom');
+  floors[8][23] = new Room (8, 42, 61, '822', 'Languages arts computer lab');
   floors[8][24] = new Room (8, 42, 68, '823', 'Language arts classroom');
   floors[8][25] = new Room (8, 42, 74, '845', 'Language arts classroom');
   floors[8][26] = new Room (8, 10.5, 33, 'F600-MAIN-1', 'Main staircase to the 600 floor');

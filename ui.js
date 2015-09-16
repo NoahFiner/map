@@ -63,7 +63,7 @@ var scrollio = function(wat) {
   })
 }
 
-var floorDescs = ['asdf', 'The main level', 'The math hallway', 'The electives hallway', 'The science hallway', 'The band/theatre/arts hallway', 'The social studies/languages hallway', 'The althetic/health hallway', 'The language arts hallway', 'The Bricks and the 700 hallway\'s gyms'];
+var floorDescs = ['asdf', 'The main level', 'The math hallway', 'The electives hallway', 'The science hallway', 'The band/theatre/arts hallway', 'The social studies/languages hallway', 'The athletic/health hallway', 'The language arts hallway', 'The Bricks and the 700 hallway\'s gyms'];
 
 var select = function(wat) {
   currScroll = wat;
