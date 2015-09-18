@@ -201,6 +201,10 @@ $(document).ready(function() {
       setExpanded(true);
       event.preventDefault();
     }
+    else if(keycode == '27' && expanded) {
+      setExpanded(false);
+      event.preventDefault();
+    }
   });
   $("#darkened-full").click(function() {
     setExpanded(false);
