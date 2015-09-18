@@ -572,8 +572,11 @@ $(document).ready(function() {
     setExpanded(false);
     $(".room, .other").css("pointer-events", "none");
     scrollio(parseInt(where[0]));
-    // var offset = $("#"+where).offset();
-    // $("#"+where[0]+"00-outer").scrollLeft(offset.left);
+    var currentFloor = where[0];
+    var f = searchForRoomSoftTemp(where.toString());
+    var actualWhere = floors[currentFloor][f].num.toString();
+    var offset = $("#"+actualWhere).offset();
+    $("#"+where[0]+"00-outer").scrollLeft(offset.left);
     hoverRoom(where, true);
     $("#search").blur();
     setTimeout(function() {
@@ -581,8 +584,10 @@ $(document).ready(function() {
     }, 3000);
   }
 
-  var category = (location.hash).replace('#','');
-  goTo(category.toString());
+  setTimeout(function() { //allows for the window to scroll to (0, 0) for mobile
+    var category = (location.hash).replace('#','');
+    goTo(category.toString());
+  }, 1000);
 
 });
 
