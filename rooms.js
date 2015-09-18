@@ -201,12 +201,12 @@ $(document).ready(function() {
   floors[5][11] = new Room (5, 44, 18, "514-ACCESS-2", "Provides access to the 514 art room");
   floors[5][12] = new Room (5, 38, 41, "502", "Special Education");
   floors[5][13] = new Room (5, 44, 59, "521", "Music Library");
-  floors[5][14] = new Room (5, 49, 55, "522", "Library"); //TODO: no idea
+  floors[5][14] = new Room (5, 49, 55, "522", "Music Library");
   floors[5][15] = new Room (5, 53, 52, "524", "Choir Room");
   floors[5][16] = new Room (5, 54, 57, "523", "Office");
-  floors[5][17] = new Room (5, 56, 67, "531", "Fine Arts/Band/Choir Room");
+  floors[5][17] = new Room (5, 56, 67, "531", "Fine Arts Studio");
   floors[5][18] = new Room (5, 66, 69, "555", "Office");
-  floors[5][19] = new Room (5, 77, 71, "EXIT-500", "Exit to the back parking lot (LOCKED)");
+  floors[5][19] = new Room (5, 77, 71, "EXIT-500", "Exit and band rooms");
   floors[5][20] = new Room (5, 58, 79, "F300-3", "Access to the 300 floor");
   floors[5][21] = new Room (5, 30.5, 21, "F300-2", "Access to the 300 floor");
   floors[5][22] = new Room (5, 25, 71, "MAIN-600-1", "Access to the main level");
@@ -386,6 +386,26 @@ $(document).ready(function() {
     }
   }
 
+  searchForRoomSoftTemp = function(wat) {
+    var currFloor = wat[0];
+    if(!isNaN(currFloor)) {
+      if(currFloor >= 0 && currFloor <= 9) {
+        for(j = 0; j < floors[currFloor].length; j++) {
+          var room = floors[currFloor][j].num;
+          if((room.search(wat) === 0) && (searchForFound(room.substr(0, 3)) === -1)) {
+            // found.push(room.substr(0, 3)); sorry i'm lazy and what this to work
+            return j;
+          }
+        }
+        return -1;
+      } else {
+        return -1;
+      }
+    } else {
+      return -1;
+    }
+  }
+
   $(".other").click(function() {
     var id = $(this).attr("id").toString();
     if(parseInt(id[1])) {
@@ -412,17 +432,23 @@ $(document).ready(function() {
     $(".room, .other").removeClass("hovered");
     if(activate != false) {
       $("#"+id.toString()).addClass("hovered");
+      $("#"+id.toString()+"-1").addClass("hovered"); // just in case the function is being run from the hash
     }
     clearTimeout(infoTime);
     var a;
     floorio = id[0];
-    if(floorio === 'F' || 'L' || 'M') {
+    if(floorio === 'F' || floorio === 'L' || floorio === 'M') {
       floorio = searchForFloor(id.toString());
       a = floorio[1];
       floorio = floorio[0];
     }
     else {
-      a = searchForRoom(id);
+      if(!activate) {
+        a = searchForRoom(id);
+      }
+      else {
+        a = searchForRoomSoftTemp(id);
+      }
     }
     var roomio = floors[floorio][a];
     activateInfo(floorio);
@@ -546,14 +572,15 @@ $(document).ready(function() {
     setExpanded(false);
     $(".room, .other").css("pointer-events", "none");
     scrollio(parseInt(where[0]));
-    var offset = $("#"+where).offset();
-    $("#"+where[0]+"00-outer").scrollLeft(offset.left);
+    // var offset = $("#"+where).offset();
+    // $("#"+where[0]+"00-outer").scrollLeft(offset.left);
     hoverRoom(where, true);
     $("#search").blur();
     setTimeout(function() {
       $(".room, .other").css("pointer-events", "auto");
     }, 3000);
   }
+
   var category = (location.hash).replace('#','');
   goTo(category.toString());
 
