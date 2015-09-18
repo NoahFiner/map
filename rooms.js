@@ -18,7 +18,7 @@ var Room = function(floor, x, y, num, info) {
   this.num = num;
   this.info = info;
   this.floor = floor;
-  if(!isNaN(this.num) || this.num.search('-') != -1 && this.num.search('F') === -1 && this.num.search('M') === -1 && this.num.search('EXIT') === -1) {
+  if(!isNaN(this.num) || this.num.search('-') != -1 && this.num.search('F') === -1 && this.num.search('M') === -1 && this.num.search('EXIT') === -1 && this.num.search('COUNSELING') === -1) {
     this.type = 'room';
   }
   else {
@@ -73,6 +73,7 @@ $(document).ready(function() {
   floors[1][9] = new Room (1, 47, 2, 'F100-MAIN', "The cafeteria");
   floors[1][10] = new Room (1, 50, 91, 'EXIT-FRONT', "Front entrance/exit");
   floors[1][11] = new Room (1, 52, 1, 'EXIT-BACK', "Back entrance/exit (LOCKED AFTER 9:00)");
+  floors[1][12] = new Room (1, 48, 66, 'COUNSELING', "Counseling offices");
 
 
   floors[2][0] = new Room (2, 61, 79, '201', 'Math classroom');
@@ -321,7 +322,7 @@ $(document).ready(function() {
   floors[9][2] = new Room (9, 33, 35, "915", "");
   floors[9][3] = new Room (9, 42, 35, "914", "IB Store");
   floors[9][4] = new Room (9, 50, 24, "913", "Football Storage");
-  floors[9][5] = new Room (9, 56, 29, "901", "Mat Room/Aerobics");
+  floors[9][5] = new Room (9, 56, 29, "901-1", "Mat Room/Aerobics");
   floors[9][6] = new Room (9, 52, 37, "900-1", "Main Gym");
   floors[9][7] = new Room (9, 83, 68, "900-2", "Main Gym");
   floors[9][8] = new Room (9, 81, 73, "900-3", "Main Gym");
@@ -329,13 +330,14 @@ $(document).ready(function() {
   floors[9][10] = new Room (9, 85, 76, "906", "Bathroom");
   floors[9][11] = new Room (9, 90, 62, "905", "Bathroom");
   floors[9][12] = new Room (9, 91, 58, "902-2", "South Gym");
-  floors[9][13] = new Room (9, 69, 27, "F700-2", "Access to the 700 floor's other corridors (plus the other gyms)");
-  floors[9][14] = new Room (9, 44, 25, "F700-3", "Access to the 700 floor main corridor");
-  floors[9][15] = new Room (9, 3, 39, "MAIN-900", "Access to the main hall");
-  floors[9][16] = new Room (9, 8, 44, "EXIT-900-1", "Exit to front parking lot");
-  floors[9][17] = new Room (9, 44, 44, "EXIT-900-2", "Exit to front parking lot");
-  floors[9][18] = new Room (9, 91, 50, "EXIT-900-3", "Exit to the back parking lot");
-  floors[9][19] = new Room (9, 81, 81, "EXIT-900-4", "Exit to the front parking lot");
+  floors[9][13] = new Room (9, 73, 25, "901-2", "Mat Room/Aerobics");
+  floors[9][14] = new Room (9, 69, 27, "F700-2", "Access to the 700 floor's other corridors (plus the other gyms)");
+  floors[9][15] = new Room (9, 44, 25, "F700-3", "Access to the 700 floor main corridor");
+  floors[9][16] = new Room (9, 3, 39, "MAIN-900", "Access to the main hall");
+  floors[9][17] = new Room (9, 8, 44, "EXIT-900-1", "Exit to front parking lot");
+  floors[9][18] = new Room (9, 44, 44, "EXIT-900-2", "Exit to front parking lot");
+  floors[9][19] = new Room (9, 91, 50, "EXIT-900-3", "Exit to the back parking lot");
+  floors[9][20] = new Room (9, 81, 81, "EXIT-900-4", "Exit to the front parking lot");
 
   searchForRoom = function(wat) {
     var currFloor = wat[0];
@@ -437,7 +439,7 @@ $(document).ready(function() {
     clearTimeout(infoTime);
     var a;
     floorio = id[0];
-    if(floorio === 'F' || floorio === 'L' || floorio === 'M') {
+    if(floorio === 'F' || floorio === 'L' || floorio === 'M' || floorio === 'C') {
       floorio = searchForFloor(id.toString());
       a = floorio[1];
       floorio = floorio[0];
@@ -604,7 +606,7 @@ $(".relative-full").click(function(e) {
   var relativeY = ((e.pageY - offset.top));
   relativeX = relativeX*100/width;
   relativeY = relativeY*100/height;
-  // alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
+  alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
   //turn that alert on for testing only
 });
 });
