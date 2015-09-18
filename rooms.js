@@ -392,7 +392,7 @@ $(document).ready(function() {
       if(currFloor >= 0 && currFloor <= 9) {
         for(j = 0; j < floors[currFloor].length; j++) {
           var room = floors[currFloor][j].num;
-          if((room.search(wat) === 0) && (searchForFound(room.substr(0, 3)) === -1)) {
+          if((room.search(wat) === 0)) {
             // found.push(room.substr(0, 3)); sorry i'm lazy and what this to work
             return j;
           }
