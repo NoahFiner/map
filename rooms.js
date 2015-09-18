@@ -570,21 +570,23 @@ $(document).ready(function() {
 
   goTo = function(where) {
     setExpanded(false);
-    $(".room, .other").css("pointer-events", "none");
-    scrollio(parseInt(where[0]));
     var currentFloor = where[0];
     var f = searchForRoomSoftTemp(where.toString());
-    var actualWhere = floors[currentFloor][f].num.toString();
-    var offset = $("#"+actualWhere).offset();
-    $("#"+where[0]+"00-outer").scrollLeft(offset.left);
-    hoverRoom(where, true);
-    $("#search").blur();
-    setTimeout(function() {
-      $(".room, .other").css("pointer-events", "auto");
-    }, 3000);
+    if(f != -1) {
+      $(".room, .other").css("pointer-events", "none");
+      scrollio(parseInt(where[0]));
+      var actualWhere = floors[currentFloor][f].num.toString();
+      var offset = $("#"+actualWhere).offset();
+      $("#"+where[0]+"00-outer").scrollLeft(offset.left);
+      hoverRoom(where, true);
+      $("#search").blur();
+      setTimeout(function() {
+        $(".room, .other").css("pointer-events", "auto");
+      }, 3000);
+    }
   }
 
-  setTimeout(function() { //allows for the window to scroll to (0, 0) for mobile
+  setTimeout(function() { // allows time for the window to scroll to (0, 0) for mobile
     var category = (location.hash).replace('#','');
     goTo(category.toString());
   }, 1000);
