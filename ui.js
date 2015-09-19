@@ -59,7 +59,7 @@ var scrollToFloor = function(wat) {
     yo = $("body").height();
   }
   $('html, body').animate({
-    scrollTop(): yo
+    scrollTop: yo
   })
 }
 
