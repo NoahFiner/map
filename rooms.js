@@ -411,10 +411,10 @@ $(document).ready(function() {
   $(".other").click(function() {
     var id = $(this).attr("id").toString();
     if(parseInt(id[1])) {
-      scrollio(id[1]);
+      scrollToFloor(id[1]);
     }
     if(id.substr(0, 4) === "MAIN") {
-      scrollio(0);
+      scrollToFloor(0);
     }
   })
 
@@ -576,7 +576,7 @@ $(document).ready(function() {
     var f = searchForRoomSoftTemp(where.toString());
     if(f != -1) {
       $(".room, .other").css("pointer-events", "none");
-      scrollio(parseInt(where[0]));
+      scrollToFloor(parseInt(where[0]));
       var actualWhere = floors[currentFloor][f].num.toString();
       var offset = $("#"+actualWhere).offset();
       $("#"+where[0]+"00-outer").scrollLeft(offset.left);

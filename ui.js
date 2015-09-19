@@ -53,13 +53,13 @@ var rotateAll = function() {
   }
 }
 
-var scrollio = function(wat) {
+var scrollToFloor = function(wat) {
   var yo = heights[wat];
   if(parseInt(wat) === 9) {
     yo = $("body").height();
   }
   $('html, body').animate({
-    scrollTop: yo
+    scrollTop(): yo
   })
 }
 
@@ -231,7 +231,7 @@ $(document).ready(function() {
     $(".header-sub").removeClass("selected");
     $(this).addClass("selected");
     var id = $(this).attr("id").toString();
-    scrollio(id[0]);
+    scrollToFloor(id[0]);
   })
   $("#rotate-inner").click(function() {
     rotateAll();
@@ -306,7 +306,7 @@ $(document).ready(function() {
 	// Set a timeout...
 	setTimeout(function(){
 		// Hide the address bar!
-		window.scrollTo($(".floor").width/2, 1);
+		window.scrollToFloor($(".floor").width/2, 1);
 	}, 0);
 });
   window.addEventListener('gestureend', function(e) {
