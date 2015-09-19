@@ -6,7 +6,7 @@
 var deg;
 var currScroll = 1;
 
-var floorio = 1;
+var activeFloor = 1;
 
 var maxSearchCars = 2;
 
@@ -339,19 +339,19 @@ $(document).ready(function() {
   floors[9][19] = new Room (9, 91, 50, "EXIT-900-3", "Exit to the back parking lot");
   floors[9][20] = new Room (9, 81, 81, "EXIT-900-4", "Exit to the front parking lot");
 
-  searchForRoom = function(wat) {
-    var currFloor = wat[0];
+  searchForRoom = function(what) {
+    var currFloor = what[0];
     for(i = 0; i < floors[currFloor].length; i++) {
-      if(floors[currFloor][i].num === wat) {
+      if(floors[currFloor][i].num === what) {
         return i;
       }
     }
     return -1;
   }
-  searchForFloor = function(wat) {
+  searchForFloor = function(what) {
     for(j = 0; j < floors.length; j++) {
       for(i = 0; i < floors[j].length; i++) {
-        if(floors[j][i].num === wat) {
+        if(floors[j][i].num === what) {
           return [j, i];
         }
       }
@@ -359,22 +359,22 @@ $(document).ready(function() {
     return [-1, -1];
   }
 
-  searchForFound = function(wat) {
+  searchForFound = function(what) {
     for(i = 0; i < found.length; i++) {
-      if(wat === found[i]) {
+      if(what === found[i]) {
         return i;
       }
     }
     return -1;
   }
 
-  searchForRoomSoft = function(wat) {
-    var currFloor = wat[0];
+  searchForRoomSoft = function(what) {
+    var currFloor = what[0];
     if(!isNaN(currFloor)) {
       if(currFloor >= 0 && currFloor <= 9) {
         for(j = 0; j < floors[currFloor].length; j++) {
           var room = floors[currFloor][j].num;
-          if((room.search(wat) === 0) && (searchForFound(room.substr(0, 3)) === -1)) {
+          if((room.search(what) === 0) && (searchForFound(room.substr(0, 3)) === -1)) {
             found.push(room.substr(0, 3));
             return j;
           }
@@ -388,13 +388,13 @@ $(document).ready(function() {
     }
   }
 
-  searchForRoomSoftTemp = function(wat) {
-    var currFloor = wat[0];
+  searchForRoomSoftTemp = function(what) {
+    var currFloor = what[0];
     if(!isNaN(currFloor)) {
       if(currFloor >= 0 && currFloor <= 9) {
         for(j = 0; j < floors[currFloor].length; j++) {
           var room = floors[currFloor][j].num;
-          if((room.search(wat) === 0)) {
+          if((room.search(what) === 0)) {
             // found.push(room.substr(0, 3)); sorry i'm lazy and what this to work
             return j;
           }
@@ -438,11 +438,11 @@ $(document).ready(function() {
     }
     clearTimeout(infoTime);
     var a;
-    floorio = id[0];
-    if(floorio === 'F' || floorio === 'L' || floorio === 'M' || floorio === 'C') {
-      floorio = searchForFloor(id.toString());
-      a = floorio[1];
-      floorio = floorio[0];
+    activeFloor = id[0];
+    if(activeFloor === 'F' || activeFloor === 'L' || activeFloor === 'M' || activeFloor === 'C') {
+      activeFloor = searchForFloor(id.toString());
+      a = activeFloor[1];
+      activeFloor = activeFloor[0];
     }
     else {
       if(!activate) {
@@ -452,37 +452,37 @@ $(document).ready(function() {
         a = searchForRoomSoftTemp(id);
       }
     }
-    var roomio = floors[floorio][a];
-    activateInfo(floorio);
+    var activeRoom = floors[activeFloor][a];
+    activateInfo(activeFloor);
     if((deg % 180) === 0 || deg === 0) {
-      $("#f"+floorio+"-info").css("top", ((roomio.y)-15)+"%");
-      $("#f"+floorio+"-info").css("left", ((roomio.x)-10)+"%");
-      if(roomio.y <= 20) {
-        $("#f"+floorio+"-info").css("top", ((roomio.y)+10)+"%");
+      $("#f"+activeFloor+"-info").css("top", ((activeRoom.y)-15)+"%");
+      $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)-10)+"%");
+      if(activeRoom.y <= 20) {
+        $("#f"+activeFloor+"-info").css("top", ((activeRoom.y)+10)+"%");
       }
-      if(roomio.x >= 85) {
-        $("#f"+floorio+"-info").css("left", ((roomio.x)-20)+"%");
+      if(activeRoom.x >= 85) {
+        $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)-20)+"%");
       }
-      if(roomio.x <= 10) {
-        $("#f"+floorio+"-info").css("left", ((roomio.x)+5)+"%");
+      if(activeRoom.x <= 10) {
+        $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)+5)+"%");
       }
     }
     else {
-      $("#f"+floorio+"-info").css("top", ((roomio.y)-30)+"%");
-      $("#f"+floorio+"-info").css("left", ((roomio.x)-25)+"%");
-      if(roomio.y <= 30) {
-        $("#f"+floorio+"-info").css("top", ((roomio.y)+10)+"%");
+      $("#f"+activeFloor+"-info").css("top", ((activeRoom.y)-30)+"%");
+      $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)-25)+"%");
+      if(activeRoom.y <= 30) {
+        $("#f"+activeFloor+"-info").css("top", ((activeRoom.y)+10)+"%");
       }
-      if(roomio.x <= 35) {
-        $("#f"+floorio+"-info").css("left", ((roomio.x)+5)+"%");
+      if(activeRoom.x <= 35) {
+        $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)+5)+"%");
       }
     }
 
 
-    $("#f"+floorio+"-h1").html(roomio.num);
-    $("#f"+floorio+"-p").html(roomio.info);
-    $(".info-top").css("background-color", roomio.color);
-    $(".info-outer").css("border", "1px solid "+roomio.color);
+    $("#f"+activeFloor+"-h1").html(activeRoom.num);
+    $("#f"+activeFloor+"-p").html(activeRoom.info);
+    $(".info-top").css("background-color", activeRoom.color);
+    $(".info-outer").css("border", "1px solid "+activeRoom.color);
   }
 
   $(".room, .other").hover(function() {
@@ -490,37 +490,37 @@ $(document).ready(function() {
   }, function() {
     clearTimeout(infoTime);
     $("#"+$(this).attr("id").toString()).removeClass("hovered");
-    infoTime = setTimeout(function() {$("#f"+floorio+"-info").css("opacity", "0")}, 1000);
+    infoTime = setTimeout(function() {$("#f"+activeFloor+"-info").css("opacity", "0")}, 1000);
   })
 
   foundRooms = [];
 
-  search = function(wat) {
-    if(!isNaN(wat) && parseInt(wat[0]) >= 2) {
+  search = function(what) {
+    if(!isNaN(what) && parseInt(what[0]) >= 2) {
       found = ['this is to avoid infinite loops lol'];
       foundRooms = [];
-      var currFloor = wat[0];
+      var currFloor = what[0];
       for(f = 0; f < floors[currFloor].length; f++) {
-        var hi = searchForRoomSoft(wat);
+        var hi = searchForRoomSoft(what);
         if(f === 0 && hi === -1) {
           foundRooms = [];
-          appendFound(wat);
+          appendFound(what);
           break;
         }
         if(hi != -1) {
           foundRooms.push(hi);
         }
         if(hi === -1) {
-          appendFound(wat);
+          appendFound(what);
           break;
         }
       }
-      appendFound(wat);
+      appendFound(what);
     }
   }
 
-  appendFound = function(wat) {
-    var currFloor = wat[0];
+  appendFound = function(what) {
+    var currFloor = what[0];
     if(foundRooms.length === 0) {
       $("#search-lower").css("height", "5vw");
       $("#search-lower").empty();
@@ -606,7 +606,7 @@ $(".relative-full").click(function(e) {
   var relativeY = ((e.pageY - offset.top));
   relativeX = relativeX*100/width;
   relativeY = relativeY*100/height;
-  alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
+  // alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
   //turn that alert on for testing only
 });
 });
