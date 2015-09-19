@@ -189,9 +189,15 @@ $(document).ready(function() {
     if(keycode == '13') {
       event.preventDefault();
       if($("input[name=search]").val() != "" && results) {
-        var currFloor = $("input[name=search]").val().toString()[0];
-        var firstRoom = foundRooms[0];
-        goTo(floors[currFloor][firstRoom].num);
+        if(!isNaN($("input[name=search]").val().toString())) {
+          var currFloor = $("input[name=search]").val().toString()[0];
+          var firstRoom = foundRooms[0];
+          goTo(floors[currFloor][firstRoom].num);
+        }
+        else {
+          var firstDesc = foundDescs[0];
+          goTo(floors[firstDesc[0]][firstDesc[1]].num);
+        }
       }
     }
   });

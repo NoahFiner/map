@@ -192,6 +192,15 @@ html, body {
   pointer-events: none;
 }
 
+.result-left.r-other > p {
+  font-size: 1.25vw;
+}
+
+.descSearched {
+  color: #b20202;
+  font-weight: 900;
+}
+
 .result-right {
   font-size: 2vw;
   color: #000;
@@ -313,6 +322,8 @@ html, body {
 
 #search:focus {
   background-color: rgba(255, 255, 255, 0.75);
+  border: 1px solid #FF0000;
+  outline: 0;
 }
 
 ::-webkit-input-placeholder {
@@ -1032,6 +1043,11 @@ div.rooms.active {
   box-shadow: 0px 0px 15px #FF0000 !important;
 }
 
+.other.hovered {
+  border: 3px solid #FF0000;
+  box-shadow: 0px 0px 15px #FF0000 !important;
+}
+
 .room:hover, .other:hover, .room.hovered, .other.hovered {
   z-index: 1;
   opacity: 1;
@@ -1212,6 +1228,9 @@ div.rooms.active {
   #floor-text.hidden {
     text-align: center;
     font-size: 3.5vw;
+  }
+  .result-left.r-other > p {
+    font-size: 2vw;
   }
   /*.header-sub {
     height: 75px;
