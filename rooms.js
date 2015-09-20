@@ -7,6 +7,8 @@ String.prototype.splice = function( idx, rem, s ) { //thanks, stackoverflow!
     return (this.slice(0,idx) + s + this.slice(idx + Math.abs(rem)));
 };
 
+var isnoahcool = true;
+
 var deg;
 var currScroll = 1;
 
