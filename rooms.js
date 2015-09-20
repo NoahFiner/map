@@ -12,18 +12,23 @@ var currScroll = 1;
 
 var activeFloor = 1;
 
-var maxSearchCars = 2;
+var maxSearchCars = 30;
 
 var results = false;
 
 String.prototype.insertSpans = function(string) { //No thanks, stackoverflow. I wrote this myself! c:
-  var stop1 = (this.toLowerCase().search(string));
-  var stop2 = (this.toLowerCase().search(string) + string.length);
-  var stop3 = this.length;
-  var splice1 = this.substr(0, stop1);
-  var splice2 = this.substr(stop1, string.length); //No idea why substr works this way...
-  var splice3 = this.substr(stop2, stop3);
-  return splice1 + "<span class='descSearched'>" + splice2 + "</span>" + splice3;
+  if(this.toLowerCase().search(string.toLowerCase()) === -1) {
+    return this;
+  }
+  else {
+    var stop1 = (this.toLowerCase().search(string.toLowerCase()));
+    var stop2 = (this.toLowerCase().search(string.toLowerCase()) + string.length);
+    var stop3 = this.length;
+    var splice1 = this.substr(0, stop1);
+    var splice2 = this.substr(stop1, string.length); //No idea why substr works this way...
+    var splice3 = this.substr(stop2, stop3);
+    return splice1 + "<span class='descSearched'>" + splice2 + "</span>" + splice3;
+  }
 }
 
 var Room = function(floor, x, y, num, info) {
@@ -598,8 +603,8 @@ $(document).ready(function() {
           var roomNumFull = floors[currFloor][e].num;
           var roomNum = floors[currFloor][e].num.substr(0, 3);
           var roomDesc = floors[currFloor][e].info;
-          if(roomDesc >= maxSearchCars) {
-            roomsDesc = roomsDesc.substr(0, maxSearchCars);
+          if(roomDesc.length >= maxSearchCars) {
+            roomDesc = roomDesc.substr(0, maxSearchCars) + "...";
           }
           $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
         }
@@ -609,6 +614,9 @@ $(document).ready(function() {
         var roomNumFull = floors[currFloor][e].num;
         var roomNum = floors[currFloor][e].num.substr(0, 3);
         var roomDesc = floors[currFloor][e].info;
+        if(roomDesc.length >= maxSearchCars) {
+          roomDesc = roomDesc.substr(0, maxSearchCars) + "...";
+        }
         $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
       }
     }
@@ -655,10 +663,11 @@ $(document).ready(function() {
           else {
             roomNum = floors[descFloor][descRoom].num.substr(0, 4);
           }
-          var roomDesc = floors[descFloor][descRoom].info.insertSpans(what);
-          if(roomDesc >= maxSearchCars) {
-            roomsDesc = roomsDesc.substr(0, maxSearchCars);
+          var roomDesc = floors[descFloor][descRoom].info;
+          if(roomDesc.length >= maxSearchCars) {
+            roomDesc = roomDesc.substr(0, maxSearchCars) + "...";
           }
+          roomDesc = roomDesc.insertSpans(what);
           $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left" id="result-left'+roomNumFull+'"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
           $("#result-left"+roomNumFull).css("background-color", floors[descFloor][descRoom].color)
           if(floors[descFloor][descRoom].type === 'other') {
@@ -706,6 +715,17 @@ $(document).ready(function() {
           $(".room, .other").css("pointer-events", "auto");
         }, 3000);
       }
+    }
+    else if(where[0] === 'C') {
+      $(".room, .other").css("pointer-events", "none");
+      scrollToFloor(0);
+      var actualWhere = floors[1][12].num.toString();
+      var offset = $("#"+actualWhere).offset();
+      $("#"+where[0]+"00-outer").scrollLeft(offset.left);
+      hoverRoom(where, true);
+      setTimeout(function() {
+        $(".room, .other").css("pointer-events", "auto");
+      }, 3000);
     }
     setExpanded(false);
     $("#search").blur();

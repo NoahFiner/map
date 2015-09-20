@@ -975,7 +975,7 @@ div.rooms.active {
 
 .room, .other {
   z-index: 0;
-  cursor: pointer;
+  /*cursor: pointer;*/
   height: 30px;
   width: 30px;
   border-radius: 60px;
@@ -1003,6 +1003,7 @@ div.rooms.active {
 }
 
 .other {
+  cursor: pointer;
   height: 50px !important;
   width: 50px !important;
   line-height: 50px;
