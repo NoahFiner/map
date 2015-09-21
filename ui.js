@@ -37,19 +37,25 @@ var rotateAll = function() {
   // $(".room, .other").css("-webkit-transform", "scale(1) rotate(-"+deg+"deg)");
   $(".no-rotate").css("transform", "rotate(-"+deg+"deg)");
   $(".no-rotate").css("-webkit-transform", "rotate(-"+deg+"deg)");
+  $(".main-text").css("transform", "translateX(-50%) rotate(-"+deg+"deg)");
+  $(".main-text").css("-webkit-transform", "translateX(-50%) rotate(-"+deg+"deg)");
   if(detectmobile() || $(window).width() <= 999) {
     $(".info-outer").css("transform", "rotate(-"+deg+"deg) scale(2)");
     $(".info-outer").css("-webkit-transform", "rotate(-"+deg+"deg) scale(2)");
+  }
+  if(deg % 180 === 0) {
+    $(".main-text").removeClass("shifted");
+  }
+  if(deg % 180 != 0) {
+    $(".main-text").addClass("shifted");
   }
   if(deg % 180 && detectmobile() === false) {
     $(".floor").css("height", "77.34375vh");
     $(".floor").css("width", "110vh");
   }
-  else {
-    if(detectmobile() === false) {
-      $(".floor").css("height", "84.375vh");
-      $(".floor").css("width", "120vh");
-    }
+  else if(!(deg % 180) && detectmobile() === false) {
+    $(".floor").css("height", "84.375vh");
+    $(".floor").css("width", "120vh");
   }
 }
 

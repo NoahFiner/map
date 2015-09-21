@@ -1117,6 +1117,41 @@ div.rooms.active {
   vertical-align: baseline;
 }
 
+.main-text {
+  font-size: 1.5vw;
+  color: white;
+  font-family: 'helvetica', sans-serif;
+  font-weight: 900;
+  opacity: 1;
+  position: absolute;
+  pointer-events: none;
+  display: inline-block;
+  text-align: center;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  z-index: 1;
+  margin: 0;
+  text-shadow: 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, -1px 1px 0 #000, 0px 0px 10px rgba(0, 0, 0, 0.75);
+}
+
+#student-text {
+  top: -20%;
+  left: 50%;
+}
+
+#student-text.shifted {
+  top: -35%;
+}
+
+#senior-text {
+  top: -1%;
+  left: 50%;
+}
+
+#senior-text.shifted {
+  top: -5%;
+}
+
 @media only screen and (max-device-width: 700px) {
   /*.floor {
     width: 100vw;
@@ -1232,6 +1267,9 @@ div.rooms.active {
   }
   .result-left.r-other > p {
     font-size: 2vw;
+  }
+  .main-text {
+    font-size: 4vw;
   }
   /*.header-sub {
     height: 75px;
