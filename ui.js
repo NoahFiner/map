@@ -59,9 +59,9 @@ var rotateAll = function() {
   }
 }
 
-var scrollToFloor = function(wat) {
-  var yo = heights[wat];
-  if(parseInt(wat) === 9) {
+var scrollToFloor = function(query) {
+  var yo = heights[query];
+  if(parseInt(query) === 9) {
     yo = $("body").height();
   }
   $('html, body').animate({
@@ -69,19 +69,19 @@ var scrollToFloor = function(wat) {
   })
 }
 
-var floorDescs = ['asdf', 'The main level', 'The math hallway', 'The electives hallway', 'The science hallway', 'The band/theatre/arts hallway', 'The social studies/languages hallway', 'The athletic/health hallway', 'The language arts hallway', 'The Bricks and the 700 hallway\'s gyms'];
+var floorDescs = ['The main level', 'The math hallway', 'The electives hallway', 'The science hallway', 'The band/theatre/arts hallway', 'The social studies/languages hallway', 'The athletic/health hallway', 'The language arts hallway', 'The Bricks and the 700 hallway\'s gyms'];
 
-var select = function(wat) {
-  currScroll = wat;
-  if(wat === 1) {
+var select = function(query) {
+  currScroll = query;
+  if(query === 1) {
     $("#header-top-h1, #floor-floor").html("main");
   }
   else {
-    $("#header-top-h1, #floor-floor").html(wat+"00");
+    $("#header-top-h1, #floor-floor").html(query+"00");
   }
   $(".header-sub").removeClass("selected");
-  $("#"+wat+"00h").addClass("selected");
-  $("#floor-text").html(floorDescs[wat]);
+  $("#"+query+"00h").addClass("selected");
+  $("#floor-text").html(floorDescs[query - 1]);
 }
 
 var headerActive = false;
@@ -150,10 +150,10 @@ function detectmobile() { // thanks, stackoverflow!
 
 var exitsActive = true, floorsActive = true, roomsActive = true;
 
-var setState = function(wat, boo) {
-  if(boo) {
-    $("."+wat).addClass("active");
-    switch(wat) {
+var setState = function(query, boolean) {
+  if(boolean) {
+    $("."+query).addClass("active");
+    switch(query) {
       case 'exits':
         $('.exit').removeClass("nope");
         exitsActive = true;
@@ -169,8 +169,8 @@ var setState = function(wat, boo) {
     }
   }
   else {
-    $("."+wat).removeClass("active");
-    switch(wat) {
+    $("."+query).removeClass("active");
+    switch(query) {
       case 'exits':
         $('.exit').addClass("nope");
         exitsActive = false;

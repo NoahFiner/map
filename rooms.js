@@ -43,6 +43,10 @@ var Room = function(floor, x, y, num, info) {
   this.num = num;
   this.info = info;
   this.floor = floor;
+  this.teacher = "";
+  this.addTeacher = function(teacher) {
+    this.teacher = teacher;
+  }
   if(!isNaN(this.num) || this.num.search('-') != -1 && this.num.search('F') === -1 && this.num.search('M') === -1 && this.num.search('EXIT') === -1 && this.num.search('COUNSELING') === -1) {
     this.type = 'room';
   }
@@ -285,6 +289,7 @@ $(document).ready(function() {
   floors[6][42] = new Room (6, 74, 37, '604', 'Office');
   floors[6][43] = new Room (6, 83, 35, '602', 'Office');
   floors[6][44] = new Room (6, 86, 32, '601', 'Office');
+  floors[6][44].addTeacher("bob");
   floors[6][45] = new Room (6, 61, 0, 'F400-HIDDEN', 'A hidden staircase to the 400 level');
   floors[6][46] = new Room (6, 88, 25, 'MAIN-600', 'Back to the main level');
   floors[6][47] = new Room (6, 57, 62, 'F800', 'Main staircase to the 800 floor');
@@ -364,19 +369,19 @@ $(document).ready(function() {
   floors[9][19] = new Room (9, 91, 50, "EXIT-900-3", "Exit to the back parking lot");
   floors[9][20] = new Room (9, 81, 81, "EXIT-900-4", "Exit to the front parking lot");
 
-  searchForRoom = function(what) { //searches for exact room number. what must be numeric.
-    var currFloor = what[0];
+  searchForRoom = function(query) { //searches for exact room number. query must be numeric.
+    var currFloor = query[0];
     for(i = 0; i < floors[currFloor].length; i++) {
-      if(floors[currFloor][i].num === what) {
+      if(floors[currFloor][i].num === query) {
         return i;
       }
     }
     return -1;
   }
-  searchForFloor = function(what) { //returns floor and room number in floors[] that's .num is what.
+  searchForFloor = function(query) { //returns floor and room number in floors[] that's .num is query.
     for(j = 0; j < floors.length; j++) {
       for(i = 0; i < floors[j].length; i++) {
-        if(floors[j][i].num === what) {
+        if(floors[j][i].num === query) {
           return [j, i];
         }
       }
@@ -384,22 +389,22 @@ $(document).ready(function() {
     return [-1, -1];
   }
 
-  searchForFound = function(what) { //searches the found array
+  searchForFound = function(query) { //searches the found array
     for(i = 0; i < found.length; i++) {
-      if(what === found[i]) {
+      if(query === found[i]) {
         return i;
       }
     }
     return -1;
   }
 
-  searchForRoomSoft = function(what) { //searches for the room containing what. adds it to the found array and will only return the value one time if found isn't [].
-    var currFloor = what[0];
+  searchForRoomSoft = function(query) { //searches for the room containing query. adds it to the found array and will only return the value one time if found isn't [].
+    var currFloor = query[0];
     if(!isNaN(currFloor)) {
       if(currFloor >= 0 && currFloor <= 9) {
         for(j = 0; j < floors[currFloor].length; j++) {
           var room = floors[currFloor][j].num;
-          if((room.search(what) === 0) && (searchForFound(room.substr(0, 3)) === -1)) {
+          if((room.search(query) === 0) && (searchForFound(room.substr(0, 3)) === -1)) {
             found.push(room.substr(0, 3));
             return j;
           }
@@ -413,14 +418,14 @@ $(document).ready(function() {
     }
   }
 
-  searchForRoomSoftTemp = function(what) { //searchForRoomSoft() but doesn't check the found array.
-    var currFloor = what[0];
+  searchForRoomSoftTemp = function(query) { //searchForRoomSoft() but doesn't check the found array.
+    var currFloor = query[0];
     if(!isNaN(currFloor)) {
       if(currFloor >= 0 && currFloor <= 9) {
         for(j = 0; j < floors[currFloor].length; j++) {
           var room = floors[currFloor][j].num;
-          if((room.search(what) === 0)) {
-            // found.push(room.substr(0, 3)); sorry i'm lazy and what this to work
+          if((room.search(query) === 0)) {
+            // found.push(room.substr(0, 3)); sorry i'm lazy and query this to work
             return j;
           }
         }
@@ -433,9 +438,9 @@ $(document).ready(function() {
     }
   }
 
-  searchForDescSoft = function(what) { //like searchforroomsoft but with .info. case doesn't matter.
-    var searchLower = what.toString().toLowerCase();
-    what = searchLower;
+  searchForDescSoft = function(query) { //like searchforroomsoft but with .info. case doesn't matter.
+    var searchLower = query.toString().toLowerCase();
+    query = searchLower;
     for(e = 0; e < floors.length; e++) {
       for(j = 0; j < floors[e].length; j++) {
         var room = floors[e][j].num;
@@ -521,8 +526,12 @@ $(document).ready(function() {
 
 
     $("#f"+activeFloor+"-h1").html(activeRoom.num);
-    $("#f"+activeFloor+"-p").html(activeRoom.info);
-    $(".info-top").css("background-color", activeRoom.color);
+    if(activeRoom.teacher === "") {
+      $("#f"+activeFloor+"-p").html(activeRoom.info);
+    } else {
+      $("#f"+activeFloor+"-p").html(activeRoom.info + "<br><span class='teacher'>Teacher(s): "+activeRoom.teacher+"</span>");
+    }
+      $(".info-top").css("background-color", activeRoom.color);
     $(".info-outer").css("border", "1px solid "+activeRoom.color);
   }
 
@@ -537,50 +546,50 @@ $(document).ready(function() {
   foundRooms = [];
   foundDescs = [];
 
-  search = function(what) {
-    if(!isNaN(what) && parseInt(what[0]) >= 2) {
+  search = function(query) {
+    if(!isNaN(query) && parseInt(query[0]) >= 2) {
       found = ['this is to avoid infinite loops lol'];
       foundRooms = [];
-      var currFloor = what[0];
+      var currFloor = query[0];
       for(f = 0; f < floors[currFloor].length; f++) {
-        var hi = searchForRoomSoft(what);
+        var hi = searchForRoomSoft(query);
         if(f === 0 && hi === -1) {
           foundRooms = [];
-          appendFound(what);
+          appendFound(query);
           break;
         }
         if(hi != -1) {
           foundRooms.push(hi);
         }
         if(hi === -1) {
-          appendFound(what);
+          appendFound(query);
           break;
         }
       }
-      appendFound(what);
+      appendFound(query);
     }
-    if(isNaN(what)) {
+    if(isNaN(query)) {
       found = ['avoiding more infinite loops'];
       foundDescs = [];
       for(r = 0; r < floors.length; r++) {
         for(f = 0; f < floors[r].length; f++) {
-          var hi = searchForDescSoft(what);
+          var hi = searchForDescSoft(query);
           if(hi != -1) {
             foundDescs.push(hi);
           }
           if(hi === -1) {
-            appendFoundDescs(what);
+            appendFoundDescs(query);
             break;
           }
         }
-        appendFoundDescs(what);
+        appendFoundDescs(query);
       }
     }
   }
 
-  appendFound = function(what) { //appends foundRooms[] into the search thing
-    what = $("input[name=search]").val().toString().toLowerCase();
-    var currFloor = what[0];
+  appendFound = function(query) { //appends foundRooms[] into the search thing
+    query = $("input[name=search]").val().toString().toLowerCase();
+    var currFloor = query[0];
     if(foundRooms.length === 0) {
       $("#search-lower").css("height", "5vw");
       $("#search-lower").empty();
@@ -609,10 +618,16 @@ $(document).ready(function() {
           var roomNumFull = floors[currFloor][e].num;
           var roomNum = floors[currFloor][e].num.substr(0, 3);
           var roomDesc = floors[currFloor][e].info;
+          var roomTeacher = floors[currFloor][e].teacher;
           if(roomDesc.length >= maxSearchCars) {
             roomDesc = roomDesc.substr(0, maxSearchCars) + "...";
           }
-          $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
+          if(roomTeacher != "") {
+            $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'<span class="teacher-search">TEACHERS: '+roomTeacher+'</span></p></div>')
+          }
+          else {
+            $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
+          }
         }
       }
       else if(foundRooms.length === 1) {
@@ -620,10 +635,16 @@ $(document).ready(function() {
         var roomNumFull = floors[currFloor][e].num;
         var roomNum = floors[currFloor][e].num.substr(0, 3);
         var roomDesc = floors[currFloor][e].info;
+        var roomTeacher = floors[currFloor][e].teacher;
         if(roomDesc.length >= maxSearchCars) {
           roomDesc = roomDesc.substr(0, maxSearchCars) + "...";
         }
-        $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
+        if(roomTeacher != "") {
+          $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'<span class="teacher-search">TEACHERS: '+roomTeacher+'</span></p></div>')
+        }
+        else {
+          $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
+        }
       }
     }
     $(".result-outer").click(function() {
@@ -633,7 +654,7 @@ $(document).ready(function() {
     })
   }
 
-  appendFoundDescs = function(what) {
+  appendFoundDescs = function(query) {
     if(foundDescs.length === 0) {
       $("#search-lower").css("height", "5vw");
       $("#search-lower").empty();
@@ -663,6 +684,7 @@ $(document).ready(function() {
           var descFloor = foundDescs[i][0];
           var descRoom = foundDescs[i][1];
           var roomNumFull = floors[descFloor][descRoom].num;
+          var roomTeacher = floors[descFloor][descRoom].teacher;
           if(floors[descFloor][descRoom].type === 'room') {
             roomNum = floors[descFloor][descRoom].num.substr(0, 3);
           }
@@ -673,9 +695,15 @@ $(document).ready(function() {
           if(roomDesc.length >= maxSearchCars) {
             roomDesc = roomDesc.substr(0, maxSearchCars) + "...";
           }
-          roomDesc = roomDesc.insertSpans(what);
+          roomDesc = roomDesc.insertSpans(query);
           $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left" id="result-left'+roomNumFull+'"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
           $("#result-left"+roomNumFull).css("background-color", floors[descFloor][descRoom].color)
+          if(roomTeacher != "") {
+            $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'<span class="teacher-search">TEACHERS: '+roomTeacher+'</span></p></div>')
+          }
+          else {
+            $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
+          }
           if(floors[descFloor][descRoom].type === 'other') {
             $("#result-left"+roomNumFull).addClass("r-other");
           }

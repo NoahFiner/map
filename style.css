@@ -201,11 +201,19 @@ html, body {
   font-weight: 900;
 }
 
-.result-right {
+.result-right, .teacher-search {
   font-size: 2vw;
   color: #000;
   margin-left: 2vw;
   font-family: "helvetica", sans-serif !important;
+}
+
+.teacher-search {
+  color: #b20202;
+  font-weight: 900;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  font-size: 1vw;
+  vertical-align: middle;
 }
 
 .go {
@@ -1107,7 +1115,7 @@ div.rooms.active {
   color: rgba(215, 215, 215, 1);
 }
 
-.info-outer > p {
+.info-outer > p, .teacher {
   font-size: 15px;
   font-family: "helvetica", sans-serif;
   font-weight: 500;
@@ -1115,6 +1123,12 @@ div.rooms.active {
   margin: 2.5px;
   line-height: 15px;
   vertical-align: baseline;
+}
+
+.teacher {
+  color: #b20202;
+  font-weight: 900;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .main-text {
