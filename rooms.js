@@ -7,7 +7,11 @@ String.prototype.splice = function( idx, rem, s ) { //thanks, stackoverflow!
     return (this.slice(0,idx) + s + this.slice(idx + Math.abs(rem)));
 };
 
+//NECESSARY FOR PROGRAM TO WORK!!! DO NOT DELETE!!!
 var isnoahcool = true;
+var isjordancool = false;
+var isjacksoncool = false;
+var isbrendancool = false;
 
 var deg;
 var currScroll = 1;
