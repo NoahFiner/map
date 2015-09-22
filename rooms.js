@@ -37,14 +37,14 @@ String.prototype.insertSpans = function(string) { //No thanks, stackoverflow. I 
   }
 }
 
-var Room = function(floor, x, y, num, info) {
+var Room = function(floor, x, y, num, info, teacher) {
   this.x = x;
   this.y = y;
   this.num = num;
   this.info = info;
   this.floor = floor;
-  this.teacher = "";
-  this.addTeacher = function(teacher) {
+  if (typeof teacher === 'undefined') { this.teacher = ''; }
+  else {
     this.teacher = teacher;
   }
   if(!isNaN(this.num) || this.num.search('-') != -1 && this.num.search('F') === -1 && this.num.search('M') === -1 && this.num.search('EXIT') === -1 && this.num.search('COUNSELING') === -1) {
@@ -120,7 +120,7 @@ $(document).ready(function() {
   floors[2][12] = new Room (2, 18, 54, '218', 'Office');
   floors[2][13] = new Room (2, 18, 48, '224', 'Office');
   floors[2][14] = new Room (2, 19, 44, '225', 'The 200 computer lab');
-  floors[2][15] = new Room (2, 25, 25, '227', 'Office');
+  floors[2][15] = new Room (2, 25, 25, '227', 'Office', "Harig");
   floors[2][16] = new Room (2, 26, 22, '228', 'Classroom');
   floors[2][17] = new Room (2, 31, 7, '231', 'Office');
   floors[2][18] = new Room (2, 32, 15, '230', 'Office');
@@ -141,7 +141,7 @@ $(document).ready(function() {
 
 
   floors[3][0] = new Room (3, 22, 14, '302', 'Break room');
-  floors[3][1] = new Room (3, 31, 31, '308', 'Teacher office');
+  floors[3][1] = new Room (3, 31, 31, '308', 'Teacher office', "Feeney, Karner, Gesell");
   floors[3][2] = new Room (3, 35, 29, '309-1', 'Tech/Drafting Lab');
   floors[3][3] = new Room (3, 36, 46, '310', 'Video editing');
   floors[3][4] = new Room (3, 37, 49, '312-1', 'Electrical');
@@ -152,7 +152,7 @@ $(document).ready(function() {
   floors[3][9] = new Room (3, 53, 26, '309-3', 'Tech/Drafting Lab');
   floors[3][10] = new Room (3, 69, 38, '339-1', 'Film/Photography room and JLab');
   floors[3][11] = new Room (3, 75, 58, '339-2', 'Film/Photography room and JLab');
-  floors[3][12] = new Room (3, 75, 62, '333', 'Computer lab');
+  floors[3][12] = new Room (3, 75, 62, '333', 'Computer lab', "Gyamerah");
   floors[3][13] = new Room (3, 69, 73, '330', 'Custodian room');
   floors[3][14] = new Room (3, 70, 82, '329', 'Storage room');
   floors[3][15] = new Room (3, 59, 83, '325', 'Boy\'s bathroom');
@@ -162,7 +162,7 @@ $(document).ready(function() {
   floors[3][19] = new Room (3, 59, 94, '328', 'Dressing room');
   floors[3][20] = new Room (3, 59, 29, '318', 'Pantry');
   floors[3][21] = new Room (3, 63, 39, '317-1', 'Food lab');
-  floors[3][22] = new Room (3, 51, 41, '316', 'Work room');
+  floors[3][22] = new Room (3, 51, 41, '316', 'Work room', "Costello, Grossi");
   floors[3][23] = new Room (3, 69, 62, '317-2', 'Food lab');
   floors[3][24] = new Room (3, 68, 68, '334', 'Storage');
   floors[3][25] = new Room (3, 65, 71, '323', 'Workroom');
@@ -227,7 +227,7 @@ $(document).ready(function() {
   floors[5][7] = new Room (5, 26, 33, "514-ACCESS-1", "Provides access to the 514 art room");
   floors[5][8] = new Room (5, 21, 20, "507", "");
   floors[5][9] = new Room (5, 21, 7, "512", "Fine arts room");
-  floors[5][10] = new Room (5, 46, 15, "513", "Fine arts room");
+  floors[5][10] = new Room (5, 46, 15, "513", "Fine arts room", "Jaramillo");
   floors[5][11] = new Room (5, 44, 18, "514-ACCESS-2", "Provides access to the 514 art room");
   floors[5][12] = new Room (5, 38, 41, "502", "Special Education");
   floors[5][13] = new Room (5, 44, 59, "521", "Music Library");
@@ -271,12 +271,12 @@ $(document).ready(function() {
   floors[6][24] = new Room (6, 49, 50, '621', 'Office');
   floors[6][25] = new Room (6, 46, 41, '622', 'Girl\'s bathroom');
   floors[6][26] = new Room (6, 43, 36, '612', 'Kitchen');
-  floors[6][27] = new Room (6, 50, 25, '637', 'Office');
+  floors[6][27] = new Room (6, 50, 25, '637', 'Office', "Cordon");
   floors[6][28] = new Room (6, 55, 23, '638', 'Social studies classroom');
   floors[6][29] = new Room (6, 59, 23, '639-1', 'Social studies classroom');
   floors[6][30] = new Room (6, 63, 12, '639-2', 'Social studies classroom');
   floors[6][31] = new Room (6, 62, 7, '641', 'Social studies classroom');
-  floors[6][32] = new Room (6, 67, 11, '642', 'Office');
+  floors[6][32] = new Room (6, 67, 11, '642', 'Office', "Stewart");
   floors[6][33] = new Room (6, 69, 18, '645', 'Storage');
   floors[6][34] = new Room (6, 69, 15, '644', 'Closet');
   floors[6][35] = new Room (6, 73, 32, '646', 'Classroom');
@@ -289,7 +289,6 @@ $(document).ready(function() {
   floors[6][42] = new Room (6, 74, 37, '604', 'Office');
   floors[6][43] = new Room (6, 83, 35, '602', 'Office');
   floors[6][44] = new Room (6, 86, 32, '601', 'Office');
-  floors[6][44].addTeacher("bob");
   floors[6][45] = new Room (6, 61, 0, 'F400-HIDDEN', 'A hidden staircase to the 400 level');
   floors[6][46] = new Room (6, 88, 25, 'MAIN-600', 'Back to the main level');
   floors[6][47] = new Room (6, 57, 62, 'F800', 'Main staircase to the 800 floor');
@@ -325,20 +324,20 @@ $(document).ready(function() {
   floors[8][6] = new Room (8, 61, 33, '812-2', 'Language arts classroom');
   floors[8][7] = new Room (8, 57, 25, '813', 'Language arts classroom');
   floors[8][8] = new Room (8, 49, 14, '814', 'Language arts classroom');
-  floors[8][9] = new Room (8, 31, 39, '859-1', 'Teacher office');
-  floors[8][10] = new Room (8, 20, 39, '859-2', 'Teacher office');
+  floors[8][9] = new Room (8, 31, 39, '855-1', 'Teacher office', "Hutchins, Lewis");
+  floors[8][10] = new Room (8, 20, 39, '855-2', 'Teacher office', "Hutchins, Lewis");
   floors[8][11] = new Room (8, 13, 60, '854', 'Language arts classroom');
-  floors[8][12] = new Room (8, 13, 68, '853', 'Language arts classroom');
+  floors[8][12] = new Room (8, 13, 68, '853', 'Language arts classroom', "Brennan");
   floors[8][13] = new Room (8, 14, 75, '848', 'Language arts classroom');
-  floors[8][14] = new Room (8, 19, 62, '844-1', 'Language arts classroom');
-  floors[8][15] = new Room (8, 36.5, 63, '844-2', 'Language arts classroom');
+  floors[8][14] = new Room (8, 19, 62, '844-1', 'Language arts classroom', "Bursiek, Robertson");
+  floors[8][15] = new Room (8, 36.5, 63, '844-2', 'Language arts classroom', "Bursiek, Robertson");
   floors[8][16] = new Room (8, 18, 71, '843', 'Teacher office');
-  floors[8][17] = new Room (8, 23.5, 79, '842-1', 'Teacher office');
-  floors[8][18] = new Room (8, 32, 79, '842-2', 'Teacher office');
+  floors[8][17] = new Room (8, 23.5, 79, '842-1', 'Teacher office', "Hensley, Hunt");
+  floors[8][18] = new Room (8, 32, 79, '842-2', 'Teacher office', "Hensley, Hunt");
   floors[8][19] = new Room (8, 24, 92, '847', 'Language arts classroom');
   floors[8][20] = new Room (8, 31, 92, '846', 'Language arts classroom');
-  floors[8][21] = new Room (8, 37, 71, '841', 'Teacher office');
-  floors[8][22] = new Room (8, 39, 52, '831', 'Teacher office');
+  floors[8][21] = new Room (8, 37, 71, '841', 'Teacher office', "Broaddus, Cosmos");
+  floors[8][22] = new Room (8, 39, 52, '831', 'Teacher office', "Jaime");
   floors[8][23] = new Room (8, 42, 61, '822', 'Languages arts computer lab');
   floors[8][24] = new Room (8, 42, 68, '823', 'Language arts classroom');
   floors[8][25] = new Room (8, 42, 74, '845', 'Language arts classroom');
