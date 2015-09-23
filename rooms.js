@@ -444,7 +444,8 @@ $(document).ready(function() {
       for(j = 0; j < floors[e].length; j++) {
         var room = floors[e][j].num;
         var desc = floors[e][j].info.toString().toLowerCase();
-        if((desc.search(searchLower) != -1) && (searchForFound(room) === -1)) {
+        var teachers = floors[e][j].teacher.toString().toLowerCase();
+        if(((desc.search(searchLower) != -1) || (teachers.search(searchLower) != -1)) && (searchForFound(room) === -1)) {
           found.push(room);
           return [e, j];
         }
@@ -549,6 +550,10 @@ $(document).ready(function() {
   foundRooms = [];
   foundDescs = [];
 
+  //HOW THE SEARCH WORKS
+  //1) Search function creates foundRooms array and gets all the stuff needed.
+  //2) It either runs appendFound() or appendFoundDescs(), which appends the found stuff.
+
   search = function(query) {
     if(!isNaN(query) && parseInt(query[0]) >= 2) {
       found = ['this is to avoid infinite loops lol'];
@@ -571,8 +576,8 @@ $(document).ready(function() {
       }
       appendFound(query);
     }
-    if(isNaN(query)) {
-      found = ['avoiding more infinite loops'];
+    if(isNaN(query)) {//descriptions
+      found = ['avoiding more infinite loops']; //For some reason, when found starts is empty an infinite loop occurrs. DO NOT REMOVE
       foundDescs = [];
       for(r = 0; r < floors.length; r++) {
         for(f = 0; f < floors[r].length; f++) {
@@ -601,7 +606,7 @@ $(document).ready(function() {
     }
     else {
       results = true;
-      var multVal;
+      var multVal; // This calculates the height of search-lower
       if(detectmobile()) {
         multVal = 10;
       }
@@ -626,7 +631,11 @@ $(document).ready(function() {
             roomDesc = roomDesc.substr(0, maxSearchCars) + "...";
           }
           if(roomTeacher != "") {
-            $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'<span class="teacher-search">TEACHERS: '+roomTeacher+'</span></p></div>')
+            var teacherText = "Teachers";
+            if(roomTeacher.search(',') === -1) {
+              teacherText = "Teacher"
+            }
+            $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'<span class="teacher-search">'+teacherText+': '+roomTeacher+'</span></p></div>')
           }
           else {
             $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
@@ -701,7 +710,11 @@ $(document).ready(function() {
           roomDesc = roomDesc.insertSpans(query);
           $("#result-left"+roomNumFull).css("background-color", floors[descFloor][descRoom].color)
           if(roomTeacher != "") {
-            $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'<span class="teacher-search">TEACHERS: '+roomTeacher+'</span></p></div>')
+            var teacherText = "Teachers";
+            if(roomTeacher.search(',') === -1) {
+              teacherText = "Teacher"
+            }
+            $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'<span class="teacher-search">'+teacherText+': '+roomTeacher+'</span></p></div>')
           }
           else {
             $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
