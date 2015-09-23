@@ -12,6 +12,10 @@ var isnoahcool = true;
 var isjordancool = false;
 var isjacksoncool = false;
 var isbrendancool = false;
+var isbrendanhot = false;
+var isbrendanalive = false;
+var issaketramcool = true;
+var isicycool = true;
 
 var deg;
 var currScroll = 1;
@@ -83,6 +87,7 @@ var floors = [[], [], [], [], [], [], [], [], [], [], [], [], []];
 var searchForFloor, infoTime;
 
 var activateInfo = function(where) {
+  $(".info-outer").css("opacity", "0");
   $("#f"+where+"-info").css("opacity", "1");
 }
 
@@ -537,6 +542,7 @@ $(document).ready(function() {
     }
       $(".info-top").css("background-color", activeRoom.color);
     $(".info-outer").css("border", "1px solid "+activeRoom.color);
+    infoTime = setTimeout(function() {$(".info-outer").css("opacity", "0")}, 1000);
   }
 
   $(".room, .other").hover(function() {
