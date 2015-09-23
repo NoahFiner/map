@@ -20,10 +20,10 @@ var doneLoading = function() {
   }, 500)
 }
 
-var everythingElem = $("#everything")
-imagesLoaded(everythingElem, function(instance) {
-  doneLoading();
-});
+$("#everything").imagesLoaded()
+  .always(function(instance) {
+    doneLoading();
+  });
 
 getHeights();
 
