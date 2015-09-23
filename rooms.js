@@ -104,9 +104,9 @@ $(document).ready(function() {
   floors[1][6] = new Room (1, 74, 40, 'F500-MAIN-2', "The band/theatre hallway");
   floors[1][7] = new Room (1, 38, 2, 'F200-MAIN', "The math hallway");
   floors[1][8] = new Room (1, 53, 4, 'F300-MAIN', "The electives hallway");
-  floors[1][9] = new Room (1, 47, 2, 'F100-MAIN', "The cafeteria");
+  floors[1][9] = new Room (1, 48.5, 2, 'F100-MAIN', "The cafeteria");
   floors[1][10] = new Room (1, 50, 91, 'EXIT-FRONT', "Front entrance/exit");
-  floors[1][11] = new Room (1, 52, 1, 'EXIT-BACK', "Back entrance/exit (LOCKED AFTER 9:00)");
+  floors[1][11] = new Room (1, 45, 2, 'EXIT-BACK', "Back entrance/exit (LOCKED AFTER 9:00)");
   floors[1][12] = new Room (1, 48, 66, 'COUNSELING', "Counseling offices");
 
 
