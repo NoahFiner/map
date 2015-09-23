@@ -11,10 +11,9 @@ var doneLoading = function() { //Remove loading screen.
   }, 500)
 }
 
-$("#everything").imagesLoaded() //Uses imagesloaded.js
-  .always(function(instance) {
-    doneLoading();
-  });
+$(window).on("load", function() {
+  doneLoading();
+});
 
 var getHeights = function() { //Gets the positions of all the tops of the floors.
   var height = window.innerHeight
