@@ -20,9 +20,10 @@ var doneLoading = function() {
   }, 500)
 }
 
-$(window).ready(function() {
+var everythingElem = $("#everything")
+imagesLoaded(everythingElem, function(instance) {
   doneLoading();
-})
+});
 
 getHeights();
 
