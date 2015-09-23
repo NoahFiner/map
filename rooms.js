@@ -703,6 +703,7 @@ $(document).ready(function() {
           var descRoom = foundDescs[i][1];
           var roomNumFull = floors[descFloor][descRoom].num;
           var roomTeacher = floors[descFloor][descRoom].teacher;
+          var roomType = floors[descFloor][descRoom].type;
           if(floors[descFloor][descRoom].type === 'room') {
             roomNum = floors[descFloor][descRoom].num.substr(0, 3);
           }
@@ -714,19 +715,22 @@ $(document).ready(function() {
             roomDesc = roomDesc.substr(0, maxSearchCars) + "...";
           }
           roomDesc = roomDesc.insertSpans(query);
-          $("#result-left"+roomNumFull).css("background-color", floors[descFloor][descRoom].color)
           if(roomTeacher != "") {
             var teacherText = "Teachers";
             if(roomTeacher.search(',') === -1) {
               teacherText = "Teacher"
             }
-            $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'<span class="teacher-search">'+teacherText+': '+roomTeacher+'</span></p></div>')
+            $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left" id="result-left'+roomNumFull+'"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'<span class="teacher-search">'+teacherText+': '+roomTeacher+'</span></p></div>')
+            if(roomType === 'other') {
+              $("#result-left"+roomNumFull).addClass("r-other");
+            }
           }
           else {
-            $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
-          }
-          if(floors[descFloor][descRoom].type === 'other') {
-            $("#result-left"+roomNumFull).addClass("r-other");
+            $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left" id="result-left'+roomNumFull+'"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
+            if(roomType === 'other') {
+              $("#result-left"+roomNumFull).addClass("r-other");
+              $("#result-left"+roomNumFull).css("background-color", floors[descFloor][descRoom].color);
+            }
           }
         }
       }
