@@ -542,7 +542,7 @@ $(document).ready(function() {
     }
       $(".info-top").css("background-color", activeRoom.color);
     $(".info-outer").css("border", "1px solid "+activeRoom.color);
-    infoTime = setTimeout(function() {$(".info-outer").css("opacity", "0")}, 1000);
+    // infoTime = setTimeout(function() {$(".info-outer").css("opacity", "0")}, 1000);
   }
 
   $(".room, .other").hover(function() {
