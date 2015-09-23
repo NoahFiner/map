@@ -17,14 +17,15 @@ var isbrendanalive = false;
 var issaketramcool = true;
 var isicycool = true;
 
-var deg;
-var currScroll = 1;
+var deg; //For rotating
 
-var activeFloor = 1;
+var currScroll = 1; //Currently selected floor (1-9)
 
-var maxSearchCars = 30;
+var activeFloor = 1; //Currently activated floor (1-9)
 
-var results = false;
+var maxSearchCars = 30; //Amount of allowed characters in the search results before it is cut off by ...
+
+var results = false; //If results are currently shown in the search
 
 String.prototype.insertSpans = function(string) { //No thanks, stackoverflow. I wrote this myself! c:
   if(this.toLowerCase().search(string.toLowerCase()) === -1) {
@@ -42,31 +43,27 @@ String.prototype.insertSpans = function(string) { //No thanks, stackoverflow. I 
 }
 
 var Room = function(floor, x, y, num, info, teacher) {
-  this.x = x;
+  this.x = x; //coords in percentages of top-left corner (0-100)
   this.y = y;
-  this.num = num;
-  this.info = info;
-  this.floor = floor;
-  if (typeof teacher === 'undefined') { this.teacher = ''; }
+  this.num = num; //this.num MUST be unique! It doesn't have to be numeric. Basically used as id of the room.
+  this.info = info; //Description
+  this.floor = floor; //Floor the room is on (for floors and exits)
+  if (typeof teacher === 'undefined') { this.teacher = ''; } //Makes teacher arg optional
   else {
     this.teacher = teacher;
   }
   if(!isNaN(this.num) || this.num.search('-') != -1 && this.num.search('F') === -1 && this.num.search('M') === -1 && this.num.search('EXIT') === -1 && this.num.search('COUNSELING') === -1) {
     this.type = 'room';
+    this.color = '#B20202'; //red
   }
   else {
     this.type = 'other';
-  }
-  if(this.type === 'room') {
-    this.color = '#B20202';
-  }
-  else {
-    this.color = "#02B202";
+    this.color = "#02B202"; //green
     if(this.num.search("EXIT") != -1) {
-      this.color = "#02B2B2";
+      this.color = "#02B2B2"; //exit
     }
   }
-  this.init = function() {
+  this.init = function() { //appends a div to the corresponding floor
     if((this.type === 'other') && (this.num != "LIRBARY")) {
       $("#f"+this.floor+"-content").append("<div class='"+this.type+" "+this.num+"' id='"+this.num+"'><p class='no-rotate'>"+this.num.substr(0, 4)+"</p></div>")
       if(this.num.search("EXIT") != -1) {
@@ -82,19 +79,14 @@ var Room = function(floor, x, y, num, info, teacher) {
   this.init();
 }
 
-var floors = [[], [], [], [], [], [], [], [], [], [], [], [], []];
+var floors = [[], [], [], [], [], [], [], [], [], [], [], [], []]; //floors[0] is unused so that the 200 hall, for example, can be at floors[2]
 
 var searchForFloor, infoTime;
 
-var activateInfo = function(where) {
-  $(".info-outer").css("opacity", "0");
-  $("#f"+where+"-info").css("opacity", "1");
-}
-
-var found = ['this is to avoid an infinite loop lol'];
+var found = ['this is to avoid an infinite loop at found[0]'];
 
 $(document).ready(function() {
-
+  //defines every room upon the document loading
   floors[1][0] = new Room (1, 25, 39, 'F400-MAIN-1', "The science hallway");
   floors[1][1] = new Room (1, 33, 26, 'F400-MAIN-2', "The science hallway");
   floors[1][2] = new Room (1, 34, 65, 'F600-MAIN', "The social studies and world languages hallway");
@@ -373,6 +365,8 @@ $(document).ready(function() {
   floors[9][19] = new Room (9, 91, 50, "EXIT-900-3", "Exit to the back parking lot");
   floors[9][20] = new Room (9, 81, 81, "EXIT-900-4", "Exit to the front parking lot");
 
+  //--------- SEARCHING ----------
+
   searchForRoom = function(query) { //searches for exact room number. query must be numeric.
     var currFloor = query[0];
     for(i = 0; i < floors[currFloor].length; i++) {
@@ -459,100 +453,6 @@ $(document).ready(function() {
     return -1;
   }
 
-  $(".other").click(function() {
-    var id = $(this).attr("id").toString();
-    if(parseInt(id[1])) {
-      scrollToFloor(id[1]);
-    }
-    if(id.substr(0, 4) === "MAIN") {
-      scrollToFloor(0);
-    }
-  })
-
-  $(document).keyup(function() {
-    setTimeout(function() {
-      var searchInput = $("input[name=search]").val();
-      search(searchInput);
-    }, 100)
-  })
-
-  // $("#search").focusout(function() {
-  //   search("");
-  //   $("#search-lower").height(0);
-  // });
-
-  hoverRoom = function(id, activate) {
-    $(".room, .other").removeClass("hovered");
-    if(activate != false) {
-      $("#"+id.toString()).addClass("hovered");
-      $("#"+id.toString()+"-1").addClass("hovered"); // just in case the function is being run from the hash
-    }
-    clearTimeout(infoTime);
-    var a;
-    activeFloor = id[0];
-    if(activeFloor === 'F' || activeFloor === 'L' || activeFloor === 'M' || activeFloor === 'C' || activeFloor === 'E') {
-      activeFloor = searchForFloor(id.toString());
-      a = activeFloor[1];
-      activeFloor = activeFloor[0];
-    }
-    else {
-      if(!activate) {
-        a = searchForRoom(id);
-      }
-      else {
-        a = searchForRoomSoftTemp(id);
-      }
-    }
-    var activeRoom = floors[activeFloor][a];
-    activateInfo(activeFloor);
-    if((deg % 180) === 0 || deg === 0) {
-      $("#f"+activeFloor+"-info").css("top", ((activeRoom.y)-15)+"%");
-      $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)-10)+"%");
-      if(activeRoom.y <= 20) {
-        $("#f"+activeFloor+"-info").css("top", ((activeRoom.y)+10)+"%");
-      }
-      if(activeRoom.x >= 85) {
-        $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)-20)+"%");
-      }
-      if(activeRoom.x <= 10) {
-        $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)+5)+"%");
-      }
-    }
-    else {
-      $("#f"+activeFloor+"-info").css("top", ((activeRoom.y)-30)+"%");
-      $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)-25)+"%");
-      if(activeRoom.y <= 30) {
-        $("#f"+activeFloor+"-info").css("top", ((activeRoom.y)+10)+"%");
-      }
-      if(activeRoom.x <= 35) {
-        $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)+5)+"%");
-      }
-    }
-
-
-    $("#f"+activeFloor+"-h1").html(activeRoom.num);
-    if(activeRoom.teacher === "") {
-      $("#f"+activeFloor+"-p").html(activeRoom.info);
-    } else {
-      var teacherText = "Teachers";
-      if(activeRoom.teacher.search(",") === -1) { //Only one teacher
-        var teacherText = "Teacher"
-      }
-      $("#f"+activeFloor+"-p").html(activeRoom.info + "<br><span class='teacher'>"+teacherText+": "+activeRoom.teacher+"</span>");
-    }
-      $(".info-top").css("background-color", activeRoom.color);
-    $(".info-outer").css("border", "1px solid "+activeRoom.color);
-    // infoTime = setTimeout(function() {$(".info-outer").css("opacity", "0")}, 1000);
-  }
-
-  $(".room, .other").hover(function() {
-    hoverRoom($(this).attr("id").toString(), false)
-  }, function() {
-    clearTimeout(infoTime);
-    $("#"+$(this).attr("id").toString()).removeClass("hovered");
-    infoTime = setTimeout(function() {$("#f"+activeFloor+"-info").css("opacity", "0")}, 1000);
-  })
-
   foundRooms = [];
   foundDescs = [];
 
@@ -560,33 +460,33 @@ $(document).ready(function() {
   //1) Search function creates foundRooms array and gets all the stuff needed.
   //2) It either runs appendFound() or appendFoundDescs(), which appends the found stuff.
 
-  search = function(query) {
-    if(!isNaN(query) && parseInt(query[0]) >= 2) {
-      found = ['this is to avoid infinite loops lol'];
+  search = function(query) { //Original search function
+    if(!isNaN(query) && parseInt(query[0]) >= 2) { //code for query being a room over 200
+      found = ['this is to avoid infinite loops at found[0]']; //resets found rooms
       foundRooms = [];
       var currFloor = query[0];
       for(f = 0; f < floors[currFloor].length; f++) {
-        var hi = searchForRoomSoft(query);
-        if(f === 0 && hi === -1) {
-          foundRooms = [];
+        var hi = searchForRoomSoft(query); //searches the current floor for matches
+        if(f === 0 && hi === -1) { // if there are absolutely no results
+          foundRooms = []; //make sure foundrooms isn't full of [currFloor, -1] arrays
           appendFound(query);
           break;
         }
-        if(hi != -1) {
-          foundRooms.push(hi);
+        if(hi != -1) { // if a match was found
+          foundRooms.push(hi); // add the match to the foundRooms[]
         }
-        if(hi === -1) {
+        if(hi === -1) { // if a match wasn't found that isn't already in found[]
           appendFound(query);
           break;
         }
       }
-      appendFound(query);
+      appendFound(query); // and if all else fails
     }
-    if(isNaN(query)) {//descriptions
+    if(isNaN(query)) {// for descriptions and teachers
       found = ['avoiding more infinite loops']; //For some reason, when found starts is empty an infinite loop occurrs. DO NOT REMOVE
-      foundDescs = [];
-      for(r = 0; r < floors.length; r++) {
-        for(f = 0; f < floors[r].length; f++) {
+      foundDescs = []; //Can't be foundRooms
+      for(r = 0; r < floors.length; r++) { //searches floors
+        for(f = 0; f < floors[r].length; f++) { //searches room in all the floors
           var hi = searchForDescSoft(query);
           if(hi != -1) {
             foundDescs.push(hi);
@@ -601,10 +501,10 @@ $(document).ready(function() {
     }
   }
 
-  appendFound = function(query) { //appends foundRooms[] into the search thing
-    query = $("input[name=search]").val().toString().toLowerCase();
+  appendFound = function(query) { //appends foundRooms[] into search-lower
+    query = $("input[name=search]").val().toString().toLowerCase(); //Get rid of caps for comparison to found descriptions
     var currFloor = query[0];
-    if(foundRooms.length === 0) {
+    if(foundRooms.length === 0) { //if no results
       $("#search-lower").css("height", "5vw");
       $("#search-lower").empty();
       $("#search-lower").append("<p style='font-size: 3vw; line-height; 5vw; vertical-align: middle; font-weight: 900; color: black; text-align: center'>No rooms found.</p>")
@@ -612,33 +512,30 @@ $(document).ready(function() {
     }
     else {
       results = true;
-      var multVal; // This calculates the height of search-lower
+      var multVal = 5; // This calculates the height of search-lower
       if(detectmobile()) {
-        multVal = 10;
-      }
-      else {
-        multVal = 5;
+        multVal = 10; // because mobile hates life
       }
       if(foundRooms.length <= 4) {
-        $("#search-lower").css("height", multVal*foundRooms.length+"vw");
+        $("#search-lower").css("height", multVal*foundRooms.length+"vw"); //each result is 5vw tall
       }
       else {
-        $("#search-lower").css("height", multVal*4.5+"vw");
+        $("#search-lower").css("height", multVal*4.5+"vw"); //so people know there's more results
       }
       $("#search-lower").empty();
-      if(foundRooms.length > 1) {
+      if(foundRooms.length >= 1) { //there should probably be results
         for(i = 0; i < foundRooms.length; i++) {
-          var e = foundRooms[i];
-          var roomNumFull = floors[currFloor][e].num;
-          var roomNum = floors[currFloor][e].num.substr(0, 3);
-          var roomDesc = floors[currFloor][e].info;
+          var e = foundRooms[i]; //because i'm lazy
+          var roomNumFull = floors[currFloor][e].num; //used for the ids
+          var roomNum = floors[currFloor][e].num.substr(0, 3); //what's appended to result-left
+          var roomDesc = floors[currFloor][e].info; //desc
           var roomTeacher = floors[currFloor][e].teacher;
           if(roomDesc.length >= maxSearchCars) {
             roomDesc = roomDesc.substr(0, maxSearchCars) + "...";
           }
-          if(roomTeacher != "") {
+          if(roomTeacher != "") { //If there are teachers
             var teacherText = "Teachers";
-            if(roomTeacher.search(',') === -1) {
+            if(roomTeacher.search(',') === -1) { //If there are multiple teachers, there should be a comma.
               teacherText = "Teacher"
             }
             $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'<span class="teacher-search">'+teacherText+': '+roomTeacher+'</span></p></div>')
@@ -648,31 +545,15 @@ $(document).ready(function() {
           }
         }
       }
-      else if(foundRooms.length === 1) {
-        var e = foundRooms[0];
-        var roomNumFull = floors[currFloor][e].num;
-        var roomNum = floors[currFloor][e].num.substr(0, 3);
-        var roomDesc = floors[currFloor][e].info;
-        var roomTeacher = floors[currFloor][e].teacher;
-        if(roomDesc.length >= maxSearchCars) {
-          roomDesc = roomDesc.substr(0, maxSearchCars) + "...";
-        }
-        if(roomTeacher != "") {
-          $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'<span class="teacher-search">TEACHERS: '+roomTeacher+'</span></p></div>')
-        }
-        else {
-          $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
-        }
-      }
     }
-    $(".result-outer").click(function() {
+    $(".result-outer").click(function() { //The click event is defined here, after .result-outer is appended
       var id = $(this).attr("id").toString()
       var id = id.substr(1, id.length);
       goTo(id);
     })
   }
 
-  appendFoundDescs = function(query) {
+  appendFoundDescs = function(query) { //Basically appendFound but with more loops
     if(foundDescs.length === 0) {
       $("#search-lower").css("height", "5vw");
       $("#search-lower").empty();
@@ -682,12 +563,9 @@ $(document).ready(function() {
     }
     else {
       results = true;
-      var multVal;
+      var multVal = 5;
       if(detectmobile()) {
         multVal = 10;
-      }
-      else {
-        multVal = 5;
       }
       if(foundDescs.length <= 4) {
         $("#search-lower").css("height", multVal*foundDescs.length+"vw");
@@ -742,26 +620,26 @@ $(document).ready(function() {
     })
   }
 
-  goTo = function(where) {
-    if(!isNaN(where[0])) {
+  goTo = function(where) { //Goes to and hovers the specified room. Can be a partial id.
+    if(!isNaN(where[0])) { //If it's a room.
       var currentFloor = where[0];
-      var f = searchForRoomSoftTemp(where.toString());
+      var f = searchForRoomSoftTemp(where.toString()); //If it's a partial id, this will get the full one of the first instance of the partial id.
       if(f != -1) {
-        $(".room, .other").css("pointer-events", "none");
-        scrollToFloor(parseInt(where[0]));
+        $(".room, .other").css("pointer-events", "none"); //Get rid of hovering other rooms.
+        scrollToFloor(parseInt(where[0])); //Go to the floor
         var actualWhere = floors[currentFloor][f].num.toString();
         var offset = $("#"+actualWhere).offset();
-        $("#"+where[0]+"00-outer").scrollLeft(offset.left);
-        hoverRoom(where, true);
+        $("#"+where[0]+"00-outer").scrollLeft(offset.left); //For mobile scrolling
+        hoverRoom(where, true); //Hovewr the room. True means that it is from a search and to show the border.
         setTimeout(function() {
           $(".room, .other").css("pointer-events", "auto");
         }, 3000);
       }
     }
-    else if(where[0] === 'F') {
+    else if(where[0] === 'F') { //If it's a floor.
       scrollToFloor(where[1]);
     }
-    else if(where[0] === 'E') {
+    else if(where[0] === 'E') { //If it's an exit. The copy and paste is real.
       var f = searchForFloor(where.toString());
       if(f != -1) {
         $(".room, .other").css("pointer-events", "none");
@@ -775,7 +653,7 @@ $(document).ready(function() {
         }, 3000);
       }
     }
-    else if(where[0] === 'C') {
+    else if(where[0] === 'C') { //If it's counseling.
       $(".room, .other").css("pointer-events", "none");
       scrollToFloor(0);
       var actualWhere = floors[1][12].num.toString();
@@ -790,6 +668,104 @@ $(document).ready(function() {
     $("#search").blur();
   }
 
+  $(".room, .other").hover(function() {
+    hoverRoom($(this).attr("id").toString(), false) //Hover the thing. False means it's not from a search and won't give it the border.
+  }, function() { //when hovering ends
+    clearTimeout(infoTime);
+    $("#"+$(this).attr("id").toString()).removeClass("hovered");
+    infoTime = setTimeout(function() {$("#f"+activeFloor+"-info").css("opacity", "0")}, 1000); //Fade info 1s after hovering ends.
+  })
+
+  $(".other").click(function() { //Scroll to floor of .other
+    var id = $(this).attr("id").toString();
+    if(parseInt(id[1])) { //id[0] is always F. Must be id[1].
+      scrollToFloor(id[1]);
+    }
+    if(id.substr(0, 4) === "MAIN") {
+      scrollToFloor(0);
+    }
+  })
+
+  $(document).keyup(function() {
+    setTimeout(function() {
+      var searchInput = $("input[name=search]").val();
+      search(searchInput); //This creates a search every time the user adds another character to the search.
+    }, 100) //Timeout necessary to avoid infinite loops.
+  })
+
+  activateInfo = function(where) { //Fades other info-outers and shows the one we want.
+    $(".info-outer").css("opacity", "0");
+    $("#f"+where+"-info").css("opacity", "1");
+  }
+
+  hoverRoom = function(id, activate) {
+    $(".room, .other").removeClass("hovered"); //Get rid of other hovered
+    if(activate != false) {
+      $("#"+id.toString()).addClass("hovered");
+      $("#"+id.toString()+"-1").addClass("hovered"); // just in case the function is being run from the hash
+    }
+    clearTimeout(infoTime);
+    var a;
+    activeFloor = id[0];
+    if(activeFloor === 'F' || activeFloor === 'L' || activeFloor === 'M' || activeFloor === 'C' || activeFloor === 'E') {
+      activeFloor = searchForFloor(id.toString()); //Returns an array of [floor, room]
+      a = activeFloor[1]; //Room
+      activeFloor = activeFloor[0]; //Floor
+    }
+    else {
+      if(!activate) {
+        a = searchForRoom(id); //For exact ids
+      }
+      else {
+        a = searchForRoomSoftTemp(id); //Because id might not be exact.
+      }
+    }
+    var activeRoom = floors[activeFloor][a];
+    activateInfo(activeFloor);
+
+
+    //The code below is a big mess. Basically it determines the x and y coordinates of the info box
+    //But because of rotation, there's a bunch of if statements
+    if((deg % 180) === 0 || deg === 0) {
+      $("#f"+activeFloor+"-info").css("top", ((activeRoom.y)-15)+"%");
+      $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)-10)+"%");
+      if(activeRoom.y <= 20) {
+        $("#f"+activeFloor+"-info").css("top", ((activeRoom.y)+10)+"%");
+      }
+      if(activeRoom.x >= 85) {
+        $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)-20)+"%");
+      }
+      if(activeRoom.x <= 10) {
+        $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)+5)+"%");
+      }
+    }
+    else {
+      $("#f"+activeFloor+"-info").css("top", ((activeRoom.y)-30)+"%");
+      $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)-25)+"%");
+      if(activeRoom.y <= 30) {
+        $("#f"+activeFloor+"-info").css("top", ((activeRoom.y)+10)+"%");
+      }
+      if(activeRoom.x <= 35) {
+        $("#f"+activeFloor+"-info").css("left", ((activeRoom.x)+5)+"%");
+      }
+    }
+
+    //Adding text and styling to info-outer!
+    $("#f"+activeFloor+"-h1").html(activeRoom.num); //Top bar
+    if(activeRoom.teacher === "") {
+      $("#f"+activeFloor+"-p").html(activeRoom.info); //Description if there's no teacher
+    } else { //but if there's teachers...
+      var teacherText = "Teachers";
+      if(activeRoom.teacher.search(",") === -1) { //Only one teacher
+        var teacherText = "Teacher"
+      } //Basically make the html the info and a teacher span.
+      $("#f"+activeFloor+"-p").html(activeRoom.info + "<br><span class='teacher'>"+teacherText+": "+activeRoom.teacher+"</span>");
+    }
+    $(".info-top").css("background-color", activeRoom.color);
+    $(".info-outer").css("border", "1px solid "+activeRoom.color);
+  }
+
+
   setTimeout(function() { // allows time for the window to scroll to (something, 0) for mobile
     var category = (location.hash).replace('#','');
     goTo(category.toString());
@@ -798,17 +774,21 @@ $(document).ready(function() {
 });
 
 
-$(function() {
-$(".relative-full").click(function(e) {
 
-  var offset = $(this).offset();
-  var height = $(this).height();
-  var width = $(this).width();
-  var relativeX = ((e.pageX - offset.left));
-  var relativeY = ((e.pageY - offset.top));
-  relativeX = relativeX*100/width;
-  relativeY = relativeY*100/height;
-  // alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
-  //turn that alert on for testing only
-});
-});
+//TESTING ONLY
+//Below alerts where the user clicks. Used for determening coords of where to place rooms.
+
+// $(function() {
+// $(".relative-full").click(function(e) {
+//
+//   var offset = $(this).offset();
+//   var height = $(this).height();
+//   var width = $(this).width();
+//   var relativeX = ((e.pageX - offset.left));
+//   var relativeY = ((e.pageY - offset.top));
+//   relativeX = relativeX*100/width;
+//   relativeY = relativeY*100/height;
+//   alert("X: " + parseInt(relativeX) + "  Y: " + parseInt(relativeY));
+//   //turn that alert on for testing only
+// });
+// });
