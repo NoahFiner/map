@@ -106,29 +106,29 @@ $(document).ready(function() {
 
 
   floors[2][0] = new Room (2, 61, 79, '201', 'Math classroom');
-  floors[2][1] = new Room (2, 58, 79, '203', 'Office');
+  floors[2][1] = new Room (2, 58, 79, '203', 'Office', "Propri");
   floors[2][2] = new Room (2, 53, 59, '213', 'Math classroom');
   floors[2][3] = new Room (2, 53, 68, '214', 'Math classroom');
-  floors[2][4] = new Room (2, 56, 68, '212', 'Math classroom');
-  floors[2][5] = new Room (2, 46, 80, '204', 'Office');
-  floors[2][6] = new Room (2, 42, 80, '205', 'Classroom');
+  floors[2][4] = new Room (2, 56, 68, '212', 'Math classroom', "Flood");
+  floors[2][5] = new Room (2, 46, 80, '204', 'Office', "Tullis, White");
+  floors[2][6] = new Room (2, 42, 80, '205', 'Classroom', "Pfenning");
   floors[2][7] = new Room (2, 30, 79, '206', 'Office');
   floors[2][8] = new Room (2, 16, 79, '208', 'Locked, old bathroom');
   floors[2][9] = new Room (2, 9, 79, '211', 'Locked, old bathroom');
   floors[2][10] = new Room (2, 23, 64, '216', 'Boys\'s bathroom'); //TODO: confirm these are bathrooms
   floors[2][11] = new Room (2, 22, 61, '217', 'Girl\'s bathroom');
   floors[2][12] = new Room (2, 18, 54, '218', 'Office');
-  floors[2][13] = new Room (2, 18, 48, '224', 'Office');
+  floors[2][13] = new Room (2, 18, 48, '224', 'Office', "Arehart, Bixler, Chilton, Silverman");
   floors[2][14] = new Room (2, 19, 44, '225', 'The 200 computer lab');
   floors[2][15] = new Room (2, 25, 25, '227', 'Office', "Harig");
   floors[2][16] = new Room (2, 26, 22, '228', 'Classroom');
   floors[2][17] = new Room (2, 31, 7, '231', 'Office');
-  floors[2][18] = new Room (2, 32, 15, '230', 'Office');
+  floors[2][18] = new Room (2, 32, 15, '230', 'Office', "Ebadi");
   floors[2][19] = new Room (2, 45, 11, '233', 'Classroom');
   floors[2][20] = new Room (2, 49, 10, '235', 'Storage');
-  floors[2][21] = new Room (2, 45, 19, '232', 'Classroom');
+  floors[2][21] = new Room (2, 45, 19, '232', 'Classroom', "Myers");
   floors[2][22] = new Room (2, 39, 26, '222', 'Classroom');
-  floors[2][23] = new Room (2, 32, 27, '219-2', 'Office');
+  floors[2][23] = new Room (2, 32, 27, '219-2', 'Office', "Cawelti, Hickman, Muzny");
   floors[2][24] = new Room (2, 24, 45, '220', 'Classroom');
   floors[2][25] = new Room (2, 23, 51, '219', 'Classroom');
   floors[2][26] = new Room (2, 21, 89, 'F400-2', 'The main staircase to the 400 floor');
@@ -172,14 +172,14 @@ $(document).ready(function() {
   floors[3][29] = new Room (3, 42, 32, 'F500-1', 'Staircase to the 500 hallway');
   floors[3][30] = new Room (3, 72, 79, 'F500-2', 'Another staircase to the 500 hallway');
   floors[3][31] = new Room (3, 63, 26, 'EXIT-300', 'Exit to the back parking lot (LOCKED)');
-
+  //Missing teachers: Halstead
 
   floors[4][0] = new Room (4, 77, 49, '402-1', 'Science');
   floors[4][1] = new Room (4, 71, 72, '402-2', 'Science');
   floors[4][2] = new Room (4, 81, 83, '405-1', 'Science');
   floors[4][3] = new Room (4, 89, 43, '432-1', 'Physics');
   floors[4][4] = new Room (4, 81, 42, '432-2', 'Physics');
-  floors[4][5] = new Room (4, 86, 50, '401', 'Office');
+  floors[4][5] = new Room (4, 86, 50, '401', 'Office', "Clement, Gutherie, Szameitat");
   floors[4][6] = new Room (4, 77, 42, '430-1', 'Physics');
   floors[4][7] = new Room (4, 70, 38, '430-2', 'Physics');
   floors[4][8] = new Room (4, 67, 37, '424-2', 'Science Computer Lab');
@@ -188,9 +188,9 @@ $(document).ready(function() {
   floors[4][11] = new Room (4, 52, 34, '425-2', 'Upper Lecture Hall');
   floors[4][12] = new Room (4, 49, 37, '426-2', 'Lower Lecture Hall');
   floors[4][13] = new Room (4, 61, 67, '426-1', 'Lower Lecture Hall');
-  floors[4][14] = new Room (4, 62, 72, '427', 'Office');
+  floors[4][14] = new Room (4, 62, 72, '427', 'Office', "Albritton, Passarelli, Petach, Wozniak");
   floors[4][15] = new Room (4, 66, 86, '405-2', 'Science');
-  floors[4][16] = new Room (4, 64, 90, '407', 'Office');
+  floors[4][16] = new Room (4, 64, 90, '407', 'Office', "Cox, Glaab, Rabatin, Rundell");
   floors[4][17] = new Room (4, 62, 86, '408-1', 'Science');
   floors[4][18] = new Room (4, 48, 87, '408-2', 'Science');
   floors[4][19] = new Room (4, 37, 83, '410', 'Electrical');
@@ -215,7 +215,7 @@ $(document).ready(function() {
   floors[4][38] = new Room (4, 91, 45, 'MAIN-400-2', 'Back to the main hallway');
   floors[4][39] = new Room (4, 29, 32, '420-1', 'Biology');
   floors[4][40] = new Room (4, 15, 17, 'EXIT-400', 'Exit to the lake (LOCKED)');
-
+  //Campbell, Hearty, Knowles, Roetto, Strode
 
   floors[5][0] = new Room (5, 38, 83, "541", "Office");
   floors[5][1] = new Room (5, 40, 89, "542", "Office");
@@ -231,9 +231,9 @@ $(document).ready(function() {
   floors[5][11] = new Room (5, 44, 18, "514-ACCESS-2", "Provides access to the 514 art room");
   floors[5][12] = new Room (5, 38, 41, "502", "Special Education");
   floors[5][13] = new Room (5, 44, 59, "521", "Music Library");
-  floors[5][14] = new Room (5, 49, 55, "522", "Music Library");
+  floors[5][14] = new Room (5, 49, 55, "522", "Music Library", "Boyer");
   floors[5][15] = new Room (5, 53, 52, "524", "Choir Room");
-  floors[5][16] = new Room (5, 54, 57, "523", "Office");
+  floors[5][16] = new Room (5, 54, 57, "523", "Office", "Bizzaro, Vlachos");
   floors[5][17] = new Room (5, 56, 67, "531", "Fine Arts Studio");
   floors[5][18] = new Room (5, 66, 69, "555", "Office");
   floors[5][19] = new Room (5, 77, 71, "EXIT-500", "Exit and band rooms");
@@ -242,7 +242,7 @@ $(document).ready(function() {
   floors[5][22] = new Room (5, 25, 71, "MAIN-600-1", "Access to the main level");
   floors[5][23] = new Room (5, 73, 81, "F700-1", "Access to the 700 floor");
   floors[5][24] = new Room (5, 42, 22, "518", "Storage");
-
+  //Missing: Anderson, Keller
 
   floors[6][0] = new Room (6, 44, 15, 'F400-1', 'Main staircase to floor 400');
   floors[6][1] = new Room (6, 34.5, 2, '631', 'Spanish and French classroom');
@@ -313,7 +313,7 @@ $(document).ready(function() {
   floors[7][14] = new Room (7, 19, 57, 'F900-4', 'Access to The Bricks and main level');
   floors[7][15] = new Room (7, 17, 7, 'F500-3', 'Access to 500 level');
   floors[7][16] = new Room (7, 86, 67, 'EXIT-700', 'Exit to the side of the school');
-
+  // Beauchamp, Vandepol, McCartney
 
   floors[8][0] = new Room (8, 96, 26, '801', 'Main office (from outside this hallway)');
   floors[8][1] = new Room (8, 81, 45, '802', 'Main office');
@@ -324,8 +324,8 @@ $(document).ready(function() {
   floors[8][6] = new Room (8, 61, 33, '812-2', 'Language arts classroom');
   floors[8][7] = new Room (8, 57, 25, '813', 'Language arts classroom');
   floors[8][8] = new Room (8, 49, 14, '814', 'Language arts classroom');
-  floors[8][9] = new Room (8, 31, 39, '855-1', 'Teacher office', "Hutchins, Lewis");
-  floors[8][10] = new Room (8, 20, 39, '855-2', 'Teacher office', "Hutchins, Lewis");
+  floors[8][9] = new Room (8, 31, 39, '855-1', 'Teacher office', "Hutchins, Lewis, Thistle");
+  floors[8][10] = new Room (8, 20, 39, '855-2', 'Teacher office', "Hutchins, Lewis, Thistle");
   floors[8][11] = new Room (8, 13, 60, '854', 'Language arts classroom');
   floors[8][12] = new Room (8, 13, 68, '853', 'Language arts classroom', "Brennan");
   floors[8][13] = new Room (8, 14, 75, '848', 'Language arts classroom');
@@ -337,14 +337,14 @@ $(document).ready(function() {
   floors[8][19] = new Room (8, 24, 92, '847', 'Language arts classroom');
   floors[8][20] = new Room (8, 31, 92, '846', 'Language arts classroom');
   floors[8][21] = new Room (8, 37, 71, '841', 'Teacher office', "Broaddus, Cosmos");
-  floors[8][22] = new Room (8, 39, 52, '831', 'Teacher office', "Jaime");
+  floors[8][22] = new Room (8, 39, 52, '831', 'Teacher office', "Rodrigues, Scott, Zerwin");
   floors[8][23] = new Room (8, 42, 61, '822', 'Languages arts computer lab');
   floors[8][24] = new Room (8, 42, 68, '823', 'Language arts classroom');
   floors[8][25] = new Room (8, 42, 74, '845', 'Language arts classroom');
   floors[8][26] = new Room (8, 10.5, 33, 'F600-MAIN-1', 'Main staircase to the 600 floor');
   floors[8][27] = new Room (8, 56, 2, 'F600-HIDDEN-1', 'A hidden staircase to the 600 floor');
   floors[8][28] = new Room (8, 87, 19, 'MAIN-800', 'Back to the main level');
-
+  //Teachers missing: Corson, Nieb, Radis, Roitz, Weber
 
   floors[9][0] = new Room (9, 6, 36, "918", "");
   floors[9][1] = new Room (9, 12, 36, "917", "");
@@ -528,7 +528,11 @@ $(document).ready(function() {
     if(activeRoom.teacher === "") {
       $("#f"+activeFloor+"-p").html(activeRoom.info);
     } else {
-      $("#f"+activeFloor+"-p").html(activeRoom.info + "<br><span class='teacher'>Teacher(s): "+activeRoom.teacher+"</span>");
+      var teacherText = "Teachers";
+      if(activeRoom.teacher.search(",") === -1) { //Only one teacher
+        var teacherText = "Teacher"
+      }
+      $("#f"+activeFloor+"-p").html(activeRoom.info + "<br><span class='teacher'>"+teacherText+": "+activeRoom.teacher+"</span>");
     }
       $(".info-top").css("background-color", activeRoom.color);
     $(".info-outer").css("border", "1px solid "+activeRoom.color);
@@ -695,7 +699,6 @@ $(document).ready(function() {
             roomDesc = roomDesc.substr(0, maxSearchCars) + "...";
           }
           roomDesc = roomDesc.insertSpans(query);
-          $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left" id="result-left'+roomNumFull+'"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'</p></div>')
           $("#result-left"+roomNumFull).css("background-color", floors[descFloor][descRoom].color)
           if(roomTeacher != "") {
             $("#search-lower").append('<div class="result-outer" id="q'+roomNumFull+'"><div class="result-left"><p>'+roomNum+'</p></div><p class="result-right">'+roomDesc+'<span class="teacher-search">TEACHERS: '+roomTeacher+'</span></p></div>')
