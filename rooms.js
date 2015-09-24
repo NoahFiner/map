@@ -52,7 +52,7 @@ var Room = function(floor, x, y, num, info, teacher) {
   else {
     this.teacher = teacher;
   }
-  if(!isNaN(this.num) || this.num.search('-') != -1 && this.num.search('F') === -1 && this.num.search('M') === -1 && this.num.search('EXIT') === -1 && this.num.search('COUNSELING') === -1) {
+  if(!isNaN(this.num) || this.num.search('-') != -1 && this.num.search('F') === -1 && this.num.search('M') === -1 && this.num.search('EXIT') === -1 && this.num.search('COUNSELING') === -1 && this.num.search('BAND') === -1) {
     this.type = 'room';
     this.color = '#B20202'; //red
   }
@@ -233,7 +233,7 @@ $(document).ready(function() {
   floors[5][16] = new Room (5, 54, 57, "523", "Office", "Bizzaro, Vlachos");
   floors[5][17] = new Room (5, 56, 67, "531", "Fine Arts Studio");
   floors[5][18] = new Room (5, 66, 69, "555", "Office");
-  floors[5][19] = new Room (5, 77, 71, "EXIT-500", "Exit and band rooms");
+  floors[5][19] = new Room (5, 77, 71, "BAND", "Band rooms");
   floors[5][20] = new Room (5, 58, 79, "F300-3", "Access to the 300 floor");
   floors[5][21] = new Room (5, 30.5, 21, "F300-2", "Access to the 300 floor");
   floors[5][22] = new Room (5, 25, 71, "MAIN-600-1", "Access to the main level");
@@ -653,12 +653,18 @@ $(document).ready(function() {
         }, 3000);
       }
     }
-    else if(where[0] === 'C') { //If it's counseling.
+    else if(where[0] === 'C' || where[0] === 'B') { //If it's counseling or band.
       $(".room, .other").css("pointer-events", "none");
-      scrollToFloor(0);
       var actualWhere = floors[1][12].num.toString();
+      if(where[0] === 'B') {
+        actualWhere = floors[5][19].num.toString();
+        scrollToFloor(5);
+      }
+      else {
+        scrollToFloor(0);
+      }
       var offset = $("#"+actualWhere).offset();
-      $("#"+where[0]+"00-outer").scrollLeft(offset.left);
+      $("#"+actualWhere[0]+"00-outer").scrollLeft(offset.left);
       hoverRoom(where, true);
       setTimeout(function() {
         $(".room, .other").css("pointer-events", "auto");
@@ -707,7 +713,7 @@ $(document).ready(function() {
     clearTimeout(infoTime);
     var a;
     activeFloor = id[0];
-    if(activeFloor === 'F' || activeFloor === 'L' || activeFloor === 'M' || activeFloor === 'C' || activeFloor === 'E') {
+    if(activeFloor === 'F' || activeFloor === 'L' || activeFloor === 'M' || activeFloor === 'C' || activeFloor === 'E' || activeFloor === 'B') {
       activeFloor = searchForFloor(id.toString()); //Returns an array of [floor, room]
       a = activeFloor[1]; //Room
       activeFloor = activeFloor[0]; //Floor
